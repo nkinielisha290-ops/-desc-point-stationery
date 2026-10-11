@@ -135,10 +135,10 @@ const CAT = {
 export const catLabel = (id) => CAT[id] || id
 
 export const PRODUCTS = [
-  { id: 'p13', cat: 'Shule', price: null, img: img('casio-fx991es-plus'), tag: b('Original', 'Genuine'),
+  { id: 'p13', cat: 'Shule', price: 35000, img: img('casio-fx991es-plus'), tag: b('Original', 'Genuine'),
     name: b('Casio fx-991ES PLUS (2nd edition)', 'Casio fx-991ES PLUS (2nd edition)'), unit: b('kipande', 'piece'),
     desc: b('Scientific calculator ya Casio halisi yenye "Natural Textbook Display" na functions 417. Inapatikana rangi nyeusi, bluu na pinki.', 'Genuine Casio scientific calculator with Natural Textbook Display and 417 functions. In black, blue and pink.') },
-  { id: 'p14', cat: 'Shule', price: null, img: img('casio-fx991ms'),
+  { id: 'p14', cat: 'Shule', price: 35000, img: img('casio-fx991ms'),
     name: b('Casio fx-991MS (2nd edition)', 'Casio fx-991MS (2nd edition)'), unit: b('kipande', 'piece'),
     desc: b('Calculator ya Casio halisi yenye functions 401 na nishati ya jua + betri. Imara na nafuu kwa wanafunzi wa sekondari na chuo.', 'Genuine Casio calculator with 401 functions and solar + battery power. Durable and affordable for secondary and college students.') },
   { id: 'p1', cat: 'Shule', price: 3500, img: u('photo-1567855354833-ac2c4f967b0c', 1000), tag: b('Maarufu', 'Popular'),

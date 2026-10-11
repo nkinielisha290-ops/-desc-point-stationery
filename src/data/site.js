@@ -14,7 +14,8 @@ export const BUSINESS = {
   whatsapp: '255759249049',
   phone: '+255 759 249 049',
   phoneLocal: '0759 249 049',
-  email: 'descpointstationery@gmail.com',
+  phone2Local: '0754 249 049',
+  email: 'dpsinfo3@gmail.com',
   branches: [
     { name: b('Tawi la Madafu', 'Madafu Branch'), area: 'Madafu, Kibaha – Pwani', map: 'Madafu, Kibaha, Tanzania' },
     { name: b('Tawi la Zegereni', 'Zegereni Branch'), area: 'Zegereni, Kibaha – Pwani', map: 'Zegereni, Kibaha, Tanzania' },
@@ -24,7 +25,7 @@ export const BUSINESS = {
     time: b('Saa 2:00 asubuhi – Saa 2:00 usiku', '8:00 AM – 8:00 PM'),
     open: 8, close: 20, closedDay: 0,
   },
-  social: { instagram: '#', facebook: '#', tiktok: '#' },
+  social: { instagram: 'https://www.instagram.com/desc_point_stationery', facebook: 'https://www.facebook.com/desc_point_stationery', tiktok: null },
 }
 
 export const waLink = (text) =>
@@ -32,10 +33,13 @@ export const waLink = (text) =>
 
 const u = (id, w = 800) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`
 
+// Picha halisi za Desc Point ziko public/images/
+const img = (name) => (typeof window !== 'undefined' && window.__DPS_IMG__?.[name]) || `/images/${name}.jpg`
+
 export const IMAGES = {
   hero: '/hero.jpg',
-  about: u('photo-1654931800100-2ecf6eee7c64', 1200),
-  school: u('photo-1725801731069-baa524d6bd4c', 1200),
+  about: img('shop-open-sign'),
+  school: img('casio-fx991es-plus'),
 }
 
 // ---------------- HUDUMA (Services) ----------------
@@ -129,6 +133,12 @@ const CAT = {
 export const catLabel = (id) => CAT[id] || id
 
 export const PRODUCTS = [
+  { id: 'p13', cat: 'Shule', price: null, img: img('casio-fx991es-plus'), tag: b('Original', 'Genuine'),
+    name: b('Casio fx-991ES PLUS (2nd edition)', 'Casio fx-991ES PLUS (2nd edition)'), unit: b('kipande', 'piece'),
+    desc: b('Scientific calculator ya Casio halisi yenye "Natural Textbook Display" na functions 417. Inapatikana rangi nyeusi, bluu na pinki.', 'Genuine Casio scientific calculator with Natural Textbook Display and 417 functions. In black, blue and pink.') },
+  { id: 'p14', cat: 'Shule', price: null, img: img('casio-fx991ms'),
+    name: b('Casio fx-991MS (2nd edition)', 'Casio fx-991MS (2nd edition)'), unit: b('kipande', 'piece'),
+    desc: b('Calculator ya Casio halisi yenye functions 401 na nishati ya jua + betri. Imara na nafuu kwa wanafunzi wa sekondari na chuo.', 'Genuine Casio calculator with 401 functions and solar + battery power. Durable and affordable for secondary and college students.') },
   { id: 'p1', cat: 'Shule', price: 3500, img: u('photo-1567855354833-ac2c4f967b0c', 1000), tag: b('Maarufu', 'Popular'),
     name: b('Seti ya kalamu za rangi', 'Coloured pen set'), unit: b('seti', 'set'),
     desc: b('Kalamu 4 za rangi tofauti zinazoandika laini bila kukatika. Nzuri kwa notes, kusahihisha na ku-highlight.', 'Four smooth-writing pens in different colours. Great for notes, marking and highlighting.') },
@@ -178,7 +188,7 @@ export const SERVICE_ITEMS = [
   { id: 's3', cat: 'Branding', price: 15000, img: u('photo-1693031630369-bd429a57f115', 1000), tag: b('Maarufu', 'Popular'),
     name: b('Banner printing', 'Banner printing'), unit: b('mita²', 'm²'),
     desc: b('Banner za flex zenye rangi zisizofifia kwa jua. Kwa maduka, sherehe, kampeni na matukio. Design ni bure kwa oda ya mita 2+.', 'Flex banners with sun-proof colours for shops, parties, campaigns and events. Free design on 2 m²+.') },
-  { id: 's4', cat: 'Design', price: 25000, img: u('photo-1718670013921-2f144aba173a', 1000),
+  { id: 's4', cat: 'Design', price: 25000, img: img('work-business-cards'),
     name: b('Business cards (100)', 'Business cards (100)'), unit: b('boksi', 'box'),
     desc: b('Kadi 100 za biashara pande mbili, karatasi nzito ya 300gsm. Design ya kitaalamu imejumuishwa.', '100 double-sided cards on heavy 300gsm stock. Professional design included.') },
   { id: 's5', cat: 'Design', price: 2500, img: u('photo-1633037773384-27d7ac0491e7', 1000), tag: b('Kisanii', 'Artistic'),
@@ -197,16 +207,16 @@ export const SERVICE_ITEMS = [
     name: b('Binding & lamination', 'Binding & lamination'), unit: b('kitabu', 'book'),
     desc: b('Spiral binding kwa ripoti, tasnifu na proposals, pamoja na lamination ya vyeti na vitambulisho.', 'Spiral binding for reports, theses and proposals, plus lamination for certificates and IDs.') },
   // Huduma za mtandaoni — bei: null = "Uliza bei" (weka namba ukiwa na bei kamili)
-  { id: 's13', cat: 'Mtandaoni', price: null, img: u('photo-1599590984817-0c15f31b1fa5', 1000), tag: b('Haraka', 'Fast'),
+  { id: 's13', cat: 'Mtandaoni', price: null, img: img('flyer-online-services'), fit: 'contain', tag: b('Haraka', 'Fast'),
     name: b('NIDA — kitambulisho cha taifa', 'NIDA — national ID'), unit: b('huduma', 'service'),
     desc: b('Tunakusaidia kujaza fomu ya NIDA mtandaoni, kupata namba ya utambulisho (NIN) na kuprint nakala zako. Leta cheti cha kuzaliwa na nyaraka zako.', 'We help you complete the NIDA form online, get your ID number (NIN) and print your copies. Bring your birth certificate and documents.') },
-  { id: 's14', cat: 'Mtandaoni', price: null, img: u('photo-1624567881801-a5a85867d990', 1000),
+  { id: 's14', cat: 'Mtandaoni', price: null, img: img('poster-cheti-cha-kuzaliwa'), fit: 'contain',
     name: b('RITA — vyeti vya kuzaliwa & vifo', 'RITA — birth & death certificates'), unit: b('huduma', 'service'),
     desc: b('Maombi ya cheti cha kuzaliwa, kifo au uhakiki wa cheti kupitia mfumo wa RITA mtandaoni. Tunakuongoza hatua kwa hatua.', 'Apply for birth or death certificates, or certificate verification, through RITA’s online system. We guide you step by step.') },
   { id: 's15', cat: 'Mtandaoni', price: null, img: u('photo-1628891439478-c613e85af7d6', 1000),
     name: b('Passport ya kusafiria', 'Travel passport'), unit: b('huduma', 'service'),
     desc: b('Tunajaza maombi ya passport kwenye mfumo wa Uhamiaji (e-Immigration), kupakia picha na nyaraka, na kukuandalia nakala ya kupeleka ofisini.', 'We complete your passport application on the Immigration e-system, upload your photo and documents, and print a copy for your appointment.') },
-  { id: 's16', cat: 'Mtandaoni', price: null, img: u('photo-1503676260728-1c00da094a0b', 1000), tag: b('Wanafunzi', 'Students'),
+  { id: 's16', cat: 'Mtandaoni', price: null, img: img('poster-heslb-requirements'), fit: 'contain', tag: b('Wanafunzi', 'Students'),
     name: b('HESLB — mkopo wa elimu ya juu', 'HESLB — student loan'), unit: b('maombi', 'application'),
     desc: b('Maombi ya mkopo wa HESLB bila makosa: kujaza fomu, kuscan na kupakia nyaraka, na kuprint fomu za kusainiwa.', 'Error-free HESLB loan applications: filling the form, scanning and uploading documents, and printing the forms for signing.') },
   { id: 's17', cat: 'Mtandaoni', price: null, img: u('photo-1702468292562-269c92d815fa', 1000),
@@ -262,21 +272,18 @@ export const DESIGN_EXTRAS = [
 // Picha za mfano — badilisha na picha halisi za kazi za Desc Point (weka kwenye public/portfolio/)
 export const PORTFOLIO_CATS = [
   { id: 'all', label: b('Zote', 'All') },
-  { id: 'cards', label: b('Kadi', 'Cards') },
-  { id: 'brand', label: b('Branding', 'Branding') },
+  { id: 'posters', label: b('Matangazo', 'Posters') },
   { id: 'print', label: b('Printing', 'Printing') },
-  { id: 'apparel', label: b('T-shirts', 'Apparel') },
+  { id: 'cards', label: b('Business cards', 'Business cards') },
 ]
+// Kazi halisi za Desc Point. Ongeza picha mpya kwenye public/images/ kisha ziorodheshe hapa.
 export const PORTFOLIO = [
-  { id: 'w1', cat: 'cards', img: u('photo-1633037773384-27d7ac0491e7', 1200), title: b('Kadi za harusi – Neema & Daudi', 'Wedding cards – Neema & Daudi'), detail: b('Kadi 200, karatasi ya kifahari na utepe wa dhahabu', '200 cards, premium stock with gold ribbon'), tall: true },
-  { id: 'w2', cat: 'brand', img: u('photo-1718670013921-2f144aba173a', 1200), title: b('Business cards za duka la vipodozi', 'Business cards for a beauty shop'), detail: b('Design + kadi 300, 350gsm matte', 'Design + 300 cards, 350gsm matte') },
-  { id: 'w3', cat: 'print', img: u('photo-1693031630369-bd429a57f115', 1200), title: b('Banner ya kampeni ya shule', 'School campaign banner'), detail: b('Flex banner mita 3 × 1', '3 × 1 m flex banner') },
-  { id: 'w4', cat: 'apparel', img: u('photo-1562157873-818bc0726f68', 1200), title: b('T-shirts za kongamano la kanisa', 'Church conference T-shirts'), detail: b('T-shirt 120, rangi 4', '120 shirts, 4 colours'), tall: true },
-  { id: 'w5', cat: 'brand', img: u('photo-1581079289196-67865ea83118', 1200), title: b('Brand identity ya mgahawa', 'Restaurant brand identity'), detail: b('Logo, rangi, menu na stickers', 'Logo, palette, menu and stickers') },
-  { id: 'w6', cat: 'cards', img: u('photo-1741893043659-ca8b82a8b637', 1200), title: b('Seti ya mialiko ya send-off', 'Send-off invitation suite'), detail: b('Kadi, bahasha na kadi za asante', 'Cards, envelopes and thank-you notes') },
-  { id: 'w7', cat: 'print', img: u('photo-1693031630146-568e2f72db0e', 1200), title: b('Vitabu vya mitihani ya shule', 'School exam booklets'), detail: b('Nakala 1,500 zimebanwa na kukatwa', '1,500 copies stapled and trimmed') },
-  { id: 'w8', cat: 'brand', img: u('photo-1436918898788-ebce04d38e46', 1200), title: b('Mihuri ya ofisi', 'Office stamps'), detail: b('Mihuri 6 self-inking kwa kampuni', '6 self-inking stamps for a company'), tall: true },
-  { id: 'w9', cat: 'print', img: u('photo-1642480532034-362360552ccb', 1200), title: b('Flyers za ufunguzi wa duka', 'Shop opening flyers'), detail: b('Flyers 500 za A5 rangi kamili', '500 full-colour A5 flyers') },
+  { id: 'w1', cat: 'print', img: img('work-school-diaries'), title: b('School diaries za shule', 'Custom school diaries'), detail: b('Diaries za Mseke Daycare Centre na Alfarero Pre & Primary School — design, printing na binding', 'Diaries for Mseke Daycare Centre and Alfarero Pre & Primary School — design, printing and binding') },
+  { id: 'w2', cat: 'posters', img: img('poster-heslb-requirements'), title: b('Tangazo la huduma ya HESLB', 'HESLB service poster'), detail: b('Poster ya mitandao ya kijamii yenye viambata vinavyohitajika', 'Social media poster listing the required documents') },
+  { id: 'w3', cat: 'cards', img: img('work-business-cards'), title: b('Business cards za Desc Point', 'Desc Point business cards'), detail: b('Kadi za pande mbili zenye huduma zetu na namba za simu', 'Double-sided cards with our services and phone numbers') },
+  { id: 'w4', cat: 'posters', img: img('poster-cheti-cha-kuzaliwa'), title: b('Mwongozo wa cheti cha kuzaliwa', 'Birth certificate guide'), detail: b('Infographic ya viambatanisho vya maombi ya RITA', 'Infographic of the documents needed for a RITA application') },
+  { id: 'w5', cat: 'posters', img: img('flyer-online-services'), title: b('Flyer ya huduma za mtandaoni', 'Online services flyer'), detail: b('Flyer ya A5 ya huduma za mtandao, printing na vifaa vya shule', 'A5 flyer for online services, printing and school supplies') },
+  { id: 'w6', cat: 'posters', img: img('poster-heslb-apply'), title: b('Kampeni ya "Apply at DPS"', '"Apply at DPS" campaign'), detail: b('Poster ya mitandao ya kijamii ya msimu wa maombi ya mkopo', 'Social media poster for the loan application season') },
 ]
 
 // ---------------- UFUATILIAJI WA ODA ----------------

@@ -30,8 +30,8 @@ export default function Footer() {
             </div>
             <p className="mt-5 max-w-sm text-white/55">{t('Printing, design, branding, vifaa vya shule na ofisi, na huduma za mtandaoni — Kibaha, Pwani.', 'Printing, design, branding, school and office supplies, and online services — Kibaha, Pwani.')}</p>
             <div className="mt-6 flex gap-3">
-              {[[Instagram, BUSINESS.social.instagram, 'Instagram'], [Facebook, BUSINESS.social.facebook, 'Facebook'], [Music2, BUSINESS.social.tiktok, 'TikTok']].map(([I, h, l]) => (
-                <a key={l} href={h} aria-label={l} className="grid h-11 w-11 place-items-center rounded-full bg-white/5 ring-1 ring-white/10 transition hover:bg-gold-400 hover:text-navy-950"><I className="h-5 w-5" /></a>
+              {[[Instagram, BUSINESS.social.instagram, 'Instagram'], [Facebook, BUSINESS.social.facebook, 'Facebook'], [Music2, BUSINESS.social.tiktok, 'TikTok']].filter(([, h]) => h).map(([I, h, l]) => (
+                <a key={l} href={h} target="_blank" rel="noreferrer" aria-label={l} className="grid h-11 w-11 place-items-center rounded-full bg-white/5 ring-1 ring-white/10 transition hover:bg-gold-400 hover:text-navy-950"><I className="h-5 w-5" /></a>
               ))}
             </div>
           </div>
@@ -48,6 +48,8 @@ export default function Footer() {
               <li>{x(BUSINESS.hours.label)}</li>
               <li>{x(BUSINESS.hours.time)}</li>
               <li className="select-all text-white/80">{BUSINESS.phoneLocal}</li>
+              <li className="select-all text-white/80">{BUSINESS.phone2Local}</li>
+              <li className="select-all break-all text-white/80">{BUSINESS.email}</li>
             </ul>
           </div>
         </div>

@@ -46,7 +46,7 @@ export default function Portfolio() {
                 transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
                 className="group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-3xl text-left ring-1 ring-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-400"
                 aria-label={`${t('Tazama', 'View')}: ${x(p.title)}`}>
-                <SafeImg src={p.img} alt={x(p.title)} className={`w-full object-cover transition duration-700 group-hover:scale-105 ${p.tall ? 'aspect-[3/4]' : 'aspect-[4/3]'}`} />
+                <SafeImg src={p.img} alt={x(p.title)} className="h-auto w-full transition duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/20 to-transparent opacity-80 transition group-hover:opacity-100" />
                 <div className="absolute inset-x-0 bottom-0 translate-y-2 p-5 transition duration-300 group-hover:translate-y-0">
                   <span className="text-[11px] font-bold uppercase tracking-[.2em] text-gold-300">{x(PORTFOLIO_CATS.find((c) => c.id === p.cat)?.label)}</span>
@@ -58,7 +58,6 @@ export default function Portfolio() {
             ))}
           </AnimatePresence>
         </motion.div>
-        <p className="mt-6 text-center text-xs text-white/40">{t('Picha za mfano — zitabadilishwa na picha halisi za kazi za Desc Point.', 'Sample images — to be replaced with real Desc Point work photos.')}</p>
       </div>
 
       <AnimatePresence>
@@ -76,7 +75,7 @@ export default function Portfolio() {
                   drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={0.5}
                   onDragEnd={(_, i) => { if (i.offset.x < -80) go(1); else if (i.offset.x > 80) go(-1) }}
                   className="max-h-full max-w-5xl">
-                  <SafeImg src={cur.img.replace('w=1200', 'w=1800')} alt={x(cur.title)} className="pointer-events-none mx-auto max-h-[65vh] w-auto rounded-2xl object-contain shadow-2xl" />
+                  <SafeImg src={cur.img} alt={x(cur.title)} className="pointer-events-none mx-auto max-h-[65vh] w-auto rounded-2xl object-contain shadow-2xl" />
                 </motion.div>
               </AnimatePresence>
               <button onClick={(e) => { e.stopPropagation(); go(-1) }} aria-label={t('Iliyopita', 'Previous')} className="absolute left-3 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-gold-400 hover:text-navy-950 sm:left-6"><ChevronLeft /></button>

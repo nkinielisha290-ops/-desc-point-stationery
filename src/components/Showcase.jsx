@@ -106,7 +106,8 @@ export default function Showcase() {
                 drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={0.6}
                 onDragEnd={(_, i) => { if (i.offset.x < -70 || i.velocity.x < -400) go(1); else if (i.offset.x > 70 || i.velocity.x > 400) go(-1) }}
                 className="absolute inset-0 cursor-grab active:cursor-grabbing">
-                <SafeImg src={item.img} alt={x(item.name)} className="pointer-events-none h-full w-full select-none object-cover" />
+                {item.fit === 'contain' && <img src={item.img} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl" />}
+                <SafeImg src={item.img} alt={x(item.name)} className={`pointer-events-none relative h-full w-full select-none ${item.fit === 'contain' ? 'object-contain p-4 pb-16 drop-shadow-2xl' : 'object-cover'}`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/10 to-transparent" />
               </motion.div>
             </AnimatePresence>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Plus, Check, Search, Heart } from 'lucide-react'
-import { CATEGORIES, PRODUCTS, catLabel } from '../data/site'
+import { Plus, Check, Search, Heart, MessageCircle } from 'lucide-react'
+import { CATEGORIES, PRODUCTS, catLabel, waLink } from '../data/site'
 import { useApp } from '../lib/store'
 import { SafeImg, SectionTitle, tsh } from './ui'
 
@@ -33,8 +33,14 @@ function Card({ p, i }) {
         <div className="min-w-0">
           <h3 className="font-semibold leading-snug text-ink">{x(p.name)}</h3>
           <p className="mt-1 line-clamp-2 text-sm text-ink/60">{x(p.desc)}</p>
-          <p className="mt-2 font-display text-xl font-black text-royal-500">{tsh(p.price)} <span className="font-sans text-xs font-normal text-ink/45">/ {x(p.unit)}</span></p>
+          <p className="mt-2 font-display text-xl font-black text-royal-500">{p.price == null ? t('Uliza bei', 'Ask for price') : <>{tsh(p.price)} <span className="font-sans text-xs font-normal text-ink/45">/ {x(p.unit)}</span></>}</p>
         </div>
+        {p.price == null ? (
+          <a href={waLink(t(`Habari Desc Point! Naomba bei ya ${x(p.name)}.`, `Hello Desc Point! What is the price of the ${x(p.name)}?`))} target="_blank" rel="noreferrer"
+            aria-label={`${t('Uliza bei ya', 'Ask price of')} ${x(p.name)}`} className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#25D366] text-white transition hover:scale-105">
+            <MessageCircle className="h-5 w-5" />
+          </a>
+        ) : (
         <button onClick={click} aria-label={`${t('Ongeza', 'Add')} ${x(p.name)}`}
           className={`grid h-12 w-12 shrink-0 place-items-center rounded-full transition ${added ? 'bg-emerald-500 text-white' : 'bg-navy-900 text-gold-300 hover:bg-gold-400 hover:text-navy-950'}`}>
           <AnimatePresence mode="wait">
@@ -43,6 +49,7 @@ function Card({ p, i }) {
             </motion.span>
           </AnimatePresence>
         </button>
+        )}
       </div>
       {inCart > 0 && <div className="bg-gold-400/15 px-5 py-2 text-xs font-semibold text-gold-700 dark:text-gold-300">✓ {inCart} {t('kwenye cart yako', 'in your cart')}</div>}
     </motion.article>

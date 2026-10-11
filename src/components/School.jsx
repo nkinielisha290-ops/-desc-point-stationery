@@ -14,7 +14,7 @@ export default function School() {
             sub={t('Mzazi, usizunguke madukani. Chagua kifurushi kinachoendana na darasa la mtoto wako — tunakuandalia kila kitu, hata kuandika majina kwenye madaftari.', 'Parents, skip the shop-hopping. Pick the pack for your child’s grade — we prepare everything, even writing names on the books.')} />
           <Reveal delay={0.15} className="relative">
             <div className="absolute -left-4 -top-4 h-full w-full rounded-[2rem] border-2 border-dashed border-gold-500" />
-            <SafeImg src={IMAGES.school} alt={t('Vifaa vya shule', 'School supplies')} className="relative aspect-[16/10] w-full rounded-[2rem] object-cover shadow-2xl" />
+            <SafeImg src={IMAGES.school} alt={t('Vifaa vya shule', 'School supplies')} className="relative aspect-[4/3] w-full rounded-[2rem] object-cover object-[50%_30%] shadow-2xl" />
             <div className="absolute -bottom-6 right-6 flex items-center gap-3 rounded-2xl bg-navy-900 px-5 py-4 text-white shadow-xl">
               <GraduationCap className="h-8 w-8 text-gold-400" />
               <span className="text-sm leading-tight"><b className="block font-display text-lg">{t('Shule & taasisi', 'Schools & institutions')}</b>{t('Bei maalum kwa bulk', 'Special bulk pricing')}</span>

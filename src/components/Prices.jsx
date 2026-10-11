@@ -1,0 +1,41 @@
+import { motion } from 'framer-motion'
+import { PRICES } from '../data/site'
+import { Reveal, SectionTitle, tsh } from './ui'
+
+export default function Prices() {
+  return (
+    <section id="bei" className="relative scroll-mt-20 overflow-hidden bg-navy-950 py-24 text-white sm:py-32">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_30%,rgba(31,85,255,.35),transparent_45%),radial-gradient(circle_at_90%_80%,rgba(245,184,0,.18),transparent_40%)]" />
+      <div className="container-x relative grid items-center gap-14 lg:grid-cols-2">
+        <div>
+          <SectionTitle light center={false} eyebrow="Bei wazi, hakuna kujificha" title="Bei zetu" accent="zinaeleweka." sub="Hizi ni baadhi ya bei zetu za kila siku. Oda za bulk kwa shule, ofisi na makampuni zinapata punguzo maalum." />
+          <Reveal delay={0.2} className="flex flex-wrap gap-3 text-sm">
+            {['M-Pesa', 'Mixx by Yas', 'Airtel Money', 'HaloPesa', 'Taslimu'].map((m) => (
+              <span key={m} className="rounded-full border border-gold-400/30 px-4 py-2 text-gold-300">{m}</span>
+            ))}
+          </Reveal>
+        </div>
+
+        <motion.div initial={{ opacity: 0, rotate: 6, y: 60 }} whileInView={{ opacity: 1, rotate: 0, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} className="relative">
+          <div className="absolute -inset-3 rotate-2 rounded-[2rem] bg-gold-400" />
+          <div className="ruled relative rounded-[2rem] bg-paper p-6 text-navy-900 shadow-2xl sm:p-10">
+            <div className="absolute bottom-0 left-12 top-0 w-px bg-rose-400/50" />
+            <p className="pl-10 font-script text-3xl font-bold text-royal-600">Orodha ya Bei ✍︎</p>
+            <ul className="mt-4 pl-10">
+              {PRICES.map((p, i) => (
+                <motion.li key={p.item} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                  className="flex items-end gap-2 py-[7px] leading-[18px]">
+                  <span className="font-medium">{p.item}</span>
+                  <span className="mb-1 flex-1 border-b-2 border-dotted border-navy-900/20" />
+                  <span className="whitespace-nowrap font-display font-black text-navy-900">{tsh(p.price)}</span>
+                  <span className="hidden whitespace-nowrap text-xs text-navy-900/50 sm:inline">/ {p.unit}</span>
+                </motion.li>
+              ))}
+            </ul>
+            <p className="mt-4 pl-10 text-xs text-navy-900/50">* Bei zinaweza kubadilika kulingana na idadi na aina ya karatasi.</p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}

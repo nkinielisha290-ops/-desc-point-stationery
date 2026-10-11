@@ -2,13 +2,17 @@
 <html lang="sw">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Desc Point Stationery | Printing, Design & Vifaa vya Ofisi – Kibaha</title>
     <meta name="description" content="Desc Point Stationery – Kibaha (Madafu & Zegereni). Printing, photocopy, lamination, binding, graphic design, vifaa vya shule na ofisi, huduma za mtandaoni (NIDA, TRA, HESLB, NECTA). Wazi Jumatatu–Jumamosi 2:00 asubuhi – 2:00 usiku." />
     <meta name="keywords" content="stationery Kibaha, printing Kibaha, photocopy Kibaha, graphic design Tanzania, vifaa vya shule, kadi za harusi, banner printing, Desc Point" />
     <meta name="theme-color" content="#06144d" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Desc Point" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Desc Point Stationery – Quality Arts & Designing" />
@@ -35,6 +39,12 @@
           "opens": "08:00", "closes": "20:00"
         }]
       }
+    </script>
+    <script>
+      try {
+        var th = JSON.parse(localStorage.getItem('dps-theme') || 'null') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (th === 'dark') document.documentElement.classList.add('dark');
+      } catch (e) {}
     </script>
   </head>
   <body>

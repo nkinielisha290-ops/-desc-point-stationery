@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root { --ink: 6 20 77; --surface: 255 255 255; --canvas: 251 248 241; color-scheme: light; }
+  .dark { --ink: 232 236 255; --surface: 13 27 88; --canvas: 4 11 43; color-scheme: dark; }
   html { scroll-behavior: smooth; }
-  body { @apply bg-paper text-navy-900 font-sans antialiased; overflow-x: hidden; }
+  body { @apply bg-canvas text-ink font-sans antialiased transition-colors duration-500; overflow-x: hidden; }
   ::selection { @apply bg-gold-400 text-navy-900; }
 }
 
@@ -25,11 +27,11 @@
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white backdrop-blur transition hover:border-gold-400 hover:text-gold-300;
   }
   .card {
-    @apply rounded-3xl bg-white shadow-[0_20px_50px_-25px_rgba(6,20,77,.35)] ring-1 ring-navy-900/5;
+    @apply rounded-3xl bg-surface shadow-[0_20px_50px_-25px_rgba(6,20,77,.35)] ring-1 ring-ink/5 dark:shadow-[0_20px_50px_-25px_rgba(0,0,0,.8)];
   }
   .eyebrow { @apply font-script text-2xl text-gold-600; }
   .paper-grain {
-    background-image: radial-gradient(rgba(6,20,77,.06) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(var(--ink) / .07) 1px, transparent 1px);
     background-size: 18px 18px;
   }
   .ruled {

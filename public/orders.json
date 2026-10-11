@@ -1,0 +1,15 @@
+{
+  "_jinsi_ya_kutumia": "Ongeza kila oda kwa namba yake. status ni moja ya: received, design, printing, ready, delivered. Hifadhi (commit) kwenye GitHub na website itajisasisha ndani ya dakika 1.",
+  "DPS-DEMO-001": {
+    "status": "printing",
+    "updated": "2026-10-11 14:30",
+    "item": "Kadi za harusi 150",
+    "note": "Design imekubaliwa. Tunachapa sasa, itakuwa tayari kesho saa 4 asubuhi."
+  },
+  "DPS-DEMO-002": {
+    "status": "ready",
+    "updated": "2026-10-11 10:05",
+    "item": "Printing A4 rangi, kurasa 40 + spiral binding",
+    "note": "Iko tayari tawi la Madafu."
+  }
+}

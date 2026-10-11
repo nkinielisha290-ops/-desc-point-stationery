@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -8,6 +9,10 @@ export default {
         royal: { 600: '#1440d6', 500: '#1f55ff', 400: '#4d7bff' },
         gold: { 300: '#ffe27a', 400: '#ffd23f', 500: '#f5b800', 600: '#d99a00', 700: '#a87400' },
         paper: '#fbf8f1',
+        // Rangi za mandhari (zinabadilika light/dark kupitia CSS variables)
+        ink: 'rgb(var(--ink) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        canvas: 'rgb(var(--canvas) / <alpha-value>)',
       },
       fontFamily: {
         display: ['"Fraunces"', 'serif'],

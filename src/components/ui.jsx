@@ -74,12 +74,12 @@ export function SectionTitle({ eyebrow, title, accent, sub, light = false, cente
         <motion.span className="inline-block h-px w-8 bg-current" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} style={{ originX: 0 }} />
         {eyebrow}
       </motion.p>
-      <h2 className={`mt-2 font-display text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl ${light ? 'text-white' : 'text-navy-900'}`} style={{ textWrap: 'balance' }}>
+      <h2 className={`mt-2 font-display text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl ${light ? 'text-white' : 'text-ink'}`} style={{ textWrap: 'balance' }}>
         <WordsUp text={title} />
         {accent && <WordsUp text={accent} delay={words * 0.07} wordClass="gold-text font-display italic" />}
       </h2>
       {sub && (
-        <motion.p className={`mt-4 text-lg ${light ? 'text-white/70' : 'text-navy-900/65'}`}
+        <motion.p className={`mt-4 text-lg ${light ? 'text-white/70' : 'text-ink/65'}`}
           initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.35 }}>
           {sub}
         </motion.p>

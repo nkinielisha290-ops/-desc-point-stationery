@@ -4,8 +4,8 @@ import { useApp } from '../lib/store'
 export default function Marquee() {
   const { t } = useApp()
   const ITEMS = t(
-    ['Printing', 'Photocopy', 'Lamination', 'Binding', 'Logo Design', 'Business Cards', 'Kadi za Harusi', 'Banners', 'T-shirt Printing', 'Mihuri', 'NIDA · TRA · HESLB', 'Vifaa vya Shule', 'Passport Photos'],
-    ['Printing', 'Photocopy', 'Lamination', 'Binding', 'Logo Design', 'Business Cards', 'Wedding Cards', 'Banners', 'T-shirt Printing', 'Rubber Stamps', 'NIDA · TRA · HESLB', 'School Supplies', 'Passport Photos'],
+    ['Printing', 'Photocopy', 'Lamination', 'Binding', 'Logo Design', 'Business Cards', 'Kadi za Harusi', 'Banners', 'T-shirt Printing', 'Mihuri', 'NIDA · RITA · HESLB', 'Passport', 'BRELA', 'Kozi ya Kompyuta', 'Vifaa vya Shule', 'Passport Photos'],
+    ['Printing', 'Photocopy', 'Lamination', 'Binding', 'Logo Design', 'Business Cards', 'Wedding Cards', 'Banners', 'T-shirt Printing', 'Rubber Stamps', 'NIDA · RITA · HESLB', 'Passport', 'BRELA', 'Computer Course', 'School Supplies', 'Passport Photos'],
   )
   const row = [...ITEMS, ...ITEMS]
   return (

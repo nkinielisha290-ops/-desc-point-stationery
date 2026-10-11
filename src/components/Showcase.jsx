@@ -29,6 +29,8 @@ export default function Showcase() {
   const item = list[index]
   const qty = cart[item.id]?.qty || 0
   const kind = tab === 'bidhaa' ? t('Bidhaa', 'Product') : t('Huduma', 'Service')
+  const ask = item.price == null
+  const priceText = (p) => (p == null ? t('Uliza bei', 'Ask for price') : tsh(p))
 
   const go = useCallback((d) => setPage(([i]) => [(i + d + list.length) % list.length, d]), [list.length])
   const jump = (i) => setPage(([cur]) => [i, i > cur ? 1 : -1])
@@ -60,8 +62,8 @@ export default function Showcase() {
   }, [index, tab])
 
   const orderNow = waLink(t(
-    `Habari Desc Point! Nataka ${kind.toLowerCase()} hii:\n\n• ${x(item.name)}\n• Bei: ${tsh(item.price)} / ${x(item.unit)}\n• Idadi: ${qty || 1}\n\nNaomba maelezo zaidi.`,
-    `Hello Desc Point! I'd like this ${kind.toLowerCase()}:\n\n• ${x(item.name)}\n• Price: ${tsh(item.price)} / ${x(item.unit)}\n• Quantity: ${qty || 1}\n\nPlease share more details.`,
+    `Habari Desc Point! Nataka ${kind.toLowerCase()} hii:\n\n• ${x(item.name)}\n${ask ? '' : `• Bei: ${tsh(item.price)} / ${x(item.unit)}\n• Idadi: ${qty || 1}\n`}\nNaomba maelezo zaidi${ask ? ' na bei' : ''}.`,
+    `Hello Desc Point! I'd like this ${kind.toLowerCase()}:\n\n• ${x(item.name)}\n${ask ? '' : `• Price: ${tsh(item.price)} / ${x(item.unit)}\n• Quantity: ${qty || 1}\n`}\nPlease share more details${ask ? ' and the price' : ''}.`,
   ))
 
   return (
@@ -127,8 +129,8 @@ export default function Showcase() {
 
             {/* Bei juu ya picha (simu) */}
             <div className="pointer-events-none absolute bottom-4 left-4 lg:hidden">
-              <p className="font-display text-3xl font-black text-gold-300 drop-shadow">{tsh(item.price)}</p>
-              <p className="text-xs text-white/80">{t('kwa', 'per')} {x(item.unit)}</p>
+              <p className="font-display text-3xl font-black text-gold-300 drop-shadow">{priceText(item.price)}</p>
+              {!ask && <p className="text-xs text-white/80">{t('kwa', 'per')} {x(item.unit)}</p>}
             </div>
 
             {/* Mishale */}
@@ -153,15 +155,17 @@ export default function Showcase() {
                 <h3 className="font-display text-3xl font-black leading-tight sm:text-4xl" style={{ textWrap: 'balance' }}>{x(item.name)}</h3>
                 <p className="mt-4 leading-relaxed text-white/70">{x(item.desc)}</p>
                 <div className="mt-6 hidden items-baseline gap-2 lg:flex">
-                  <span className="gold-text font-display text-5xl font-black tabular-nums">{tsh(item.price)}</span>
-                  <span className="text-white/50">/ {x(item.unit)}</span>
+                  <span className={`gold-text font-display font-black tabular-nums ${ask ? 'text-4xl' : 'text-5xl'}`}>{priceText(item.price)}</span>
+                  {!ask && <span className="text-white/50">/ {x(item.unit)}</span>}
                 </div>
               </motion.div>
             </AnimatePresence>
 
             {/* Cart controls */}
             <div className="mt-8 space-y-3">
-              {qty === 0 ? (
+              {ask ? (
+                <p className="rounded-2xl bg-white/5 px-4 py-3 text-sm text-white/70 ring-1 ring-white/10">{t('Bei inategemea mahitaji yako. Tuulize WhatsApp tukupe bei na maelekezo.', 'Price depends on your needs. Ask us on WhatsApp for the price and requirements.')}</p>
+              ) : qty === 0 ? (
                 <button onClick={() => onAdd(item)} className="btn-gold w-full text-base">
                   <ShoppingBag className="h-5 w-5" /> {t('Ongeza kwenye cart', 'Add to cart')}
                 </button>
@@ -177,7 +181,7 @@ export default function Showcase() {
               )}
               <a href={orderNow} target="_blank" rel="noreferrer"
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:brightness-110">
-                <MessageCircle className="h-5 w-5" /> {t('Agiza sasa kwa WhatsApp', 'Order now on WhatsApp')}
+                <MessageCircle className="h-5 w-5" /> {ask ? t('Uliza bei WhatsApp', 'Ask price on WhatsApp') : t('Agiza sasa kwa WhatsApp', 'Order now on WhatsApp')}
               </a>
             </div>
 
@@ -197,7 +201,7 @@ export default function Showcase() {
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-2.5">
                 <p className="truncate text-xs font-semibold">{x(p.name)}</p>
-                <p className="text-xs font-bold text-gold-300">{tsh(p.price)}</p>
+                <p className="text-xs font-bold text-gold-300">{priceText(p.price)}</p>
               </div>
               {cart[p.id] && <span className="absolute right-2 top-2 grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1 text-[10px] font-black text-navy-950">{cart[p.id].qty}</span>}
             </button>

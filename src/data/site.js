@@ -67,8 +67,14 @@ export const SERVICE_GROUPS = [
   {
     id: 'online', icon: 'Globe',
     title: b('Huduma za Mtandaoni', 'Online Services'),
-    blurb: b('Usihangaike na foleni — tunakusaidia kujaza na kutuma.', 'Skip the queues — we help you fill in and submit.'),
-    items: [b('Usajili & namba ya NIDA', 'NIDA registration & number'), b('TIN ya TRA', 'TRA TIN'), b('Mkopo wa HESLB', 'HESLB loan application'), b('Maombi ya vyuo (TCU / NACTVET)', 'College applications (TCU / NACTVET)'), b('Ajira Portal & CV', 'Ajira Portal & CV'), b('Matokeo ya NECTA & leseni (BRELA)', 'NECTA results & BRELA licences')],
+    blurb: b('Usihangaike na foleni — tunakusaidia kujaza, kuambatisha na kutuma.', 'Skip the queues — we help you fill in, attach and submit.'),
+    items: [b('NIDA: usajili & namba ya kitambulisho', 'NIDA: registration & ID number'), b('RITA: vyeti vya kuzaliwa & vifo', 'RITA: birth & death certificates'), b('Passport ya kusafiria (e-Immigration)', 'Travel passport (e-Immigration)'), b('HESLB: maombi ya mkopo', 'HESLB: student loan applications'), b('BRELA: usajili wa biashara & kampuni', 'BRELA: business & company registration'), b('Ajira Portal: usajili & kuomba kazi', 'Ajira Portal: registration & job applications')],
+  },
+  {
+    id: 'course', icon: 'Monitor',
+    title: b('Kozi ya Kompyuta', 'Computer Course'),
+    blurb: b('Jifunze kompyuta kwa vitendo — kutoka mwanzo hadi kujiamini kazini.', 'Learn computers hands-on — from zero to job-ready.'),
+    items: [b('Misingi ya kompyuta (Windows & files)', 'Computer basics (Windows & files)'), b('Microsoft Word', 'Microsoft Word'), b('Microsoft Excel', 'Microsoft Excel'), b('Microsoft PowerPoint', 'Microsoft PowerPoint'), b('Internet, email & kutuma maombi mtandaoni', 'Internet, email & online applications'), b('Typing ya haraka', 'Fast typing')],
   },
   {
     id: 'office', icon: 'Briefcase',
@@ -115,7 +121,11 @@ export const CATEGORIES = [
   { id: 'Sanaa', label: b('Sanaa', 'Art') },
   { id: 'Karatasi', label: b('Karatasi', 'Paper') },
 ]
-const CAT = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]))
+const CAT = {
+  ...Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label])),
+  Mtandaoni: b('Mtandaoni', 'Online'),
+  Mafunzo: b('Mafunzo', 'Training'),
+}
 export const catLabel = (id) => CAT[id] || id
 
 export const PRODUCTS = [
@@ -186,9 +196,28 @@ export const SERVICE_ITEMS = [
   { id: 's9', cat: 'Finishing', price: 2000, img: u('photo-1693031630146-568e2f72db0e', 1000),
     name: b('Binding & lamination', 'Binding & lamination'), unit: b('kitabu', 'book'),
     desc: b('Spiral binding kwa ripoti, tasnifu na proposals, pamoja na lamination ya vyeti na vitambulisho.', 'Spiral binding for reports, theses and proposals, plus lamination for certificates and IDs.') },
-  { id: 's10', cat: 'Mtandaoni', price: 5000, img: u('photo-1516131206008-dd041a9764fd', 1000),
-    name: b('Huduma za mtandaoni', 'Online applications'), unit: b('huduma', 'service'),
-    desc: b('Tunakusaidia NIDA, TIN ya TRA, HESLB, TCU, Ajira Portal na BRELA. Unaondoka na nakala ya maombi yako.', 'We help with NIDA, TRA TIN, HESLB, TCU, Ajira Portal and BRELA. You leave with a copy of your application.') },
+  // Huduma za mtandaoni — bei: null = "Uliza bei" (weka namba ukiwa na bei kamili)
+  { id: 's13', cat: 'Mtandaoni', price: null, img: u('photo-1599590984817-0c15f31b1fa5', 1000), tag: b('Haraka', 'Fast'),
+    name: b('NIDA — kitambulisho cha taifa', 'NIDA — national ID'), unit: b('huduma', 'service'),
+    desc: b('Tunakusaidia kujaza fomu ya NIDA mtandaoni, kupata namba ya utambulisho (NIN) na kuprint nakala zako. Leta cheti cha kuzaliwa na nyaraka zako.', 'We help you complete the NIDA form online, get your ID number (NIN) and print your copies. Bring your birth certificate and documents.') },
+  { id: 's14', cat: 'Mtandaoni', price: null, img: u('photo-1624567881801-a5a85867d990', 1000),
+    name: b('RITA — vyeti vya kuzaliwa & vifo', 'RITA — birth & death certificates'), unit: b('huduma', 'service'),
+    desc: b('Maombi ya cheti cha kuzaliwa, kifo au uhakiki wa cheti kupitia mfumo wa RITA mtandaoni. Tunakuongoza hatua kwa hatua.', 'Apply for birth or death certificates, or certificate verification, through RITA’s online system. We guide you step by step.') },
+  { id: 's15', cat: 'Mtandaoni', price: null, img: u('photo-1628891439478-c613e85af7d6', 1000),
+    name: b('Passport ya kusafiria', 'Travel passport'), unit: b('huduma', 'service'),
+    desc: b('Tunajaza maombi ya passport kwenye mfumo wa Uhamiaji (e-Immigration), kupakia picha na nyaraka, na kukuandalia nakala ya kupeleka ofisini.', 'We complete your passport application on the Immigration e-system, upload your photo and documents, and print a copy for your appointment.') },
+  { id: 's16', cat: 'Mtandaoni', price: null, img: u('photo-1503676260728-1c00da094a0b', 1000), tag: b('Wanafunzi', 'Students'),
+    name: b('HESLB — mkopo wa elimu ya juu', 'HESLB — student loan'), unit: b('maombi', 'application'),
+    desc: b('Maombi ya mkopo wa HESLB bila makosa: kujaza fomu, kuscan na kupakia nyaraka, na kuprint fomu za kusainiwa.', 'Error-free HESLB loan applications: filling the form, scanning and uploading documents, and printing the forms for signing.') },
+  { id: 's17', cat: 'Mtandaoni', price: null, img: u('photo-1702468292562-269c92d815fa', 1000),
+    name: b('BRELA — usajili wa biashara', 'BRELA — business registration'), unit: b('huduma', 'service'),
+    desc: b('Usajili wa jina la biashara, kampuni na leseni kupitia mfumo wa BRELA (ORS). Tunakusaidia kuandaa nyaraka zote.', 'Register a business name, company or licence through BRELA’s online system (ORS). We help prepare all your documents.') },
+  { id: 's18', cat: 'Mtandaoni', price: null, img: u('photo-1516131206008-dd041a9764fd', 1000),
+    name: b('Ajira Portal — kuomba kazi', 'Ajira Portal — job applications'), unit: b('huduma', 'service'),
+    desc: b('Tunafungua akaunti yako ya Ajira Portal, kujaza wasifu, kupakia vyeti na kutuma maombi ya kazi za serikali. CV yako pia tunaiandaa.', 'We set up your Ajira Portal account, complete your profile, upload certificates and submit government job applications. We can write your CV too.') },
+  { id: 's19', cat: 'Mafunzo', price: null, img: u('photo-1699347914988-c61ec13c99c5', 1000), tag: b('Mpya', 'New'),
+    name: b('Kozi ya kompyuta', 'Computer course'), unit: b('kozi', 'course'),
+    desc: b('Mafunzo ya vitendo: misingi ya kompyuta, Word, Excel, PowerPoint, internet na typing. Unafaa kwa wanafunzi, wanaotafuta kazi na wafanyabiashara.', 'Hands-on training: computer basics, Word, Excel, PowerPoint, internet and typing. Ideal for students, job seekers and business owners.') },
   { id: 's11', cat: 'Printing', price: 3000, img: u('photo-1510511336377-1a9caa095849', 1000),
     name: b('Passport size photos', 'Passport size photos'), unit: b('picha 4', '4 photos'),
     desc: b('Picha za passport papo hapo kwa NIDA, pasipoti, shule na maombi ya kazi. Background nyeupe au bluu.', 'Instant passport photos for NIDA, passports, school and job applications. White or blue background.') },
@@ -292,12 +321,14 @@ export const TESTIMONIALS = [
   { name: 'Peter Kimaro', role: b('Meneja, kampuni ya usafirishaji', 'Manager, logistics company'), service: b('Receipt books & mihuri', 'Receipt books & stamps'), text: b('Receipt books na muhuri wa kampuni vilikuwa tayari ndani ya saa 24. Tumewapa kazi zetu zote za printing.', 'Receipt books and the company stamp were ready within 24 hours. We now give them all our printing.') },
   { name: 'Zainabu H.', role: b('Mjasiriamali wa vipodozi', 'Cosmetics entrepreneur'), service: b('Labels & stickers', 'Labels & stickers'), text: b('Labels za bidhaa zangu zimefanya biashara yangu ionekane ya kimataifa. Mauzo yamepanda kweli.', 'My product labels make my brand look international. Sales have really gone up.') },
   { name: 'Mchungaji Elia', role: b('Kanisa, Kibaha', 'Church, Kibaha'), service: b('T-shirts & banners', 'T-shirts & banners'), text: b('T-shirt 120 za kongamano zilikuwa safi na zilifika kabla ya siku. Tutaendelea kufanya kazi nao.', '120 conference T-shirts were perfect and arrived early. We will keep working with them.') },
-  { name: 'Fatma Said', role: b('Mwanafunzi, kidato cha sita', 'Form six student'), service: b('NECTA & TCU', 'NECTA & TCU'), text: b('Walinielekeza hatua kwa hatua kwenye maombi ya chuo. Sikuhitaji kwenda mjini kabisa.', 'They guided me step by step through my college application. I didn’t need to travel to town at all.') },
+  { name: 'Fatma Said', role: b('Mhitimu, anatafuta kazi', 'Graduate, job seeker'), service: b('Kozi ya kompyuta & Ajira Portal', 'Computer course & Ajira Portal'), text: b('Nilisoma Word na Excel hapa, kisha wakanisaidia kujisajili Ajira Portal. Sasa naomba kazi mwenyewe kwa kujiamini.', 'I learned Word and Excel here, then they helped me register on Ajira Portal. Now I apply for jobs confidently on my own.') },
 ]
 
 export const FAQS = [
   { q: b('Naweza kupakia faili hapa na kuchukua baadaye?', 'Can I upload my file here and collect later?'), a: b('Ndiyo. Tumia sehemu ya "Pakia faili", chagua aina ya printing, kisha tuma kwa WhatsApp. Utapata namba ya oda ya kufuatilia, na tutakujulisha kazi ikiwa tayari.', 'Yes. Use the "Upload file" section, choose your print options and send on WhatsApp. You get an order number to track, and we’ll tell you when it’s ready.') },
   { q: b('Nitafuatiliaje oda yangu?', 'How do I track my order?'), a: b('Kila oda ina namba kama DPS-261011-AB3. Iingize kwenye sehemu ya "Fuatilia oda" kuona hatua iliyofikia.', 'Every order has a number like DPS-261011-AB3. Enter it in "Track order" to see its progress.') },
+  { q: b('Kozi ya kompyuta inachukua muda gani?', 'How long is the computer course?'), a: b('Inategemea kiwango chako na masomo unayochagua. Tuulize WhatsApp kupata ratiba ya madarasa, muda wa kozi na ada.', 'It depends on your level and the modules you choose. Ask us on WhatsApp for the class schedule, course length and fees.') },
+  { q: b('Nilete nini kwa huduma za NIDA, RITA au passport?', 'What should I bring for NIDA, RITA or passport services?'), a: b('Kwa kawaida: cheti cha kuzaliwa, kitambulisho au barua ya utambulisho, na picha za passport (tunazipiga hapa hapa). Tutakuambia orodha kamili ukituandikia.', 'Usually: birth certificate, an ID or introduction letter, and passport photos (we take them here). Message us for the full list.') },
   { q: b('Mnafanya delivery?', 'Do you deliver?'), a: b('Ndiyo, ndani ya Kibaha na maeneo ya karibu kwa oda za bulk na vifurushi vya shule. Wasiliana nasi kupata gharama ya usafiri.', 'Yes, within Kibaha and nearby for bulk orders and school packs. Contact us for the delivery fee.') },
   { q: b('Design ya logo au kadi inachukua muda gani?', 'How long does a logo or card design take?'), a: b('Kazi ndogo kama business cards au flyers ni siku 1. Logo na brand identity ni siku 2–4 pamoja na marekebisho.', 'Small jobs like business cards or flyers take 1 day. Logos and brand identity take 2–4 days including revisions.') },
   { q: b('Mnapokea malipo gani?', 'Which payments do you accept?'), a: b('Taslimu, M-Pesa, Mixx by Yas, Airtel Money, HaloPesa na benki kwa oda kubwa.', 'Cash, M-Pesa, Mixx by Yas, Airtel Money, HaloPesa and bank transfer for large orders.') },

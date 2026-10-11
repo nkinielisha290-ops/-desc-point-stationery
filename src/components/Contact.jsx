@@ -11,8 +11,8 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', service: 0, msg: '' })
   const status = useOpenStatus()
   const SERVICES = t(
-    ['Printing', 'Photocopy', 'Graphic Design', 'Kadi za Harusi', 'Banners', 'Vifaa vya Shule', 'Huduma za Mtandaoni', 'Branding (T-shirts, Mugs)', 'Nyingine'],
-    ['Printing', 'Photocopy', 'Graphic Design', 'Wedding Cards', 'Banners', 'School Supplies', 'Online Services', 'Branding (T-shirts, Mugs)', 'Other'],
+    ['Printing', 'Photocopy', 'Graphic Design', 'Kadi za Harusi', 'Banners', 'Vifaa vya Shule', 'NIDA / RITA / Passport', 'HESLB / Ajira Portal', 'BRELA', 'Kozi ya Kompyuta', 'Branding (T-shirts, Mugs)', 'Nyingine'],
+    ['Printing', 'Photocopy', 'Graphic Design', 'Wedding Cards', 'Banners', 'School Supplies', 'NIDA / RITA / Passport', 'HESLB / Ajira Portal', 'BRELA', 'Computer Course', 'Branding (T-shirts, Mugs)', 'Other'],
   )
   const branch = BUSINESS.branches[b]
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.map)}`

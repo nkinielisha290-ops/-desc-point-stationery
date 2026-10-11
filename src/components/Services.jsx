@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Printer, Layers, PenTool, Shirt, Globe, Briefcase, Check, ArrowUpRight } from 'lucide-react'
+import { Printer, Layers, PenTool, Shirt, Globe, Briefcase, Monitor, Check, ArrowUpRight } from 'lucide-react'
 import { SERVICE_GROUPS, waLink } from '../data/site'
 import { useApp } from '../lib/store'
 import { SectionTitle, Stagger, rise } from './ui'
 
-const ICONS = { Printer, Layers, PenTool, Shirt, Globe, Briefcase }
+const ICONS = { Printer, Layers, PenTool, Shirt, Globe, Briefcase, Monitor }
 
 export default function Services() {
   const { t, x } = useApp()
@@ -56,8 +56,8 @@ export default function Services() {
                     </motion.li>
                   ))}
                 </ul>
-                <a href={waLink(t(`Habari, naomba maelezo/bei ya huduma: ${x(g.title)}`, `Hello, please send details/prices for: ${x(g.title)}`))} target="_blank" rel="noreferrer" className="btn-gold mt-10">
-                  {t('Omba bei ya', 'Get prices for')} {x(g.title)} <ArrowUpRight className="h-4 w-4" />
+                <a href={waLink(g.id === 'course' ? t('Habari Desc Point! Nataka kujisajili kozi ya kompyuta. Naomba ratiba na ada.', 'Hello Desc Point! I want to join the computer course. Please send the schedule and fees.') : t(`Habari, naomba maelezo/bei ya huduma: ${x(g.title)}`, `Hello, please send details/prices for: ${x(g.title)}`))} target="_blank" rel="noreferrer" className="btn-gold mt-10">
+                  {g.id === 'course' ? t('Jisajili kozi', 'Join the course') : <>{t('Omba bei ya', 'Get prices for')} {x(g.title)}</>} <ArrowUpRight className="h-4 w-4" />
                 </a>
               </motion.div>
             </AnimatePresence>

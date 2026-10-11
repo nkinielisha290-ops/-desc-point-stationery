@@ -4,6 +4,7 @@ import { UploadCloud, FileText, Image as ImageIcon, File as FileIcon, X, Minus, 
 import { BULK_DISCOUNT, BUSINESS, PRINT_FINISH, PRINT_RATES, waLink } from '../data/site'
 import { newOrderId, useApp } from '../lib/store'
 import { SectionTitle, tsh } from './ui'
+import { asset } from '../lib/asset'
 
 const MAX_MB = 50
 
@@ -233,7 +234,7 @@ export default function PrintUpload() {
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="relative rounded-t-3xl bg-white px-6 pb-8 pt-7 font-mono text-[13px] text-navy-900 shadow-2xl [mask-image:linear-gradient(black,black)] sm:px-8">
               <div className="text-center">
-                <img src="/logo.png" alt="" className="mx-auto h-12 w-12 rounded-full" />
+                <img src={asset('logo.png')} alt="" className="mx-auto h-12 w-12 rounded-full" />
                 <p className="mt-2 font-display text-lg font-black not-italic">Desc Point Stationery</p>
                 <p className="text-[11px] uppercase tracking-[.25em] text-navy-900/50">{t('Makadirio ya printing', 'Print estimate')}</p>
               </div>

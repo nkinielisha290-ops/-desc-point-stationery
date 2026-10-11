@@ -1,6 +1,7 @@
 // Service worker ya Desc Point: inafanya website ifunguke haraka na hata bila mtandao.
-const VERSION = 'dps-v1'
-const SHELL = ['/', '/index.html', '/logo.png', '/hero.jpg', '/icon-192.png', '/manifest.webmanifest']
+const VERSION = 'dps-v2'
+const BASE = new URL('./', self.location).pathname
+const SHELL = ['', 'index.html', 'logo.png', 'hero.jpg', 'icon-192.png', 'manifest.webmanifest'].map((p) => BASE + p)
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()))
@@ -18,16 +19,16 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url)
 
   // Hali ya oda daima itoke mtandaoni (isikae kwenye cache)
-  if (url.pathname === '/orders.json') return
+  if (url.pathname.endsWith('/orders.json')) return
 
   // Kurasa: mtandao kwanza, cache ikishindikana
   if (req.mode === 'navigate') {
     e.respondWith(
       fetch(req).then((res) => {
         const copy = res.clone()
-        caches.open(VERSION).then((c) => c.put('/index.html', copy))
+        caches.open(VERSION).then((c) => c.put(BASE + 'index.html', copy))
         return res
-      }).catch(() => caches.match('/index.html')),
+      }).catch(() => caches.match(BASE + 'index.html')),
     )
     return
   }

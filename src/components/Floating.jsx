@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { MessageCircle, ShoppingBag, CheckCircle2, Smartphone, X } from 'lucide-react'
 import { BUSINESS, waLink } from '../data/site'
 import { useApp } from '../lib/store'
+import { asset } from '../lib/asset'
 
 export default function Floating() {
   const { t, count, setCartOpen, toast, canInstall, install } = useApp()
@@ -32,7 +33,7 @@ export default function Floating() {
           <motion.div initial={{ y: 120, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 120, opacity: 0 }} transition={{ delay: 4, type: 'spring', damping: 22 }}
             className="fixed bottom-4 left-4 right-24 z-40 flex items-center gap-3 rounded-2xl bg-navy-950 p-3 pr-2 text-white shadow-2xl ring-1 ring-gold-400/40 sm:right-auto sm:w-80 xl:hidden"
             style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-            <img src="/logo.png" alt="" className="h-11 w-11 shrink-0 rounded-xl" />
+            <img src={asset('logo.png')} alt="" className="h-11 w-11 shrink-0 rounded-xl" />
             <div className="min-w-0 flex-1">
               <p className="text-sm font-bold leading-tight">{t('Weka Desc Point kwenye simu', 'Get the Desc Point app')}</p>
               <p className="text-[11px] text-white/60">{t('Haraka, hata mtandao ukiwa dhaifu', 'Fast, even on a weak connection')}</p>

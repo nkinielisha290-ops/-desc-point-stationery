@@ -11,5 +11,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 // PWA: sajili service worker kwenye website halisi tu (si kwenye dev wala preview)
 if ('serviceWorker' in navigator && import.meta.env.PROD && location.protocol === 'https:' && !window.__DPS_PREVIEW__) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}))
+  window.addEventListener('load', () => navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {}))
 }

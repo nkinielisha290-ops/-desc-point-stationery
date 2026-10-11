@@ -4,6 +4,7 @@ import { Search, Inbox, PenTool, Printer, PackageCheck, BadgeCheck, History, Mes
 import { ORDER_STEPS, waLink } from '../data/site'
 import { useApp } from '../lib/store'
 import { SectionTitle, tsh } from './ui'
+import { asset } from '../lib/asset'
 
 const ICONS = { Inbox, PenTool, Printer, PackageCheck, BadgeCheck }
 
@@ -18,7 +19,7 @@ export default function OrderTracker() {
     setCode(id)
     setState({ phase: 'loading' })
     try {
-      const res = await fetch(`/orders.json?ts=${Date.now()}`, { cache: 'no-store' })
+      const res = await fetch(`${asset('orders.json')}?ts=${Date.now()}`, { cache: 'no-store' })
       if (!res.ok) throw new Error(String(res.status))
       const data = await res.json()
       const o = data[id]

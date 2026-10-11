@@ -4,6 +4,7 @@ import { Zap, Gem, Wallet, Palette, ShieldCheck, Truck } from 'lucide-react'
 import { IMAGES } from '../data/site'
 import { useApp } from '../lib/store'
 import { Reveal, SafeImg, SectionTitle, Stagger, rise } from './ui'
+import { asset } from '../lib/asset'
 
 function Counter({ to, suffix = '' }) {
   const ref = useRef(null)
@@ -36,7 +37,7 @@ export default function WhyUs() {
             <p className="font-display text-5xl font-black"><Counter to={5000} suffix="+" /></p>
             <p className="text-sm font-semibold">{t('Wateja walioridhika', 'Happy customers')}</p>
           </div>
-          <img src="/logo.png" alt="" className="absolute -left-4 -top-6 h-28 w-28 animate-spinslow rounded-full shadow-xl ring-4 ring-canvas" />
+          <img src={asset('logo.png')} alt="" className="absolute -left-4 -top-6 h-28 w-28 animate-spinslow rounded-full shadow-xl ring-4 ring-canvas" />
         </Reveal>
 
         <div>

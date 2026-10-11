@@ -4,6 +4,8 @@
 //  b('Kiswahili', 'English') = maandishi ya lugha mbili.
 // =============================================================
 
+import { asset } from '../lib/asset'
+
 const b = (sw, en) => ({ sw, en })
 
 export const BUSINESS = {
@@ -34,10 +36,10 @@ export const waLink = (text) =>
 const u = (id, w = 800) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`
 
 // Picha halisi za Desc Point ziko public/images/
-const img = (name) => (typeof window !== 'undefined' && window.__DPS_IMG__?.[name]) || `/images/${name}.jpg`
+const img = (name) => (typeof window !== 'undefined' && window.__DPS_IMG__?.[name]) || asset(`images/${name}.jpg`)
 
 export const IMAGES = {
-  hero: '/hero.jpg',
+  hero: asset('hero.jpg'),
   about: img('shop-open-sign'),
   school: img('casio-fx991es-plus'),
 }

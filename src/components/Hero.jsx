@@ -4,6 +4,7 @@ import { ArrowRight, MessageCircle, Sparkles, Star, Printer, PenTool, Clock, Upl
 import { BUSINESS, IMAGES, waLink } from '../data/site'
 import { useOpenStatus } from './useOpenStatus'
 import { useApp } from '../lib/store'
+import { asset } from '../lib/asset'
 
 
 function Floater({ className, children, delay = 0, r = '0deg' }) {
@@ -125,7 +126,7 @@ export default function Hero() {
           <motion.div initial={{ opacity: 0, scale: 0.5, rotate: -30 }} animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ delay: 0.4, duration: 1.2, type: 'spring', bounce: 0.35 }} className="absolute inset-[8%]">
             <div className="absolute inset-0 rounded-full bg-gold-400/30 blur-3xl" />
-            <motion.img src="/logo.png" alt="Desc Point Stationery – Quality arts and designing"
+            <motion.img src={asset('logo.png')} alt="Desc Point Stationery – Quality arts and designing"
               className="relative h-full w-full rounded-full shadow-[0_40px_80px_-20px_rgba(0,0,0,.7)] ring-4 ring-gold-400/50"
               animate={{ y: [0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
           </motion.div>

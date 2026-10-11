@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X, ShoppingBag, MessageCircle, Moon, Sun, Heart, Download } from 'lucide-react'
 import { BUSINESS, waLink } from '../data/site'
 import { useApp } from '../lib/store'
+import { asset } from '../lib/asset'
 
 export default function Navbar() {
   const { t, lang, setLang, theme, toggleTheme, count, setCartOpen, wishlist, canInstall, install } = useApp()
@@ -44,7 +45,7 @@ export default function Navbar() {
 >
       <nav className="container-x flex items-center justify-between gap-3">
         <a href="#" className="group flex shrink-0 items-center gap-3">
-          <motion.img src="/logo.png" alt="Desc Point Stationery logo"
+          <motion.img src={asset('logo.png')} alt="Desc Point Stationery logo"
             className={`rounded-full ring-2 ring-gold-400/70 transition-all duration-500 ${scrolled ? 'h-10 w-10' : 'h-12 w-12 sm:h-14 sm:w-14'}`}
             whileHover={{ rotate: 360 }} transition={{ duration: 0.9 }} />
           <span className="hidden leading-none min-[380px]:block">
@@ -101,7 +102,7 @@ export default function Navbar() {
         {open && (
           <motion.div className="fixed inset-0 z-[70] overflow-y-auto bg-navy-950/97 backdrop-blur-xl xl:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="container-x flex items-center justify-between py-4">
-              <img src="/logo.png" alt="" className="h-12 w-12 rounded-full" />
+              <img src={asset('logo.png')} alt="" className="h-12 w-12 rounded-full" />
               <div className="flex items-center gap-2">
                 <LangSwitch big />
                 <button onClick={() => setOpen(false)} aria-label={t('Funga', 'Close')} className="grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white"><X /></button>

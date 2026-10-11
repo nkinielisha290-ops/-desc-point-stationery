@@ -6,6 +6,7 @@ const Facebook = svg('M14 13.5h2.5l1-4H14v-2c0-1 0-2 2-2h1.5V2.1C17.2 2.1 16 2 1
 const Music2 = svg('M16.6 5.8A4.3 4.3 0 0115.5 3h-3.1v12.4a2.6 2.6 0 11-1.8-2.5V9.7a5.7 5.7 0 104.9 5.7V9a7.4 7.4 0 004.3 1.4V7.3a4.3 4.3 0 01-3.2-1.5z')
 import { BUSINESS } from '../data/site'
 import { useApp } from '../lib/store'
+import { asset } from '../lib/asset'
 
 export default function Footer() {
   const { t, x } = useApp()
@@ -25,7 +26,7 @@ export default function Footer() {
         <div className="grid gap-10 py-16 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
-              <img src="/logo.png" alt="" className="h-16 w-16 rounded-full ring-2 ring-gold-400/60" />
+              <img src={asset('logo.png')} alt="" className="h-16 w-16 rounded-full ring-2 ring-gold-400/60" />
               <span><b className="block font-display text-2xl">{BUSINESS.name}</b><span className="font-script text-xl text-gold-300">{BUSINESS.slogan}</span></span>
             </div>
             <p className="mt-5 max-w-sm text-white/55">{t('Printing, design, branding, vifaa vya shule na ofisi, na huduma za mtandaoni — Kibaha, Pwani.', 'Printing, design, branding, school and office supplies, and online services — Kibaha, Pwani.')}</p>

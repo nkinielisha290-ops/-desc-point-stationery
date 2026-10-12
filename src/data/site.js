@@ -343,3 +343,42 @@ export const FAQS = [
   { q: b('Mnapokea malipo gani?', 'Which payments do you accept?'), a: b('Taslimu, M-Pesa, Mixx by Yas, Airtel Money, HaloPesa na benki kwa oda kubwa.', 'Cash, M-Pesa, Mixx by Yas, Airtel Money, HaloPesa and bank transfer for large orders.') },
   { q: b('Naweza kuweka website hii kama app kwenye simu?', 'Can I install this website as an app?'), a: b('Ndiyo. Bonyeza "Weka App" juu ya ukurasa (au "Add to Home screen" kwenye browser). Itafunguka kama app hata mtandao ukiwa dhaifu.', 'Yes. Tap "Install app" at the top (or "Add to Home screen" in your browser). It opens like an app, even on a weak connection.') },
 ]
+
+// ---------------- HUDUMA ZA MTANDAONI (ukurasa wake) ----------------
+// Viambata vya HESLB na RITA vimetoka kwenye matangazo ya Desc Point yenyewe.
+// Kwa zilizobaki, requirements: null => "Tuulize orodha kamili".
+export const ONLINE_SERVICES = [
+  { id: 'heslb', itemId: 's16', name: b('HESLB — mkopo wa elimu ya juu', 'HESLB — student loan'),
+    requirements: [b('Index namba za kidato cha nne na sita', 'Form four and six index numbers'), b('Namba ya NIDA ya mwombaji', 'Applicant’s NIDA number'), b('Namba ya akaunti ya benki', 'Bank account number'), b('Cheti cha kuzaliwa kilichohakikiwa', 'Verified birth certificate'), b('Namba ya usajili wa makazi (NaPA)', 'Residential address number (NaPA)'), b('Kitambulisho cha mdhamini', 'Guarantor’s ID'), b('Picha ya passport size ya mdhamini', 'Guarantor’s passport-size photo'), b('Picha ya passport size ya mwombaji', 'Applicant’s passport-size photo')] },
+  { id: 'rita', itemId: 's14', name: b('RITA — cheti cha kuzaliwa', 'RITA — birth certificate'),
+    note: b('Mwombaji awe na viambatanisho angalau VIWILI kati ya hivi:', 'The applicant needs at least TWO of the following:'),
+    requirements: [b('Kadi ya mpiga kura au kadi ya kliniki ya mwombaji', 'Applicant’s voter card or clinic card'), b('Barua ya utambulisho kutoka serikali za mitaa', 'Introduction letter from the local government'), b('Kitambulisho cha taifa (NIDA)', 'National ID (NIDA)'), b('Cheti cha kidato cha nne au cha elimu ya msingi', 'Form four or primary school leaving certificate'), b('Leseni ya udereva, pasipoti au cheti cha ubatizo', 'Driving licence, passport or baptism certificate'), b('Kitambulisho cha mpiga kura au NIDA cha mzazi mmojawapo', 'Voter or NIDA ID of one parent')] },
+  { id: 'nida', itemId: 's13', name: b('NIDA — kitambulisho cha taifa', 'NIDA — national ID'), requirements: null },
+  { id: 'passport', itemId: 's15', name: b('Passport ya kusafiria', 'Travel passport'), requirements: null },
+  { id: 'brela', itemId: 's17', name: b('BRELA — usajili wa biashara', 'BRELA — business registration'), requirements: null },
+  { id: 'ajira', itemId: 's18', name: b('Ajira Portal — kuomba kazi', 'Ajira Portal — job applications'), requirements: null },
+]
+
+// ---------------- MENYU (mega-menu kama ya Yas) ----------------
+export const NAV = [
+  { id: 'print', label: b('Printing & Design', 'Printing & Design'), columns: [
+    { title: b('Printing', 'Printing'), links: [
+      [b('Pakia faili uprint', 'Upload a file to print'), '/printing'], [b('Orodha ya bei', 'Price list'), '/printing#bei'], [b('Photocopy, lamination & binding', 'Copies, lamination & binding'), '/huduma#print'], [b('Passport size photos', 'Passport photos'), '/huduma#print'] ] },
+    { title: b('Design & Branding', 'Design & Branding'), links: [
+      [b('Design studio (omba quote)', 'Design studio (get a quote)'), '/design'], [b('Kadi za harusi & mialiko', 'Wedding & invitation cards'), '/design'], [b('Banners, T-shirts & mihuri', 'Banners, T-shirts & stamps'), '/huduma#branding'], [b('Kazi zetu (portfolio)', 'Our work (portfolio)'), '/kazi-zetu'] ] },
+  ] },
+  { id: 'online', label: b('Huduma za Mtandaoni', 'Online Services'), columns: [
+    { title: b('Vitambulisho & vyeti', 'IDs & certificates'), links: [
+      [b('NIDA', 'NIDA'), '/mtandaoni#nida'], [b('RITA — cheti cha kuzaliwa', 'RITA — birth certificate'), '/mtandaoni#rita'], [b('Passport ya kusafiria', 'Travel passport'), '/mtandaoni#passport'] ] },
+    { title: b('Elimu, kazi & biashara', 'Education, jobs & business'), links: [
+      [b('HESLB — mkopo', 'HESLB — loan'), '/mtandaoni#heslb'], [b('Ajira Portal', 'Ajira Portal'), '/mtandaoni#ajira'], [b('BRELA', 'BRELA'), '/mtandaoni#brela'] ] },
+  ] },
+  { id: 'shop', label: b('Duka', 'Shop'), columns: [
+    { title: b('Bidhaa', 'Products'), links: [
+      [b('Bidhaa zote', 'All products'), '/duka'], [b('Vifaa vya shule', 'School supplies'), '/duka/Shule'], [b('Vifaa vya ofisi', 'Office supplies'), '/duka/Ofisi'], [b('Sanaa & karatasi', 'Art & paper'), '/duka/Sanaa'] ] },
+    { title: b('Shule & biashara', 'Schools & business'), links: [
+      [b('Vifurushi vya shule', 'School packs'), '/duka#shule'], [b('Ofa za wiki', 'Weekly offers'), '/ofa'], [b('Bidhaa & huduma kwa picha', 'Browse with photos'), '/duka#gundua'] ] },
+  ] },
+  { id: 'course', label: b('Kozi ya Kompyuta', 'Computer Course'), to: '/kozi' },
+  { id: 'offers', label: b('Ofa', 'Offers'), to: '/ofa', hot: true },
+]

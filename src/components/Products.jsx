@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Plus, Check, Search, Heart, MessageCircle } from 'lucide-react'
 import { CATEGORIES, PRODUCTS, catLabel, waLink } from '../data/site'
 import { useApp } from '../lib/store'
 import { SafeImg, SectionTitle, tsh } from './ui'
 
-function Card({ p, i }) {
+export function Card({ p, i }) {
   const { t, x, add, cart, wishlist, toggleWish, notify } = useApp()
   const [added, setAdded] = useState(false)
   const inCart = cart[p.id]?.qty || 0
@@ -15,7 +15,7 @@ function Card({ p, i }) {
     setTimeout(() => setAdded(false), 1200)
   }
   return (
-    <motion.article layout initial={{ opacity: 0, y: 40, scale: 0.94 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: '-40px' }}
+    <motion.article id={p.id} layout initial={{ opacity: 0, y: 40, scale: 0.94 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: '-40px' }}
       exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.55, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="card group flex flex-col overflow-hidden" whileHover={{ y: -8 }}>
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -56,9 +56,10 @@ function Card({ p, i }) {
   )
 }
 
-export default function Products() {
+export default function Products({ initialCat = 'all' }) {
   const { t, x, wishlist } = useApp()
-  const [cat, setCat] = useState('all')
+  const [cat, setCat] = useState(initialCat || 'all')
+  useEffect(() => { setCat(initialCat || 'all') }, [initialCat])
   const [q, setQ] = useState('')
   const filters = [...CATEGORIES, { id: 'wish', label: { sw: `♥ Unavyovipenda (${wishlist.length})`, en: `♥ Wishlist (${wishlist.length})` } }]
   const needle = q.toLowerCase()

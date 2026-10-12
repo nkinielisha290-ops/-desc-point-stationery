@@ -38,20 +38,19 @@ export default function Services() {
           {/* Panel */}
           <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-navy-900 via-navy-800 to-royal-600 p-8 text-white shadow-2xl sm:p-12">
             <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[28px] border-gold-400/10" />
-            <div className="absolute -bottom-24 right-24 h-48 w-48 rounded-full bg-gold-400/10 blur-2xl" />
             <AnimatePresence mode="wait">
               <motion.div key={g.id} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.45 }} className="relative">
                 <div className="flex flex-wrap items-center gap-4">
                   <span className="grid h-16 w-16 place-items-center rounded-2xl bg-gold-400 text-navy-950 shadow-lg shadow-gold-500/30"><Icon className="h-8 w-8" /></span>
                   <div>
                     <h3 className="font-display text-3xl font-black sm:text-4xl">{x(g.title)}</h3>
-                    <p className="font-script text-2xl text-gold-300">{x(g.blurb)}</p>
+                    <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{x(g.blurb)}</p>
                   </div>
                 </div>
                 <ul className="mt-10 grid gap-3 sm:grid-cols-2">
                   {g.items.map((it, k) => (
                     <motion.li key={it.sw} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 * k }}
-                      className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10 backdrop-blur transition hover:bg-white/10 hover:ring-gold-400/40">
+                      className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10 transition hover:bg-white/10 hover:ring-gold-400/40">
                       <Check className="h-5 w-5 shrink-0 text-gold-400" /> {x(it)}
                     </motion.li>
                   ))}

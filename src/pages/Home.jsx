@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, ChevronLeft, ChevronRight, Phone, MessageCircle, Mail, HelpCircle, MapPin, Clock, Star, Upload, Monitor, Bell, Check } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Phone, MessageCircle, Mail, HelpCircle, MapPin, Clock, Star, Upload, Monitor, Bell, Check, Printer, Globe, PenTool, ShoppingBag } from 'lucide-react'
 import { BUSINESS, PRODUCTS, TESTIMONIALS, waLink } from '../data/site'
 import { useApp } from '../lib/store'
 import { href } from '../lib/router'
@@ -52,8 +52,7 @@ function HeroSlider() {
             className="relative grid min-h-[460px] grid-cols-1 md:min-h-[440px] md:grid-cols-[1.05fr_1fr]">
             {/* Picha */}
             <div className="absolute inset-0 md:relative md:order-2">
-              {s.contain && <img src={s.img} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl" />}
-              <SafeImg src={s.img} alt="" className={`relative h-full w-full ${s.contain ? 'object-contain p-6 md:p-10' : 'animate-kenburns object-cover'}`} />
+              <SafeImg src={s.img} alt="" className={`relative h-full w-full ${s.contain ? 'object-contain p-6 md:p-10' : ' object-cover'}`} />
             </div>
             {/* Maandishi */}
             <div className={`relative z-10 flex flex-col justify-end bg-gradient-to-t ${s.tone} to-transparent p-7 pt-40 text-white sm:p-10 md:justify-center md:bg-gradient-to-r md:pt-10 lg:p-14`}>
@@ -80,8 +79,8 @@ function HeroSlider() {
               </button>
             ))}
           </div>
-          <button onClick={() => go(-1)} aria-label={t('Iliyopita', 'Previous')} className="hidden h-10 w-10 place-items-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white hover:text-navy-950 sm:grid"><ChevronLeft className="h-5 w-5" /></button>
-          <button onClick={() => go(1)} aria-label={t('Inayofuata', 'Next')} className="hidden h-10 w-10 place-items-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white hover:text-navy-950 sm:grid"><ChevronRight className="h-5 w-5" /></button>
+          <button onClick={() => go(-1)} aria-label={t('Iliyopita', 'Previous')} className="hidden h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition hover:bg-white hover:text-navy-950 sm:grid"><ChevronLeft className="h-5 w-5" /></button>
+          <button onClick={() => go(1)} aria-label={t('Inayofuata', 'Next')} className="hidden h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition hover:bg-white hover:text-navy-950 sm:grid"><ChevronRight className="h-5 w-5" /></button>
         </div>
       </div>
     </section>
@@ -92,26 +91,33 @@ function HeroSlider() {
 function PlanTiles() {
   const { t } = useApp()
   const TILES = [
-    { title: t('Printing & Photocopy', 'Printing & Photocopy'), sub: t('Rangi, nyeusi, binding na lamination', 'Colour, B/W, binding and lamination'), img: unsplash('photo-1503694978374-8a2fa686963a'), to: '/printing' },
-    { title: t('Huduma za Mtandaoni', 'Online Services'), sub: t('NIDA, RITA, HESLB, passport, BRELA, Ajira', 'NIDA, RITA, HESLB, passport, BRELA, Ajira'), img: asset('images/flyer-online-services.jpg'), to: '/mtandaoni', top: true },
-    { title: t('Graphic Design', 'Graphic Design'), sub: t('Logo, kadi za harusi, banners & flyers', 'Logos, wedding cards, banners & flyers'), img: asset('images/work-business-cards.jpg'), to: '/design', top: true },
-    { title: t('Vifaa vya Shule & Ofisi', 'School & Office Supplies'), sub: t('Calculators, madaftari, kalamu & zaidi', 'Calculators, exercise books, pens & more'), img: asset('images/casio-fx991es-plus.jpg'), to: '/duka', top: true },
+    { icon: Printer, title: t('Printing & Photocopy', 'Printing & Photocopy'), sub: t('Rangi, nyeusi, binding na lamination — pakia faili mtandaoni.', 'Colour, B/W, binding and lamination — upload online.'), img: unsplash('photo-1503694978374-8a2fa686963a'), to: '/printing', from: t('Kuanzia TSh 100', 'From TSh 100') },
+    { icon: Globe, title: t('Huduma za Mtandaoni', 'Online Services'), sub: t('NIDA, RITA, HESLB, passport, BRELA na Ajira Portal.', 'NIDA, RITA, HESLB, passport, BRELA and Ajira Portal.'), img: asset('images/flyer-online-services.jpg'), to: '/mtandaoni', top: true, from: t('Bila foleni', 'No queues') },
+    { icon: PenTool, title: t('Graphic Design', 'Graphic Design'), sub: t('Logo, business cards, kadi za harusi, banners na flyers.', 'Logos, business cards, wedding cards, banners and flyers.'), img: asset('images/work-business-cards.jpg'), to: '/design', top: true, from: t('Quote papo hapo', 'Instant quote') },
+    { icon: ShoppingBag, title: t('Vifaa vya Shule & Ofisi', 'School & Office Supplies'), sub: t('Calculators za Casio, madaftari, kalamu na zaidi.', 'Casio calculators, exercise books, pens and more.'), img: asset('images/casio-fx991es-plus.jpg'), to: '/duka', top: true, from: t('Casio TSh 35,000', 'Casio TSh 35,000') },
   ]
   return (
     <section className="container-x py-16 sm:py-20">
       <SectionHead title={t('Chagua huduma unayohitaji', 'Find the service you need')} sub={t('Kila kitu cha stationery na huduma za mtandaoni, sehemu moja Kibaha.', 'All your stationery and online services, in one place in Kibaha.')} />
-      <Stagger className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+      <Stagger className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 sm:gap-5 lg:grid-cols-4">
         {TILES.map((tile) => (
-          <motion.a key={tile.to} variants={rise} href={href(tile.to)} whileHover={{ y: -6 }}
-            className="group flex flex-col overflow-hidden rounded-3xl bg-surface shadow-[0_20px_40px_-28px_rgba(6,20,77,.5)] ring-1 ring-ink/5 transition hover:ring-gold-400">
-            <div className="aspect-[4/3] overflow-hidden bg-navy-900">
-              <SafeImg src={tile.img} alt="" className={`h-full w-full object-cover transition duration-700 group-hover:scale-110 ${tile.top ? 'object-top' : ''}`} />
+          <motion.a key={tile.to} variants={rise} href={href(tile.to)}
+            className="group relative flex flex-col overflow-hidden rounded-[22px] bg-surface ring-1 ring-ink/[.07] transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_-20px_rgba(6,20,77,.4)] hover:ring-gold-400/70">
+            <div className="relative aspect-[16/11] overflow-hidden bg-navy-900">
+              <SafeImg src={tile.img} alt="" className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${tile.top ? 'object-top' : ''}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-navy-950/10 to-transparent" />
+              <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold text-navy-900">{tile.from}</span>
             </div>
-            <div className="flex flex-1 flex-col p-4 sm:p-5">
-              <h3 className="flex items-start justify-between gap-2 font-bold leading-snug text-ink sm:text-lg">
-                {tile.title} <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-gold-600 transition group-hover:translate-x-1" />
-              </h3>
-              <p className="mt-1 text-xs text-ink/55 sm:text-sm">{tile.sub}</p>
+            <div className="relative flex flex-1 flex-col px-5 pb-5 pt-8">
+              <span className="absolute -top-6 right-5 grid h-12 w-12 place-items-center rounded-2xl bg-gold-400 text-navy-950 shadow-lg ring-4 ring-surface transition-transform duration-300 group-hover:-rotate-6">
+                <tile.icon className="h-6 w-6" />
+              </span>
+              <h3 className="text-lg font-extrabold leading-snug text-ink">{tile.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-ink/55">{tile.sub}</p>
+              <span className="mt-auto flex items-center justify-between pt-5 text-sm font-bold text-royal-500">
+                {t('Jifunze zaidi', 'Learn more')}
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-royal-500/10 transition-colors duration-300 group-hover:bg-gold-400 group-hover:text-navy-950"><ArrowRight className="h-4 w-4" /></span>
+              </span>
             </div>
           </motion.a>
         ))}
@@ -166,7 +172,7 @@ function NewArrivals() {
     <section className="container-x py-16 sm:py-20">
       <SectionHead title={t('Bidhaa dukani sasa', 'In store now')} sub={t('Bei halisi, ongeza kwenye cart na agiza kwa WhatsApp.', 'Real prices — add to cart and order on WhatsApp.')}
         link={<a href={href('/duka')} className="inline-flex items-center gap-1 font-semibold text-royal-500 hover:underline">{t('Ona zote', 'See all')} <ArrowRight className="h-4 w-4" /></a>} />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
         {list.map((p, i) => <Card key={p.id} p={p} i={i} />)}
       </div>
     </section>

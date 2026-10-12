@@ -127,7 +127,6 @@ export function OnlinePage() {
           <motion.article key={s.id} id={s.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6 }}
             className="grid scroll-mt-28 overflow-hidden rounded-[1.75rem] bg-surface shadow-[0_20px_50px_-30px_rgba(6,20,77,.45)] ring-1 ring-ink/5 md:grid-cols-[320px_1fr]">
             <div className="relative min-h-[220px] bg-navy-900">
-              {item?.fit === 'contain' && <img src={item.img} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40 blur-xl" />}
               <SafeImg src={item?.img} alt={x(s.name)} className={`relative h-full w-full ${item?.fit === 'contain' ? 'object-contain p-4' : 'object-cover'}`} />
             </div>
             <div className="p-6 sm:p-9">

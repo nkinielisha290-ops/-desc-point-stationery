@@ -28,7 +28,7 @@ export default function School() {
               <motion.div whileHover={{ y: -8 }}
                 className={`relative flex h-full flex-col rounded-[2rem] p-8 ${p.featured ? 'bg-navy-900 text-white shadow-2xl shadow-navy-900/40 ring-2 ring-gold-400' : 'card'}`}>
                 {p.featured && <span className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold-400 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-navy-950">{t('Kinachopendwa zaidi', 'Most popular')}</span>}
-                <p className={`font-script text-2xl ${p.featured ? 'text-gold-300' : 'text-gold-600'}`}>{x(p.level)}</p>
+                <p className={`text-xs font-bold uppercase tracking-[.18em] sm:text-sm ${p.featured ? 'text-gold-300' : 'text-gold-600'}`}>{x(p.level)}</p>
                 <h3 className="font-display text-3xl font-black">{x(p.name)}</h3>
                 <p className="mt-4 font-display text-4xl font-black tabular-nums">
                   <span className={p.featured ? 'gold-text' : 'text-royal-500'}>{tsh(p.price)}</span>

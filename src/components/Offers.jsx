@@ -26,8 +26,6 @@ export default function Offers() {
 
   return (
     <section id="ofa" className="relative scroll-mt-20 overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-rose-950 py-24 text-white sm:py-28">
-      <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
-      <div className="absolute -right-10 bottom-0 h-72 w-72 rounded-full bg-gold-400/15 blur-3xl" />
       <div className="container-x relative">
         <div className="mb-12 flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-end">
           <SectionTitle light center={false} eyebrow={t('Ofa za wiki hii 🔥', 'This week’s deals 🔥')} title={t('Bei za kushtua,', 'Prices that shock,')} accent={t('muda unakwisha.', 'time is running out.')}
@@ -48,7 +46,7 @@ export default function Offers() {
             const item = ALL_ITEMS.find((i) => i.id === o.itemId)
             const save = o.oldPrice - o.price
             return (
-              <motion.article key={o.id} variants={rise} whileHover={{ y: -8 }} className="group relative overflow-hidden rounded-[2rem] bg-white/[.06] ring-1 ring-white/10 backdrop-blur">
+              <motion.article key={o.id} variants={rise} whileHover={{ y: -8 }} className="group relative overflow-hidden rounded-[2rem] bg-white/[.06] ring-1 ring-white/10">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <SafeImg src={item?.img} alt={x(o.title)} className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent" />

@@ -22,7 +22,6 @@ export default function Floating() {
         <motion.a href={waLink(t(`Habari ${BUSINESS.name}!`, `Hello ${BUSINESS.name}!`))} target="_blank" rel="noreferrer" aria-label="WhatsApp"
           initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2, type: 'spring' }}
           className="relative grid h-16 w-16 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl shadow-emerald-600/40">
-          <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-30" />
           <MessageCircle className="relative h-8 w-8" />
         </motion.a>
       </div>

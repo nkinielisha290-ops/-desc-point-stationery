@@ -5,53 +5,58 @@ import { CATEGORIES, PRODUCTS, catLabel, waLink } from '../data/site'
 import { useApp } from '../lib/store'
 import { SafeImg, SectionTitle, tsh } from './ui'
 
-export function Card({ p, i }) {
+export function Card({ p, i = 0 }) {
   const { t, x, add, cart, wishlist, toggleWish, notify } = useApp()
   const [added, setAdded] = useState(false)
   const inCart = cart[p.id]?.qty || 0
   const loved = wishlist.includes(p.id)
+  const real = String(p.img).includes('/images/') || String(p.img).startsWith('data:')
+  const ask = p.price == null
   const click = () => {
     add(p); setAdded(true); notify(t('Imeongezwa kwenye cart', 'Added to cart'))
     setTimeout(() => setAdded(false), 1200)
   }
   return (
-    <motion.article id={p.id} layout initial={{ opacity: 0, y: 40, scale: 0.94 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: '-40px' }}
-      exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.55, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="card group flex flex-col overflow-hidden" whileHover={{ y: -8 }}>
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <SafeImg src={p.img} alt={x(p.name)} className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-        {p.tag && <span className="absolute left-3 top-3 rounded-full bg-gold-400 px-3 py-1 text-xs font-bold text-navy-950 shadow">{x(p.tag)}</span>}
-        <motion.button whileTap={{ scale: 0.8 }} onClick={() => { toggleWish(p.id); notify(loved ? t('Imeondolewa', 'Removed') : t('Imehifadhiwa kwenye unavyovipenda', 'Saved to wishlist')) }}
-          aria-pressed={loved} aria-label={loved ? t('Ondoa kwenye unavyovipenda', 'Remove from wishlist') : t('Hifadhi', 'Save to wishlist')}
-          className="absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full bg-white/90 shadow backdrop-blur transition hover:scale-110">
-          <Heart className={`h-5 w-5 transition ${loved ? 'fill-rose-500 text-rose-500' : 'text-navy-900'}`} />
-        </motion.button>
-        <span className="absolute bottom-3 left-3 rounded-full bg-navy-950/70 px-3 py-1 text-xs font-semibold text-white backdrop-blur">{x(catLabel(p.cat))}</span>
-      </div>
-      <div className="flex flex-1 items-end justify-between gap-3 p-5">
-        <div className="min-w-0">
-          <h3 className="font-semibold leading-snug text-ink">{x(p.name)}</h3>
-          <p className="mt-1 line-clamp-2 text-sm text-ink/60">{x(p.desc)}</p>
-          <p className="mt-2 font-display text-xl font-black text-royal-500">{p.price == null ? t('Uliza bei', 'Ask for price') : <>{tsh(p.price)} <span className="font-sans text-xs font-normal text-ink/45">/ {x(p.unit)}</span></>}</p>
+    <motion.article id={p.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: 0.4, delay: (i % 3) * 0.05 }}
+      className="group relative flex h-full scroll-mt-32 flex-col overflow-hidden rounded-[20px] bg-surface ring-1 ring-ink/[.07] transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(6,20,77,.35)] hover:ring-gold-400/60">
+      {/* Picha: bidhaa halisi zinaonekana nzima juu ya mandhari safi (kama gridi ya vifaa ya Yas) */}
+      <div className={`relative overflow-hidden ${real ? 'aspect-square bg-gradient-to-b from-ink/[.02] to-ink/[.06]' : 'aspect-[4/3] bg-navy-900 sm:aspect-square'}`}>
+        <SafeImg src={p.img} alt={x(p.name)} className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${real ? 'object-contain p-2 sm:p-4' : 'object-cover'}`} />
+        <div className="absolute inset-x-3 top-3 flex items-start justify-between">
+          {p.tag ? <span className="rounded-full bg-gold-400 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-navy-950">{x(p.tag)}</span> : <span />}
+          <button onClick={() => { toggleWish(p.id); notify(loved ? t('Imeondolewa', 'Removed') : t('Imehifadhiwa kwenye unavyovipenda', 'Saved to wishlist')) }}
+            aria-pressed={loved} aria-label={loved ? t('Ondoa kwenye unavyovipenda', 'Remove from wishlist') : t('Hifadhi', 'Save to wishlist')}
+            className="grid h-9 w-9 place-items-center rounded-full bg-white text-navy-900 shadow-sm ring-1 ring-black/5 transition active:scale-90">
+            <Heart className={`h-[18px] w-[18px] ${loved ? 'fill-rose-500 text-rose-500' : ''}`} />
+          </button>
         </div>
-        {p.price == null ? (
-          <a href={waLink(t(`Habari Desc Point! Naomba bei ya ${x(p.name)}.`, `Hello Desc Point! What is the price of the ${x(p.name)}?`))} target="_blank" rel="noreferrer"
-            aria-label={`${t('Uliza bei ya', 'Ask price of')} ${x(p.name)}`} className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#25D366] text-white transition hover:scale-105">
-            <MessageCircle className="h-5 w-5" />
-          </a>
-        ) : (
-        <button onClick={click} aria-label={`${t('Ongeza', 'Add')} ${x(p.name)}`}
-          className={`grid h-12 w-12 shrink-0 place-items-center rounded-full transition ${added ? 'bg-emerald-500 text-white' : 'bg-navy-900 text-gold-300 hover:bg-gold-400 hover:text-navy-950'}`}>
-          <AnimatePresence mode="wait">
-            <motion.span key={added ? 'a' : 'b'} initial={{ scale: 0, rotate: -90 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0 }}>
-              {added ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-            </motion.span>
-          </AnimatePresence>
-        </button>
-        )}
       </div>
-      {inCart > 0 && <div className="bg-gold-400/15 px-5 py-2 text-xs font-semibold text-gold-700 dark:text-gold-300">✓ {inCart} {t('kwenye cart yako', 'in your cart')}</div>}
+
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <span className="text-[11px] font-bold uppercase tracking-[.14em] text-gold-600">{x(catLabel(p.cat))}</span>
+        <h3 className="mt-1 line-clamp-2 min-h-[2.75rem] text-[15px] font-bold leading-snug text-ink sm:text-base">{x(p.name)}</h3>
+        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink/55">{x(p.desc)}</p>
+
+        <div className="mt-auto pt-4">
+          <div className="flex items-baseline justify-between gap-2 border-t border-ink/[.07] pt-3">
+            {ask ? <span className="text-lg font-extrabold text-ink">{t('Uliza bei', 'Ask for price')}</span>
+              : <span className="text-xl font-extrabold tabular-nums text-ink">{tsh(p.price)}</span>}
+            {!ask && <span className="text-xs text-ink/45">/ {x(p.unit)}</span>}
+          </div>
+          {ask ? (
+            <a href={waLink(t(`Habari Desc Point! Naomba bei ya ${x(p.name)}.`, `Hello Desc Point! What is the price of the ${x(p.name)}?`))} target="_blank" rel="noreferrer"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] py-2.5 text-sm font-bold text-white transition hover:brightness-105">
+              <MessageCircle className="h-4 w-4" /> {t('Uliza bei', 'Ask for price')}
+            </a>
+          ) : (
+            <button onClick={click}
+              className={`mt-3 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-bold transition ${added ? 'bg-emerald-500 text-white' : 'bg-navy-900 text-white hover:bg-gold-400 hover:text-navy-950 dark:bg-gold-400 dark:text-navy-950'}`}>
+              {added ? <><Check className="h-4 w-4" /> {t('Imeongezwa', 'Added')}</> : <><Plus className="h-4 w-4" /> {inCart ? t(`Ongeza tena (${inCart})`, `Add again (${inCart})`) : t('Ongeza kwenye cart', 'Add to cart')}</>}
+            </button>
+          )}
+        </div>
+      </div>
     </motion.article>
   )
 }
@@ -91,11 +96,9 @@ export default function Products({ initialCat = 'all' }) {
           </label>
         </div>
 
-        <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <AnimatePresence mode="popLayout">
-            {list.map((p, i) => <Card key={p.id} i={i} p={p} />)}
-          </AnimatePresence>
-        </motion.div>
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
+          {list.map((p, i) => <Card key={p.id} i={i} p={p} />)}
+        </div>
         {list.length === 0 && (
           <p className="py-16 text-center text-ink/50">
             {cat === 'wish' ? t('Bado hujahifadhi bidhaa. Bonyeza ♥ kwenye bidhaa unayoipenda.', 'No saved items yet. Tap ♥ on a product you like.')

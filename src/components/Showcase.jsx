@@ -75,7 +75,7 @@ export default function Showcase() {
           <div>
             <p className="eyebrow text-gold-300">{t('Gundua na uagize', 'Explore and order')}</p>
             <h2 className="mt-1 font-display text-4xl font-black leading-[1.05] sm:text-5xl">
-              {t('Bidhaa & huduma,', 'Products & services,')} <em className="gold-text italic">{t('na bei zake.', 'with prices.')}</em>
+              {t('Bidhaa & huduma,', 'Products & services,')} <em className="gold-text ">{t('na bei zake.', 'with prices.')}</em>
             </h2>
             <p className="mt-3 max-w-xl text-white/65">{t('Telezesha kuona zaidi. Ongeza kwenye cart, au agiza moja kwa moja kwa WhatsApp.', 'Swipe to see more. Add to cart, or order straight on WhatsApp.')}</p>
           </div>
@@ -94,7 +94,7 @@ export default function Showcase() {
 
         {/* Stage */}
         <div
-          className="grid overflow-hidden rounded-[2rem] bg-white/[.04] ring-1 ring-white/10 backdrop-blur lg:grid-cols-[1.35fr_1fr]"
+          className="grid overflow-hidden rounded-[2rem] bg-white/[.04] ring-1 ring-white/10 lg:grid-cols-[1.35fr_1fr]"
           onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
           onTouchStart={() => setPaused(true)} onTouchEnd={() => setTimeout(() => setPaused(false), 2500)}
         >
@@ -106,7 +106,6 @@ export default function Showcase() {
                 drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={0.6}
                 onDragEnd={(_, i) => { if (i.offset.x < -70 || i.velocity.x < -400) go(1); else if (i.offset.x > 70 || i.velocity.x > 400) go(-1) }}
                 className="absolute inset-0 cursor-grab active:cursor-grabbing">
-                {item.fit === 'contain' && <img src={item.img} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl" />}
                 <SafeImg src={item.img} alt={x(item.name)} className={`pointer-events-none relative h-full w-full select-none ${item.fit === 'contain' ? 'object-contain p-4 pb-16 drop-shadow-2xl' : 'object-cover'}`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/10 to-transparent" />
               </motion.div>
@@ -115,14 +114,14 @@ export default function Showcase() {
             {/* Juu ya picha */}
             <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-4 sm:p-5">
               <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-navy-950/70 px-3 py-1 text-xs font-semibold backdrop-blur">{x(catLabel(item.cat))}</span>
+                <span className="rounded-full bg-navy-950/70 px-3 py-1 text-xs font-semibold">{x(catLabel(item.cat))}</span>
                 {item.tag && <span className="rounded-full bg-gold-400 px-3 py-1 text-xs font-bold text-navy-950">{x(item.tag)}</span>}
               </div>
               <span className="pointer-events-auto flex items-center gap-2">
-                <button onClick={() => toggleWish(item.id)} aria-pressed={wishlist.includes(item.id)} aria-label={t('Hifadhi', 'Save')} className="grid h-9 w-9 place-items-center rounded-full bg-navy-950/70 backdrop-blur transition hover:scale-110">
+                <button onClick={() => toggleWish(item.id)} aria-pressed={wishlist.includes(item.id)} aria-label={t('Hifadhi', 'Save')} className="grid h-9 w-9 place-items-center rounded-full bg-navy-950/70 transition hover:scale-110">
                   <Heart className={`h-4 w-4 ${wishlist.includes(item.id) ? 'fill-rose-500 text-rose-500' : 'text-white'}`} />
                 </button>
-              <span className="rounded-full bg-navy-950/70 px-3 py-1 font-display text-sm font-bold tabular-nums backdrop-blur">
+              <span className="rounded-full bg-navy-950/70 px-3 py-1 font-display text-sm font-bold tabular-nums">
                 {String(index + 1).padStart(2, '0')} <span className="text-white/40">/ {String(list.length).padStart(2, '0')}</span>
               </span>
               </span>
@@ -152,7 +151,7 @@ export default function Showcase() {
           <div className="flex flex-col p-6 sm:p-8 lg:p-10">
             <AnimatePresence mode="wait">
               <motion.div key={tab + item.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.3 }} className="flex-1">
-                <p className="font-script text-2xl text-gold-300">{kind}</p>
+                <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{kind}</p>
                 <h3 className="font-display text-3xl font-black leading-tight sm:text-4xl" style={{ textWrap: 'balance' }}>{x(item.name)}</h3>
                 <p className="mt-4 leading-relaxed text-white/70">{x(item.desc)}</p>
                 <div className="mt-6 hidden items-baseline gap-2 lg:flex">

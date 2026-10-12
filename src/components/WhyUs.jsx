@@ -37,7 +37,7 @@ export default function WhyUs() {
             <p className="font-display text-5xl font-black"><Counter to={5000} suffix="+" /></p>
             <p className="text-sm font-semibold">{t('Wateja walioridhika', 'Happy customers')}</p>
           </div>
-          <img src={asset('logo.png')} alt="" className="absolute -left-4 -top-6 h-28 w-28 animate-spinslow rounded-full shadow-xl ring-4 ring-canvas" />
+          <img src={asset('logo.png')} alt="" className="absolute -left-4 -top-6 h-28 w-28 rounded-full shadow-xl ring-4 ring-canvas" />
         </Reveal>
 
         <div>

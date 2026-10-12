@@ -62,7 +62,7 @@ export default function Portfolio() {
 
       <AnimatePresence>
         {cur && (
-          <motion.div role="dialog" aria-modal="true" aria-label={x(cur.title)} className="fixed inset-0 z-[100] flex flex-col bg-navy-950/95 backdrop-blur-xl"
+          <motion.div role="dialog" aria-modal="true" aria-label={x(cur.title)} className="fixed inset-0 z-[100] flex flex-col bg-navy-950/95"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="flex items-center justify-between p-4" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}>
               <span className="font-display text-sm tabular-nums text-white/60">{open + 1} / {list.length}</span>

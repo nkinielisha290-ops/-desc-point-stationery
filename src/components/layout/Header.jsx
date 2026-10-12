@@ -149,7 +149,7 @@ export default function Header() {
       </div>
 
       {/* Header kuu */}
-      <div className={`relative border-b border-ink/5 bg-surface/95 backdrop-blur-xl transition-shadow ${scrolled || mega ? 'shadow-[0_10px_30px_-20px_rgba(6,20,77,.35)]' : ''}`} onMouseLeave={closeMega}>
+      <div className={`relative border-b border-ink/5 bg-surface transition-shadow ${scrolled || mega ? 'shadow-[0_10px_30px_-20px_rgba(6,20,77,.35)]' : ''}`} onMouseLeave={closeMega}>
         <div className="container-x flex h-16 items-center gap-3 lg:h-[72px] lg:gap-6">
           <a href={href('/')} className="flex shrink-0 items-center gap-2.5" aria-label="Desc Point Stationery – home">
             <img src={asset('logo.png')} alt="" className="h-10 w-10 rounded-full ring-2 ring-gold-400/60 lg:h-11 lg:w-11" />
@@ -228,7 +228,7 @@ export default function Header() {
       <AnimatePresence>
         {mobile && (
           <>
-            <motion.div className="fixed inset-0 z-[70] bg-navy-950/50 backdrop-blur-sm xl:hidden" onClick={() => setMobile(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />
+            <motion.div className="fixed inset-0 z-[70] bg-navy-950/50 xl:hidden" onClick={() => setMobile(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />
             <motion.aside role="dialog" aria-modal="true" aria-label={t('Menyu', 'Menu')} className="fixed inset-y-0 right-0 z-[71] flex w-[88%] max-w-sm flex-col bg-surface shadow-2xl xl:hidden"
               initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 30, stiffness: 280 }}>
               <div className="flex items-center justify-between bg-navy-950 px-5 py-4 text-white" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}>

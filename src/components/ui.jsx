@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ImageOff } from 'lucide-react'
 
 export const tsh = (n) => 'TSh ' + n.toLocaleString('en-US')
@@ -11,10 +11,10 @@ export function Reveal({ children, delay = 0, y = 40, className = '', as = 'div'
   return (
     <M
       className={className}
-      initial={{ opacity: 0, y, filter: 'blur(8px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
+      initial={{ opacity: 0, y: Math.min(y, 24) }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: Math.min(delay, 0.2), ease: EASE }}
     >
       {children}
     </M>
@@ -24,11 +24,11 @@ export function Reveal({ children, delay = 0, y = 40, className = '', as = 'div'
 // Watoto wanaingia mmoja baada ya mwingine
 export const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.06 } },
 }
 export const rise = {
-  hidden: { opacity: 0, y: 36, scale: 0.96, filter: 'blur(6px)' },
-  show: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', transition: { duration: 0.7, ease: EASE } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
 }
 export function Stagger({ children, className = '', as = 'div' }) {
   const M = motion[as]
@@ -42,21 +42,10 @@ export function Stagger({ children, className = '', as = 'div' }) {
 // Maneno ya kichwa yanapanda moja moja
 export function WordsUp({ text, className = '', delay = 0, wordClass = '' }) {
   return (
-    <span className={className}>
-      {text.split(' ').map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
-          <motion.span
-            className={`inline-block ${wordClass}`}
-            initial={{ y: '110%', rotate: 4 }}
-            whileInView={{ y: 0, rotate: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.8, delay: delay + i * 0.07, ease: EASE }}
-          >
-            {w}&nbsp;
-          </motion.span>
-        </span>
-      ))}
-    </span>
+    <motion.span className={`inline ${className} ${wordClass}`} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }} transition={{ duration: 0.5, delay: Math.min(delay, 0.15), ease: EASE }}>
+      {text}{' '}
+    </motion.span>
   )
 }
 
@@ -76,7 +65,7 @@ export function SectionTitle({ eyebrow, title, accent, sub, light = false, cente
       </motion.p>
       <h2 className={`mt-2 font-display text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl ${light ? 'text-white' : 'text-ink'}`} style={{ textWrap: 'balance' }}>
         <WordsUp text={title} />
-        {accent && <WordsUp text={accent} delay={words * 0.07} wordClass="gold-text font-display italic" />}
+        {accent && <WordsUp text={accent} delay={words * 0.07} wordClass="gold-text font-display " />}
       </h2>
       {sub && (
         <motion.p className={`mt-4 text-lg ${light ? 'text-white/70' : 'text-ink/65'}`}
@@ -88,27 +77,9 @@ export function SectionTitle({ eyebrow, title, accent, sub, light = false, cente
   )
 }
 
-// Kadi inayoinama kufuata kipanya (3D tilt) + mwanga wa dhahabu
+// Kadi ya kawaida (zamani ilikuwa ya 3D; imeondolewa ili kuscroll kuwe kwa haraka)
 export function TiltCard({ children, className = '', variants }) {
-  const mx = useMotionValue(0.5)
-  const my = useMotionValue(0.5)
-  const rx = useSpring(useTransform(my, [0, 1], [7, -7]), { stiffness: 200, damping: 18 })
-  const ry = useSpring(useTransform(mx, [0, 1], [-7, 7]), { stiffness: 200, damping: 18 })
-  const glow = useTransform([mx, my], ([x, y]) => `radial-gradient(420px circle at ${x * 100}% ${y * 100}%, rgba(255,210,63,.22), transparent 45%)`)
-  const move = (e) => {
-    if (e.pointerType !== 'mouse') return
-    const r = e.currentTarget.getBoundingClientRect()
-    mx.set((e.clientX - r.left) / r.width)
-    my.set((e.clientY - r.top) / r.height)
-  }
-  const leave = () => { mx.set(0.5); my.set(0.5) }
-  return (
-    <motion.div variants={variants} onPointerMove={move} onPointerLeave={leave}
-      style={{ rotateX: rx, rotateY: ry, transformPerspective: 900 }} className={`group/tilt relative ${className}`}>
-      {children}
-      <motion.div aria-hidden style={{ background: glow }} className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/tilt:opacity-100" />
-    </motion.div>
-  )
+  return <motion.div variants={variants} className={`relative ${className}`}>{children}</motion.div>
 }
 
 // Picha yenye fallback nzuri kama mtandao ukizuia
@@ -120,5 +91,5 @@ export function SafeImg({ src, alt, className = '' }) {
         <ImageOff className="h-8 w-8 opacity-60" />
       </div>
     )
-  return <img src={src} alt={alt} loading="lazy" onError={() => setErr(true)} className={className} />
+  return <img src={src} alt={alt} loading="lazy" decoding="async" onError={() => setErr(true)} className={className} />
 }

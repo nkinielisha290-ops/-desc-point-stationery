@@ -55,13 +55,13 @@ export default function OrderDrawer() {
     <AnimatePresence>
       {open && (
         <>
-          <motion.div className="fixed inset-0 z-[80] bg-navy-950/60 backdrop-blur-sm" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />
+          <motion.div className="fixed inset-0 z-[80] bg-navy-950/60" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />
           <motion.aside role="dialog" aria-modal="true" aria-label={t('Cart yako', 'Your cart')}
             className="fixed bottom-0 right-0 top-0 z-[90] flex w-full max-w-md flex-col bg-canvas shadow-2xl"
             initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 30, stiffness: 260 }}>
             <div className="flex items-center justify-between bg-navy-950 px-6 py-5 text-white" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top, 0px))' }}>
               <div>
-                <p className="font-script text-xl text-gold-300">{t('Cart yako', 'Your cart')}</p>
+                <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{t('Cart yako', 'Your cart')}</p>
                 <p className="font-display text-2xl font-black">{items.length} {t('vitu', 'items')}</p>
               </div>
               <button onClick={onClose} aria-label={t('Funga', 'Close')} className="grid h-10 w-10 place-items-center rounded-full bg-white/10"><X className="h-5 w-5" /></button>

@@ -59,9 +59,9 @@ export default function Testimonials() {
           <div className="relative overflow-hidden rounded-[2.5rem] bg-surface p-8 sm:p-14">
             <Quote className="absolute right-8 top-8 h-24 w-24 text-gold-400/20" />
             <AnimatePresence mode="wait">
-              <motion.div key={i} initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -30, filter: 'blur(6px)' }} transition={{ duration: 0.5 }}>
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5 }}>
                 <div className="flex flex-wrap items-center gap-3"><Stars className="h-5 w-5" /><span className="rounded-full bg-gold-400/20 px-3 py-1 text-xs font-semibold text-gold-700 dark:text-gold-300">{t.service}</span></div>
-                <p className="mt-6 font-display text-2xl font-medium italic leading-snug text-ink sm:text-3xl">“{t.text}”</p>
+                <p className="mt-6 font-display text-2xl font-medium leading-snug text-ink sm:text-3xl">“{t.text}”</p>
                 <div className="mt-8 flex items-center gap-4">
                   <span className="grid h-14 w-14 place-items-center rounded-full bg-navy-900 font-display text-xl font-black text-gold-300">{t.name[0]}</span>
                   <span><b className="block text-lg">{t.name}</b><span className="text-ink/60">{t.role}</span></span>

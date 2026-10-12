@@ -81,7 +81,7 @@ export default function Footer() {
 
       <AnimatePresence>
         {howTo && (
-          <motion.div className="fixed inset-0 z-[100] grid place-items-end bg-navy-950/70 p-4 backdrop-blur-sm sm:place-items-center" onClick={() => setHowTo(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div className="fixed inset-0 z-[100] grid place-items-end bg-navy-950/70 p-4 sm:place-items-center" onClick={() => setHowTo(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <motion.div role="dialog" aria-modal="true" aria-label={t('Jinsi ya kuweka App', 'How to install')} onClick={(e) => e.stopPropagation()}
               initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
               className="w-full max-w-sm rounded-3xl bg-surface p-6 text-ink shadow-2xl" style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>

@@ -15,9 +15,9 @@ export default {
         canvas: 'rgb(var(--canvas) / <alpha-value>)',
       },
       fontFamily: {
-        display: ['"Fraunces"', 'serif'],
-        script: ['"Caveat"', 'cursive'],
-        sans: ['"Outfit"', 'system-ui', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        script: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },

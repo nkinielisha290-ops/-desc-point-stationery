@@ -85,7 +85,7 @@ export default function DesignStudio() {
         <SectionTitle eyebrow="Design studio" title={t('Eleza wazo lako,', 'Describe your idea,')} accent={t('tunalichora.', 'we draw it.')}
           sub={t('Hatua 3 tu: chagua unachohitaji, tueleze ladha yako, upate makadirio ya bei papo hapo. Mbunifu wetu atakupigia kuthibitisha.', 'Just 3 steps: choose what you need, tell us your taste, and get an instant estimate. Our designer will call to confirm.')} />
 
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] bg-surface shadow-[0_40px_80px_-40px_rgba(6,20,77,.45)] ring-1 ring-ink/5">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-[36px] bg-surface shadow-[0_40px_80px_-40px_rgba(6,20,77,.45)] ring-1 ring-ink/5">
           {/* Hatua */}
           <ol className="flex border-b border-ink/5">
             {steps.map((s, i) => (
@@ -198,7 +198,7 @@ export default function DesignStudio() {
                   <div className="grid gap-8 md:grid-cols-[1fr_1.1fr]">
                     {/* Kadi ya mfano inayoonyesha ladha */}
                     <motion.div initial={{ rotate: -4, scale: 0.9 }} animate={{ rotate: -2, scale: 1 }} transition={{ type: 'spring' }}
-                      className="relative mx-auto flex aspect-[4/5] w-full max-w-xs flex-col items-center justify-center overflow-hidden rounded-3xl p-8 text-center shadow-2xl"
+                      className="relative mx-auto flex aspect-[4/5] w-full max-w-xs flex-col items-center justify-center overflow-hidden rounded-[30px] p-8 text-center shadow-2xl"
                       style={{ background: pal.c[2], color: pal.c[0] }}>
                       <div className="absolute inset-3 rounded-2xl border-2" style={{ borderColor: pal.c[1] }} />
                       <Sparkles className="h-8 w-8" style={{ color: pal.c[1] }} />

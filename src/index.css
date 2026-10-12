@@ -29,7 +29,7 @@
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white backdrop-blur transition hover:border-gold-400 hover:text-gold-300;
   }
   .card {
-    @apply rounded-[20px] bg-surface shadow-[0_1px_2px_rgba(6,20,77,.06),0_8px_24px_-12px_rgba(6,20,77,.18)] ring-1 ring-ink/[.06] dark:shadow-none;
+    @apply rounded-[30px] bg-surface shadow-[0_1px_2px_rgba(6,20,77,.06),0_8px_24px_-12px_rgba(6,20,77,.18)] ring-1 ring-ink/[.06] dark:shadow-none;
   }
   .eyebrow { @apply text-xs font-bold uppercase tracking-[.18em] text-gold-600 sm:text-sm; }
   .paper-grain {

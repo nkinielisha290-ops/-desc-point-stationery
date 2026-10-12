@@ -13,7 +13,7 @@ function WallCard({ t: item }) {
   const { x } = useApp()
   const t = { ...item, role: x(item.role), service: x(item.service), text: x(item.text) }
   return (
-    <figure className="w-[300px] shrink-0 rounded-3xl bg-surface p-6 shadow-[0_20px_40px_-24px_rgba(6,20,77,.35)] ring-1 ring-ink/5 transition duration-300 hover:-translate-y-1 hover:ring-gold-400 sm:w-[340px]">
+    <figure className="w-[300px] shrink-0 rounded-[30px] bg-surface p-6 shadow-[0_20px_40px_-24px_rgba(6,20,77,.35)] ring-1 ring-ink/5 transition duration-300 hover:-translate-y-1 hover:ring-gold-400 sm:w-[340px]">
       <div className="flex items-center justify-between">
         <Stars />
         <span className="rounded-full bg-ink/5 px-2.5 py-1 text-[11px] font-semibold text-ink/60">{t.service}</span>
@@ -54,9 +54,9 @@ export default function Testimonials() {
 
         {/* Ushuhuda mkubwa */}
         <Reveal className="relative mx-auto max-w-4xl">
-          <motion.div className="absolute -inset-2 rounded-[2.5rem] bg-gradient-to-r from-gold-400 to-gold-600"
+          <motion.div className="absolute -inset-2 rounded-[40px] bg-gradient-to-r from-gold-400 to-gold-600"
             initial={{ rotate: 0 }} whileInView={{ rotate: -1.2 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.3 }} />
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-surface p-8 sm:p-14">
+          <div className="relative overflow-hidden rounded-[40px] bg-surface p-8 sm:p-14">
             <Quote className="absolute right-8 top-8 h-24 w-24 text-gold-400/20" />
             <AnimatePresence mode="wait">
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5 }}>

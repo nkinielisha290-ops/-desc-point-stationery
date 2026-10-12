@@ -143,7 +143,7 @@ export default function PrintUpload() {
               onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && input.current?.click()}
               role="button" tabIndex={0} aria-label={t('Chagua faili za kuprint', 'Choose files to print')}
               animate={{ scale: drag ? 1.02 : 1 }}
-              className={`group relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed px-6 py-10 text-center transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-400 ${drag ? 'border-gold-400 bg-gold-400/10' : 'border-ink/15 hover:border-gold-400 hover:bg-gold-400/5'}`}>
+              className={`group relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[30px] border-2 border-dashed px-6 py-10 text-center transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-400 ${drag ? 'border-gold-400 bg-gold-400/10' : 'border-ink/15 hover:border-gold-400 hover:bg-gold-400/5'}`}>
               <motion.span animate={{ y: drag ? -6 : [0, -6, 0] }} transition={drag ? {} : { duration: 2.4, repeat: Infinity }}
                 className="grid h-16 w-16 place-items-center rounded-2xl bg-navy-900 text-gold-300 shadow-lg dark:bg-gold-400 dark:text-navy-950">
                 <UploadCloud className="h-8 w-8" />

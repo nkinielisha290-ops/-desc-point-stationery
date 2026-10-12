@@ -94,7 +94,7 @@ export default function Showcase() {
 
         {/* Stage */}
         <div
-          className="grid overflow-hidden rounded-[2rem] bg-white/[.04] ring-1 ring-white/10 lg:grid-cols-[1.35fr_1fr]"
+          className="grid overflow-hidden rounded-[36px] bg-white/[.04] ring-1 ring-white/10 lg:grid-cols-[1.35fr_1fr]"
           onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
           onTouchStart={() => setPaused(true)} onTouchEnd={() => setTimeout(() => setPaused(false), 2500)}
         >

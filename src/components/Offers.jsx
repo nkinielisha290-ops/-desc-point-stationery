@@ -46,7 +46,7 @@ export default function Offers() {
             const item = ALL_ITEMS.find((i) => i.id === o.itemId)
             const save = o.oldPrice - o.price
             return (
-              <motion.article key={o.id} variants={rise} whileHover={{ y: -8 }} className="group relative overflow-hidden rounded-[2rem] bg-white/[.06] ring-1 ring-white/10">
+              <motion.article key={o.id} variants={rise} whileHover={{ y: -8 }} className="group relative overflow-hidden rounded-[36px] bg-white/[.06] ring-1 ring-white/10">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <SafeImg src={item?.img} alt={x(o.title)} className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent" />

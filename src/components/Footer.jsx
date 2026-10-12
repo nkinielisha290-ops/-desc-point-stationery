@@ -55,7 +55,7 @@ export default function Footer() {
         </div>
 
         {/* Pakua App (kama "Download Yas App") */}
-        <div className="rounded-3xl bg-white/[.05] p-6 ring-1 ring-white/10">
+        <div className="rounded-[30px] bg-white/[.05] p-6 ring-1 ring-white/10">
           <p className="text-sm font-bold uppercase tracking-[.15em] text-gold-300">{t('Pakua App ya Desc Point', 'Get the Desc Point app')}</p>
           <p className="mt-2 text-sm text-white/60">{t('Agiza, pakia faili na fuatilia oda kutoka kwenye simu yako — hata mtandao ukiwa dhaifu.', 'Order, upload files and track orders from your phone — even on a weak connection.')}</p>
           <div className="mt-5 grid gap-2">
@@ -84,7 +84,7 @@ export default function Footer() {
           <motion.div className="fixed inset-0 z-[100] grid place-items-end bg-navy-950/70 p-4 sm:place-items-center" onClick={() => setHowTo(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <motion.div role="dialog" aria-modal="true" aria-label={t('Jinsi ya kuweka App', 'How to install')} onClick={(e) => e.stopPropagation()}
               initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
-              className="w-full max-w-sm rounded-3xl bg-surface p-6 text-ink shadow-2xl" style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+              className="w-full max-w-sm rounded-[30px] bg-surface p-6 text-ink shadow-2xl" style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>
               <div className="flex items-start justify-between">
                 <img src={asset('logo.png')} alt="" className="h-12 w-12 rounded-xl" />
                 <button onClick={() => setHowTo(false)} aria-label={t('Funga', 'Close')} className="grid h-9 w-9 place-items-center rounded-full bg-ink/5"><X className="h-4 w-4" /></button>

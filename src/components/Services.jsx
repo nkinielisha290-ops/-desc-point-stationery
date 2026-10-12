@@ -36,7 +36,7 @@ export default function Services() {
           </Stagger>
 
           {/* Panel */}
-          <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-navy-900 via-navy-800 to-royal-600 p-8 text-white shadow-2xl sm:p-12">
+          <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-navy-900 via-navy-800 to-royal-600 p-8 text-white shadow-2xl sm:p-12">
             <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[28px] border-gold-400/10" />
             <AnimatePresence mode="wait">
               <motion.div key={g.id} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.45 }} className="relative">

@@ -19,7 +19,7 @@ export function Card({ p, i = 0 }) {
   return (
     <motion.article id={p.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-30px' }}
       transition={{ duration: 0.4, delay: (i % 3) * 0.05 }}
-      className="group relative flex h-full scroll-mt-32 flex-col overflow-hidden rounded-[20px] bg-surface ring-1 ring-ink/[.07] transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(6,20,77,.35)] hover:ring-gold-400/60">
+      className="group relative flex h-full scroll-mt-32 flex-col overflow-hidden rounded-[30px] bg-surface ring-1 ring-ink/[.07] transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(6,20,77,.35)] hover:ring-gold-400/60">
       {/* Picha: bidhaa halisi zinaonekana nzima juu ya mandhari safi (kama gridi ya vifaa ya Yas) */}
       <div className={`relative overflow-hidden ${real ? 'aspect-square bg-gradient-to-b from-ink/[.02] to-ink/[.06]' : 'aspect-[4/3] bg-navy-900 sm:aspect-square'}`}>
         <SafeImg src={p.img} alt={x(p.name)} className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${real ? 'object-contain p-2 sm:p-4' : 'object-cover'}`} />

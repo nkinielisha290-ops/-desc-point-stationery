@@ -19,8 +19,8 @@ export default function Prices() {
         </div>
 
         <motion.div initial={{ opacity: 0, rotate: 6, y: 60 }} whileInView={{ opacity: 1, rotate: 0, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} className="relative">
-          <div className="absolute -inset-3 rotate-2 rounded-[2rem] bg-gold-400" />
-          <div className="ruled relative rounded-[2rem] bg-paper p-6 text-navy-900 shadow-2xl sm:p-10">
+          <div className="absolute -inset-3 rotate-2 rounded-[36px] bg-gold-400" />
+          <div className="ruled relative rounded-[36px] bg-paper p-6 text-navy-900 shadow-2xl sm:p-10">
             <div className="absolute bottom-0 left-12 top-0 w-px bg-rose-400/50" />
             <p className="pl-10 text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-royal-600">{t('Orodha ya Bei ✍︎', 'Price List ✍︎')}</p>
             <ul className="mt-4 pl-10">

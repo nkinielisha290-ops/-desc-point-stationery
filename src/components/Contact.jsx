@@ -43,14 +43,14 @@ export default function Contact() {
               <Row I={Phone} title={t('Simu & WhatsApp', 'Phone & WhatsApp')} d={<><span className="select-all font-semibold text-ink">{BUSINESS.phoneLocal}</span>{' · '}<span className="select-all font-semibold text-ink">{BUSINESS.phone2Local}</span><br /><a href={waLink(t('Habari Desc Point!', 'Hello Desc Point!'))} target="_blank" rel="noreferrer" className="font-semibold text-emerald-600 hover:underline dark:text-emerald-400">{t('Chat WhatsApp', 'Chat on WhatsApp')}</a></>} />
               <Row I={Mail} title="Email" d={<span className="select-all break-all">{BUSINESS.email}</span>} />
             </div>
-            <div className="overflow-hidden rounded-3xl shadow-xl ring-1 ring-ink/10">
+            <div className="overflow-hidden rounded-[30px] shadow-xl ring-1 ring-ink/10">
               <iframe key={b} title={`${t('Ramani', 'Map')} ${x(branch.name)}`} className="h-64 w-full" loading="lazy"
                 src={`https://maps.google.com/maps?q=${encodeURIComponent(branch.map)}&z=14&output=embed`} />
             </div>
           </Reveal>
 
           <Reveal delay={0.15} className="lg:col-span-3">
-            <form onSubmit={send} className="relative h-full overflow-hidden rounded-[2rem] bg-navy-900 p-8 text-white shadow-2xl ring-1 ring-white/5 sm:p-12">
+            <form onSubmit={send} className="relative h-full overflow-hidden rounded-[36px] bg-navy-900 p-8 text-white shadow-2xl ring-1 ring-white/5 sm:p-12">
               <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{t('Tuandikie', 'Write to us')}</p>
               <h3 className="font-display text-3xl font-black sm:text-4xl">{t('Omba bei au weka oda', 'Get a price or place an order')}</h3>
               <div className="mt-8 grid gap-5 sm:grid-cols-2">

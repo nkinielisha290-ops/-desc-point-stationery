@@ -91,7 +91,7 @@ export default function OrderTracker() {
           )}
 
           {(state.phase === 'missing' || state.phase === 'error') && (
-            <motion.div key="nf" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mx-auto mt-10 flex max-w-xl gap-4 rounded-3xl bg-amber-400/10 p-6 ring-1 ring-amber-400/30">
+            <motion.div key="nf" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mx-auto mt-10 flex max-w-xl gap-4 rounded-[30px] bg-amber-400/10 p-6 ring-1 ring-amber-400/30">
               <AlertCircle className="h-6 w-6 shrink-0 text-amber-500" />
               <div className="text-sm">
                 <p className="font-semibold">

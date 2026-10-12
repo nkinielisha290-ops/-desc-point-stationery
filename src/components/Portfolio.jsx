@@ -44,7 +44,7 @@ export default function Portfolio() {
               <motion.button layout key={p.id} onClick={() => setOpen(i)}
                 initial={{ opacity: 0, y: 30, scale: 0.95 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }} exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-                className="group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-3xl text-left ring-1 ring-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-400"
+                className="group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-[30px] text-left ring-1 ring-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-400"
                 aria-label={`${t('Tazama', 'View')}: ${x(p.title)}`}>
                 <SafeImg src={p.img} alt={x(p.title)} className="h-auto w-full transition duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/20 to-transparent opacity-80 transition group-hover:opacity-100" />

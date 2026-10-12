@@ -125,7 +125,7 @@ export function OnlinePage() {
         const item = ALL_ITEMS.find((it) => it.id === s.itemId)
         return (
           <motion.article key={s.id} id={s.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6 }}
-            className="grid scroll-mt-28 overflow-hidden rounded-[1.75rem] bg-surface shadow-[0_20px_50px_-30px_rgba(6,20,77,.45)] ring-1 ring-ink/5 md:grid-cols-[320px_1fr]">
+            className="grid scroll-mt-28 overflow-hidden rounded-[36px] bg-surface shadow-[0_20px_50px_-30px_rgba(6,20,77,.45)] ring-1 ring-ink/5 md:grid-cols-[320px_1fr]">
             <div className="relative min-h-[220px] bg-navy-900">
               <SafeImg src={item?.img} alt={x(s.name)} className={`relative h-full w-full ${item?.fit === 'contain' ? 'object-contain p-4' : 'object-cover'}`} />
             </div>
@@ -203,7 +203,7 @@ export function CoursePage() {
         </div>
       </div>
 
-      <form onSubmit={send} className="h-fit rounded-[1.75rem] bg-surface p-6 shadow-2xl ring-1 ring-ink/5 sm:p-8 lg:sticky lg:top-28">
+      <form onSubmit={send} className="h-fit rounded-[36px] bg-surface p-6 shadow-2xl ring-1 ring-ink/5 sm:p-8 lg:sticky lg:top-28">
         <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold-400 text-navy-950"><Monitor className="h-6 w-6" /></span>
         <h2 className="mt-4 font-display text-2xl font-black text-ink">{t('Jisajili sasa', 'Register now')}</h2>
         <p className="mt-1 text-sm text-ink/60">{t('Tutakutumia ratiba ya madarasa na ada kwa WhatsApp.', 'We’ll send the class schedule and fees on WhatsApp.')}</p>

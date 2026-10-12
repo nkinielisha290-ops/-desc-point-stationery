@@ -13,8 +13,8 @@ export default function School() {
           <SectionTitle center={false} eyebrow={t('Back to school 🎒', 'Back to school 🎒')} title={t('Vifurushi vya shule,', 'School packs,')} accent={t('tayari kwenye mfuko.', 'ready in the bag.')}
             sub={t('Mzazi, usizunguke madukani. Chagua kifurushi kinachoendana na darasa la mtoto wako — tunakuandalia kila kitu, hata kuandika majina kwenye madaftari.', 'Parents, skip the shop-hopping. Pick the pack for your child’s grade — we prepare everything, even writing names on the books.')} />
           <Reveal delay={0.15} className="relative">
-            <div className="absolute -left-4 -top-4 h-full w-full rounded-[2rem] border-2 border-dashed border-gold-500" />
-            <SafeImg src={IMAGES.school} alt={t('Vifaa vya shule', 'School supplies')} className="relative aspect-[4/3] w-full rounded-[2rem] object-cover object-[50%_30%] shadow-2xl" />
+            <div className="absolute -left-4 -top-4 h-full w-full rounded-[36px] border-2 border-dashed border-gold-500" />
+            <SafeImg src={IMAGES.school} alt={t('Vifaa vya shule', 'School supplies')} className="relative aspect-[4/3] w-full rounded-[36px] object-cover object-[50%_30%] shadow-2xl" />
             <div className="absolute -bottom-6 right-6 flex items-center gap-3 rounded-2xl bg-navy-900 px-5 py-4 text-white shadow-xl">
               <GraduationCap className="h-8 w-8 text-gold-400" />
               <span className="text-sm leading-tight"><b className="block font-display text-lg">{t('Shule & taasisi', 'Schools & institutions')}</b>{t('Bei maalum kwa bulk', 'Special bulk pricing')}</span>
@@ -24,9 +24,9 @@ export default function School() {
 
         <Stagger className="grid gap-6 lg:grid-cols-3">
           {SCHOOL_PACKS.map((p) => (
-            <TiltCard key={p.id} variants={rise} className="h-full rounded-[2rem]">
+            <TiltCard key={p.id} variants={rise} className="h-full rounded-[36px]">
               <motion.div whileHover={{ y: -8 }}
-                className={`relative flex h-full flex-col rounded-[2rem] p-8 ${p.featured ? 'bg-navy-900 text-white shadow-2xl shadow-navy-900/40 ring-2 ring-gold-400' : 'card'}`}>
+                className={`relative flex h-full flex-col rounded-[36px] p-8 ${p.featured ? 'bg-navy-900 text-white shadow-2xl shadow-navy-900/40 ring-2 ring-gold-400' : 'card'}`}>
                 {p.featured && <span className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold-400 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-navy-950">{t('Kinachopendwa zaidi', 'Most popular')}</span>}
                 <p className={`text-xs font-bold uppercase tracking-[.18em] sm:text-sm ${p.featured ? 'text-gold-300' : 'text-gold-600'}`}>{x(p.level)}</p>
                 <h3 className="font-display text-3xl font-black">{x(p.name)}</h3>

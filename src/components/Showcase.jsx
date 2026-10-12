@@ -74,8 +74,8 @@ export default function Showcase() {
         <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="eyebrow text-gold-300">{t('Gundua na uagize', 'Explore and order')}</p>
-            <h2 className="mt-1 font-display text-4xl font-black leading-[1.05] sm:text-5xl">
-              {t('Bidhaa & huduma,', 'Products & services,')} <em className="gold-text ">{t('na bei zake.', 'with prices.')}</em>
+            <h2 className="mt-1 font-display text-4xl font-bold leading-[1.05] sm:text-5xl">
+              {t('Bidhaa na huduma, na bei zake', 'Products and services, with prices')}
             </h2>
             <p className="mt-3 max-w-xl text-white/65">{t('Telezesha kuona zaidi. Ongeza kwenye cart, au agiza moja kwa moja kwa WhatsApp.', 'Swipe to see more. Add to cart, or order straight on WhatsApp.')}</p>
           </div>
@@ -129,7 +129,7 @@ export default function Showcase() {
 
             {/* Bei juu ya picha (simu) */}
             <div className="pointer-events-none absolute bottom-4 left-4 lg:hidden">
-              <p className="font-display text-3xl font-black text-gold-300 drop-shadow">{priceText(item.price)}</p>
+              <p className="font-display text-3xl font-bold text-gold-300 drop-shadow">{priceText(item.price)}</p>
               {!ask && <p className="text-xs text-white/80">{t('kwa', 'per')} {x(item.unit)}</p>}
             </div>
 
@@ -152,10 +152,10 @@ export default function Showcase() {
             <AnimatePresence mode="wait">
               <motion.div key={tab + item.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.3 }} className="flex-1">
                 <p className="text-xs font-bold sm:text-sm text-gold-300">{kind}</p>
-                <h3 className="font-display text-3xl font-black leading-tight sm:text-4xl" style={{ textWrap: 'balance' }}>{x(item.name)}</h3>
+                <h3 className="font-display text-3xl font-bold leading-tight sm:text-4xl" style={{ textWrap: 'balance' }}>{x(item.name)}</h3>
                 <p className="mt-4 leading-relaxed text-white/70">{x(item.desc)}</p>
                 <div className="mt-6 hidden items-baseline gap-2 lg:flex">
-                  <span className={`gold-text font-display font-black tabular-nums ${ask ? 'text-4xl' : 'text-5xl'}`}>{priceText(item.price)}</span>
+                  <span className={`gold-text font-display font-bold tabular-nums ${ask ? 'text-4xl' : 'text-5xl'}`}>{priceText(item.price)}</span>
                   {!ask && <span className="text-white/50">/ {x(item.unit)}</span>}
                 </div>
               </motion.div>
@@ -173,7 +173,7 @@ export default function Showcase() {
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-1 rounded-full bg-white/10 p-1.5 ring-1 ring-gold-400/40">
                     <button onClick={() => setQty(item.id, qty - 1)} aria-label={t('Punguza', 'Decrease')} className="grid h-10 w-10 place-items-center rounded-full bg-white/10 hover:bg-white/20"><Minus className="h-4 w-4" /></button>
-                    <motion.span key={qty} initial={{ scale: 1.4 }} animate={{ scale: 1 }} className="w-8 text-center font-display text-lg font-black tabular-nums">{qty}</motion.span>
+                    <motion.span key={qty} initial={{ scale: 1.4 }} animate={{ scale: 1 }} className="w-8 text-center font-display text-lg font-bold tabular-nums">{qty}</motion.span>
                     <button onClick={() => onAdd(item)} aria-label={t('Ongeza', 'Increase')} className="grid h-10 w-10 place-items-center rounded-full bg-gold-400 text-navy-950 hover:bg-gold-300"><Plus className="h-4 w-4" /></button>
                   </div>
                   <p className="text-sm text-white/70">{t('Kwenye cart', 'In cart')} · <b className="text-gold-300">{tsh(qty * item.price)}</b></p>
@@ -203,7 +203,7 @@ export default function Showcase() {
                 <p className="truncate text-xs font-semibold">{x(p.name)}</p>
                 <p className="text-xs font-bold text-gold-300">{priceText(p.price)}</p>
               </div>
-              {cart[p.id] && <span className="absolute right-2 top-2 grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1 text-[10px] font-black text-navy-950">{cart[p.id].qty}</span>}
+              {cart[p.id] && <span className="absolute right-2 top-2 grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1 text-[10px] font-bold text-navy-950">{cart[p.id].qty}</span>}
             </button>
           ))}
         </div>

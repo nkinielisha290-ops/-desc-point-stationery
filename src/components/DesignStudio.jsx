@@ -92,7 +92,7 @@ export default function DesignStudio() {
               <li key={s} className="flex-1">
                 <button onClick={() => go(i)} aria-current={step === i ? 'step' : undefined}
                   className={`relative flex w-full items-center justify-center gap-2 px-2 py-4 text-sm font-semibold transition ${step >= i ? 'text-ink' : 'text-ink/40'}`}>
-                  <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-black transition ${step > i ? 'bg-emerald-500 text-white' : step === i ? 'bg-gold-400 text-navy-950' : 'bg-ink/10'}`}>
+                  <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-bold transition ${step > i ? 'bg-emerald-500 text-white' : step === i ? 'bg-gold-400 text-navy-950' : 'bg-ink/10'}`}>
                     {step > i ? <Check className="h-4 w-4" /> : i + 1}
                   </span>
                   <span className="hidden sm:inline">{s}</span>
@@ -133,7 +133,7 @@ export default function DesignStudio() {
                       <div>
                         <label htmlFor="ds-qty" className="mb-2 block text-sm font-semibold text-ink/70">{t('Idadi', 'Quantity')} ({x(kind.unit)}) · {t('kiwango cha chini', 'minimum')} {kind.min}</label>
                         <input id="ds-qty" type="number" min={kind.min} inputMode="numeric" value={qty} onChange={(e) => setQty(+e.target.value || kind.min)} onBlur={() => setQty((q) => Math.max(kind.min, q))}
-                          className="w-full rounded-2xl bg-ink/5 px-4 py-3 font-display text-xl font-black tabular-nums outline-none ring-gold-400 focus:ring-2" />
+                          className="w-full rounded-2xl bg-ink/5 px-4 py-3 font-display text-xl font-bold tabular-nums outline-none ring-gold-400 focus:ring-2" />
                       </div>
                     )}
                     <div>
@@ -203,13 +203,13 @@ export default function DesignStudio() {
                       <div className="absolute inset-3 rounded-2xl border-2" style={{ borderColor: pal.c[1] }} />
                       <Sparkles className="h-8 w-8" style={{ color: pal.c[1] }} />
                       <p className="mt-3 text-xs font-bold sm:text-sm" style={{ color: pal.c[1] }}>{x(kind.label)}</p>
-                      <p className="mt-2 line-clamp-4 font-display text-2xl font-black leading-tight">{text || t('Maandishi yako yatakaa hapa', 'Your text goes here')}</p>
+                      <p className="mt-2 line-clamp-4 font-display text-2xl font-bold leading-tight">{text || t('Maandishi yako yatakaa hapa', 'Your text goes here')}</p>
                       {date && <p className="mt-3 text-sm font-semibold opacity-70">{new Date(date).toLocaleDateString(t('sw-TZ', 'en-GB'), { day: 'numeric', month: 'long', year: 'numeric' })}</p>}
                       <span className="absolute bottom-4 text-[10px] font-semibold opacity-50">{t('Mfano tu', 'Mock-up only')}</span>
                     </motion.div>
 
                     <div>
-                      <h3 className="font-display text-2xl font-black">{t('Muhtasari wa oda', 'Order summary')}</h3>
+                      <h3 className="font-display text-2xl font-bold">{t('Muhtasari wa oda', 'Order summary')}</h3>
                       <dl className="mt-4 divide-y divide-ink/5 text-sm">
                         <Row k={t('Aina', 'Type')} v={x(kind.label)} />
                         {kind.per === 'unit' && <Row k={t('Idadi', 'Quantity')} v={`${est.q} ${x(kind.unit)}`} />}
@@ -222,7 +222,7 @@ export default function DesignStudio() {
                       </dl>
                       <div className="mt-4 flex items-end justify-between rounded-2xl bg-navy-900 p-5 text-white dark:ring-1 dark:ring-gold-400/30">
                         <span className="text-sm text-white/70">{t('Makadirio, kuanzia', 'Estimate, from')}</span>
-                        <motion.span key={est.total} initial={{ scale: 1.15 }} animate={{ scale: 1 }} className="gold-text font-display text-3xl font-black tabular-nums">{tsh(est.total)}</motion.span>
+                        <motion.span key={est.total} initial={{ scale: 1.15 }} animate={{ scale: 1 }} className="gold-text font-display text-3xl font-bold tabular-nums">{tsh(est.total)}</motion.span>
                       </div>
                       <p className="mt-2 text-xs text-ink/50">{t('Bei ya mwisho inathibitishwa baada ya kuongea na mbunifu.', 'Final price is confirmed after talking with the designer.')}</p>
                       <label htmlFor="ds-name" className="sr-only">{t('Jina lako', 'Your name')}</label>

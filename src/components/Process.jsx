@@ -24,7 +24,7 @@ export default function Process() {
             <motion.div key={i} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.25, duration: 0.7 }} className="relative text-center">
               <div className="relative mx-auto grid h-20 w-20 place-items-center rounded-full bg-gold-400 text-navy-950 shadow-[0_0_0_10px_rgba(245,184,0,.15)]">
                 <I className="h-9 w-9" />
-                <span className="absolute -right-2 -top-2 grid h-8 w-8 place-items-center rounded-full bg-white font-display font-black text-navy-900">{i + 1}</span>
+                <span className="absolute -right-2 -top-2 grid h-8 w-8 place-items-center rounded-full bg-white font-display font-bold text-navy-900">{i + 1}</span>
               </div>
               <h3 className="mt-6 font-display text-2xl font-bold">{title}</h3>
               <p className="mx-auto mt-2 max-w-xs text-white/65">{d}</p>

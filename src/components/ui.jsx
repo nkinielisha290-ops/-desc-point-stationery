@@ -49,29 +49,12 @@ export function WordsUp({ text, className = '', delay = 0, wordClass = '' }) {
   )
 }
 
-export function SectionTitle({ eyebrow, title, accent, sub, light = false, center = true }) {
-  const words = title.split(' ').length
+export function SectionTitle({ eyebrow, title, accent, sub, light = false, center = false }) {
   return (
-    <div className={`mb-12 max-w-3xl ${center ? 'mx-auto text-center' : ''}`}>
-      <motion.p
-        className={`eyebrow ${light ? '!text-gold-300' : ''}`}
-        initial={{ opacity: 0, x: center ? 0 : -20, y: 10 }}
-        whileInView={{ opacity: 1, x: 0, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        {eyebrow}
-      </motion.p>
-      <h2 className={`mt-2 font-display text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl ${light ? 'text-white' : 'text-ink'}`} style={{ textWrap: 'balance' }}>
-        <WordsUp text={title} />
-        {accent && <WordsUp text={accent} delay={words * 0.07} wordClass="" />}
-      </h2>
-      {sub && (
-        <motion.p className={`mt-4 text-lg ${light ? 'text-white/70' : 'text-ink/65'}`}
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.35 }}>
-          {sub}
-        </motion.p>
-      )}
+    <div className={`mb-8 max-w-2xl sm:mb-10 ${center ? 'mx-auto text-center' : ''}`}>
+      {eyebrow && <p className={`text-sm font-semibold ${light ? 'text-gold-300' : 'text-royal-500 dark:text-gold-300'}`}>{eyebrow}</p>}
+      <h2 className={`h-sec mt-2 ${light ? '!text-white' : ''}`}>{title}{accent ? ' ' + accent : ''}</h2>
+      {sub && <p className={`mt-3 text-[17px] leading-relaxed ${light ? 'text-white/70' : 'text-ink/60'}`}>{sub}</p>}
     </div>
   )
 }

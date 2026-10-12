@@ -55,7 +55,7 @@ export default function OrderTracker() {
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="font-mono text-sm font-bold tracking-wider text-royal-500">{state.id}</p>
-                  <h3 className="mt-1 font-display text-2xl font-black">{state.o.item || t('Oda yako', 'Your order')}</h3>
+                  <h3 className="mt-1 font-display text-2xl font-bold">{state.o.item || t('Oda yako', 'Your order')}</h3>
                 </div>
                 <span className={`rounded-full px-4 py-1.5 text-sm font-bold ${idx >= 3 ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300' : 'bg-gold-400/20 text-gold-700 dark:text-gold-300'}`}>
                   {x(ORDER_STEPS[idx].label)}

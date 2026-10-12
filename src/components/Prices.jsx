@@ -29,7 +29,7 @@ export default function Prices() {
                   className="flex items-end gap-2 py-[7px] leading-[18px]">
                   <span className="font-medium">{x(p.item)}</span>
                   <span className="mb-1 flex-1 border-b-2 border-dotted border-navy-900/20" />
-                  <span className="whitespace-nowrap font-display font-black text-navy-900">{tsh(p.price)}</span>
+                  <span className="whitespace-nowrap font-display font-bold text-navy-900">{tsh(p.price)}</span>
                   <span className="hidden whitespace-nowrap text-xs text-navy-900/50 sm:inline">/ {x(p.unit)}</span>
                 </motion.li>
               ))}

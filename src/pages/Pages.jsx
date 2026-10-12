@@ -17,21 +17,20 @@ import OrderTracker from '../components/OrderTracker'
 import Services from '../components/Services'
 import WhyUs from '../components/WhyUs'
 import Process from '../components/Process'
-import Testimonials from '../components/Testimonials'
 import Contact from '../components/Contact'
 
-/* Banner ya juu ya kila ukurasa wa ndani (kama Yas) */
+/* Kichwa cha kila ukurasa wa ndani: bluu iliyokolea, chini imepinda */
 export function PageHero({ crumb, title, sub, children }) {
   const { t } = useApp()
   return (
-    <section className="border-b border-ink/[.06] bg-surface">
-      <div className="container-x py-10 sm:py-14">
-        <nav aria-label={t('Ulipo', 'Breadcrumb')} className="flex items-center gap-1 text-sm text-ink/50">
-          <a href={href('/')} className="hover:text-ink">{t('Mwanzo', 'Home')}</a> <ChevronRight className="h-4 w-4" /> <span className="font-semibold text-royal-500">{crumb}</span>
+    <section className="rounded-b-[40px] bg-navy-950 text-white sm:rounded-b-[56px]">
+      <div className="container-x pb-10 pt-6 sm:pb-16 sm:pt-10">
+        <nav aria-label={t('Ulipo', 'Breadcrumb')} className="flex items-center gap-1 text-sm text-white/55">
+          <a href={href('/')} className="hover:text-white">{t('Mwanzo', 'Home')}</a> <ChevronRight className="h-4 w-4" /> <span className="font-semibold text-gold-300">{crumb}</span>
         </nav>
-        <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-          className="mt-4 max-w-4xl text-[clamp(2.4rem,6vw,4.25rem)] font-extrabold leading-[.98] text-ink" style={{ textWrap: 'balance' }}>{title}</motion.h1>
-        {sub && <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-ink/60">{sub}</p>}
+        <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-4 max-w-4xl font-display text-[clamp(1.85rem,6.6vw,3.6rem)] font-bold leading-[1.05]" style={{ textWrap: 'balance' }}>{title}</motion.h1>
+        {sub && <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-white/65 sm:text-[17px]">{sub}</p>}
         {children}
       </div>
     </section>
@@ -102,9 +101,8 @@ export function ServicesPage() {
 export function AboutPage() {
   const { t } = useApp()
   return <>
-    <PageHero crumb={t('Kuhusu sisi', 'About us')} title={t('Kuhusu Desc Point Stationery', 'About Desc Point Stationery')} sub="Quality arts and designing · Madafu & Zegereni, Kibaha" />
+    <PageHero crumb={t('Kuhusu sisi', 'About us')} title={t('Kuhusu Desc Point Stationery', 'About Desc Point Stationery')} sub={t('Quality arts and designing. Maduka mawili: Madafu na Zegereni, Kibaha.', 'Quality arts and designing. Two shops: Madafu and Zegereni, Kibaha.')} />
     <WhyUs />
-    <Testimonials />
     <div id="maduka" className="scroll-mt-28"><Contact /></div>
   </>
 }
@@ -116,7 +114,7 @@ export function OnlinePage() {
     <PageHero crumb={t('Huduma za mtandaoni', 'Online services')} title={t('Huduma za mtandaoni, bila foleni', 'Online services, without the queue')}
       sub={t('Tunajaza, tunascan, tunapakia na kutuma maombi yako. Unaondoka na nakala ya kila ulichotuma.', 'We fill in, scan, upload and submit your application. You leave with a copy of everything.')}>
       <div className="mt-7 flex flex-wrap gap-2">
-        {ONLINE_SERVICES.map((s) => <a key={s.id} href={href(`/mtandaoni#${s.id}`)} className="rounded-full bg-canvas px-4 py-2 text-sm font-semibold text-ink ring-1 ring-ink/10 transition-colors hover:bg-navy-900 hover:text-white">{x(s.name).split('—')[0].trim()}</a>)}
+        {ONLINE_SERVICES.map((s) => <a key={s.id} href={href(`/mtandaoni#${s.id}`)} className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gold-400 hover:text-navy-950">{x(s.name).split('—')[0].trim()}</a>)}
       </div>
     </PageHero>
     <section className="container-x space-y-6 py-14 sm:py-20">
@@ -124,13 +122,13 @@ export function OnlinePage() {
         const item = ALL_ITEMS.find((it) => it.id === s.itemId)
         return (
           <motion.article key={s.id} id={s.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6 }}
-            className="grid scroll-mt-28 overflow-hidden rounded-[36px] bg-surface shadow-[0_20px_50px_-30px_rgba(6,20,77,.45)] ring-1 ring-ink/5 md:grid-cols-[320px_1fr]">
+            className="grid scroll-mt-28 overflow-hidden rounded-[32px] bg-surface ring-1 ring-ink/[.07] md:grid-cols-[320px_1fr]">
             <div className="relative min-h-[220px] bg-navy-900">
               <SafeImg src={item?.img} alt={x(s.name)} className={`relative h-full w-full ${item?.fit === 'contain' ? 'object-contain p-4' : 'object-cover'}`} />
             </div>
             <div className="p-6 sm:p-9">
-              <span className="text-xs font-bold text-gold-600">{String(i + 1).padStart(2, '0')} · {t('Huduma ya mtandaoni', 'Online service')}</span>
-              <h2 className="mt-2 font-display text-2xl font-black text-ink sm:text-3xl">{x(s.name)}</h2>
+              <span className="text-xs font-bold text-gold-600">{t('Huduma ya mtandaoni', 'Online service')}</span>
+              <h2 className="mt-2 font-display text-2xl font-bold text-ink sm:text-3xl">{x(s.name)}</h2>
               <p className="mt-3 text-ink/65">{x(item?.desc)}</p>
               <div className="mt-6 rounded-2xl bg-ink/[.035] p-5">
                 <p className="flex items-center gap-2 font-semibold text-ink"><FileCheck2 className="h-5 w-5 text-royal-500" /> {t('Viambata unavyohitaji', 'What to bring')}</p>
@@ -181,16 +179,16 @@ export function CoursePage() {
     <PageHero crumb={t('Kozi ya kompyuta', 'Computer course')} title={x(course.title)} sub={x(course.blurb)} />
     <section className="container-x grid gap-10 py-14 sm:py-20 lg:grid-cols-[1.2fr_1fr]">
       <div>
-        <h2 className="font-display text-2xl font-black text-ink sm:text-3xl">{t('Utajifunza nini?', 'What you’ll learn')}</h2>
+        <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">{t('Utajifunza nini?', 'What you’ll learn')}</h2>
         <Stagger className="mt-6 grid gap-3 sm:grid-cols-2">
           {course.items.map((it, i) => (
             <motion.div key={it.sw} variants={rise} className="flex items-center gap-3 rounded-2xl bg-surface p-4 ring-1 ring-ink/5">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-royal-500/10 font-display font-black text-royal-500">{i + 1}</span>
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-royal-500/10 font-display font-bold text-royal-500">{i + 1}</span>
               <span className="font-semibold text-ink">{x(it)}</span>
             </motion.div>
           ))}
         </Stagger>
-        <h2 className="mt-12 font-display text-2xl font-black text-ink sm:text-3xl">{t('Kozi hii ni kwa nani?', 'Who is it for?')}</h2>
+        <h2 className="mt-12 font-display text-2xl font-bold text-ink sm:text-3xl">{t('Kozi hii ni kwa nani?', 'Who is it for?')}</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {WHO.map(([I, title, d]) => (
             <div key={title} className="rounded-2xl bg-navy-900 p-5 text-white">
@@ -204,7 +202,7 @@ export function CoursePage() {
 
       <form onSubmit={send} className="h-fit rounded-[36px] bg-surface p-6 shadow-2xl ring-1 ring-ink/5 sm:p-8 lg:sticky lg:top-28">
         <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold-400 text-navy-950"><Monitor className="h-6 w-6" /></span>
-        <h2 className="mt-4 font-display text-2xl font-black text-ink">{t('Jisajili sasa', 'Register now')}</h2>
+        <h2 className="mt-4 font-display text-2xl font-bold text-ink">{t('Jisajili sasa', 'Register now')}</h2>
         <p className="mt-1 text-sm text-ink/60">{t('Tutakutumia ratiba ya madarasa na ada kwa WhatsApp.', 'We’ll send the class schedule and fees on WhatsApp.')}</p>
         <label htmlFor="course-name" className="mt-6 block text-sm font-semibold text-ink/70">{t('Jina lako', 'Your name')}</label>
         <input id="course-name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-2 w-full rounded-xl bg-ink/5 px-4 py-3 outline-none ring-gold-400 focus:ring-2" />

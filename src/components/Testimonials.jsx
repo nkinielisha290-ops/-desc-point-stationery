@@ -20,7 +20,7 @@ function WallCard({ t: item }) {
       </div>
       <blockquote className="mt-4 text-[15px] leading-relaxed text-ink/80">“{t.text}”</blockquote>
       <figcaption className="mt-5 flex items-center gap-3">
-        <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-navy-800 to-royal-600 font-display font-black text-gold-300">{t.name[0]}</span>
+        <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-navy-800 to-royal-600 font-display font-bold text-gold-300">{t.name[0]}</span>
         <span className="leading-tight"><b className="block text-sm text-ink">{t.name}</b><span className="text-xs text-ink/55">{t.role}</span></span>
       </figcaption>
     </figure>
@@ -45,11 +45,11 @@ export default function Testimonials() {
         {/* Muhtasari wa ukadiriaji */}
         <Reveal className="mx-auto mb-12 flex max-w-xl flex-wrap items-center justify-center gap-x-8 gap-y-4 rounded-full bg-surface px-8 py-4 shadow-lg ring-1 ring-ink/5">
           <div className="flex items-center gap-3">
-            <span className="font-display text-4xl font-black text-ink">4.9</span>
+            <span className="font-display text-4xl font-bold text-ink">4.9</span>
             <div><Stars /><p className="text-xs text-ink/55">{tr('wastani wa ukadiriaji', 'average rating')}</p></div>
           </div>
           <span className="hidden h-10 w-px bg-ink/10 sm:block" />
-          <div className="text-center"><p className="font-display text-2xl font-black text-royal-600">5,000+</p><p className="text-xs text-ink/55">{tr('wateja walioridhika', 'happy customers')}</p></div>
+          <div className="text-center"><p className="font-display text-2xl font-bold text-royal-600">5,000+</p><p className="text-xs text-ink/55">{tr('wateja walioridhika', 'happy customers')}</p></div>
         </Reveal>
 
         {/* Ushuhuda mkubwa */}
@@ -63,7 +63,7 @@ export default function Testimonials() {
                 <div className="flex flex-wrap items-center gap-3"><Stars className="h-5 w-5" /><span className="rounded-full bg-gold-400/20 px-3 py-1 text-xs font-semibold text-gold-700 dark:text-gold-300">{t.service}</span></div>
                 <p className="mt-6 font-display text-2xl font-medium leading-snug text-ink sm:text-3xl">“{t.text}”</p>
                 <div className="mt-8 flex items-center gap-4">
-                  <span className="grid h-14 w-14 place-items-center rounded-full bg-navy-900 font-display text-xl font-black text-gold-300">{t.name[0]}</span>
+                  <span className="grid h-14 w-14 place-items-center rounded-full bg-navy-900 font-display text-xl font-bold text-gold-300">{t.name[0]}</span>
                   <span><b className="block text-lg">{t.name}</b><span className="text-ink/60">{t.role}</span></span>
                 </div>
               </motion.div>

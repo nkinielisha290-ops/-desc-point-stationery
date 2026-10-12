@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUp, Smartphone, Share, PlusSquare, X, Download } from 'lucide-react'
-import { BUSINESS } from '../data/site'
+import { ArrowUp, Smartphone, Share, PlusSquare, X, Download, MessageCircle } from 'lucide-react'
+import { BUSINESS, waLink } from '../data/site'
 import { useApp } from '../lib/store'
 import { href } from '../lib/router'
 import { asset } from '../lib/asset'
@@ -16,9 +16,9 @@ export default function Footer() {
   const isIOS = typeof navigator !== 'undefined' && /iphone|ipad|ipod/i.test(navigator.userAgent)
 
   const COLS = [
-    { title: 'Desc Point', links: [[t('Kuhusu sisi', 'About us'), '/kuhusu'], [t('Kazi zetu', 'Our work'), '/kazi-zetu'], [t('Pata duka', 'Find a store'), '/kuhusu#maduka'], [t('Ushuhuda', 'Reviews'), '/#ushuhuda']] },
+    { title: 'Desc Point', links: [[t('Kuhusu sisi', 'About us'), '/kuhusu'], [t('Kazi zetu', 'Our work'), '/kazi-zetu'], [t('Pata duka', 'Find a store'), '/kuhusu#maduka'], [t('Maswali (FAQ)', 'FAQs'), '/#faq']] },
     { title: t('Huduma', 'Services'), links: [[t('Printing & photocopy', 'Printing & photocopy'), '/printing'], [t('Design studio', 'Design studio'), '/design'], [t('Huduma za mtandaoni', 'Online services'), '/mtandaoni'], [t('Kozi ya kompyuta', 'Computer course'), '/kozi'], [t('Huduma zote', 'All services'), '/huduma']] },
-    { title: t('Taarifa muhimu', 'Useful info'), links: [[t('Duka', 'Shop'), '/duka'], [t('Ofa za wiki', 'Weekly offers'), '/ofa'], [t('Fuatilia oda', 'Track order'), '/fuatilia'], [t('Weka miadi', 'Book a visit'), '/miadi'], [t('Tengeneza CV', 'CV maker'), '/cv'], [t('Maswali (FAQ)', 'FAQs'), '/#faq'], [t('Orodha ya bei', 'Price list'), '/printing#bei']] },
+    { title: t('Taarifa muhimu', 'Useful info'), links: [[t('Duka', 'Shop'), '/duka'], [t('Ofa za wiki', 'Weekly offers'), '/ofa'], [t('Fuatilia oda', 'Track order'), '/fuatilia'], [t('Weka miadi', 'Book a visit'), '/miadi'], [t('Tengeneza CV', 'CV maker'), '/cv'], [t('Nukuu ya shule', 'School quote'), '/nukuu'], [t('Orodha ya bei', 'Price list'), '/printing#bei']] },
   ]
 
   const onInstall = async () => {
@@ -27,18 +27,29 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-navy-950 text-white">
-      <div className="container-x grid gap-10 py-14 lg:grid-cols-[1.3fr_2fr_1.2fr]">
+    <footer className="bg-navy-950 pb-[calc(66px+env(safe-area-inset-bottom,0px))] text-white xl:pb-0">
+      {/* Mstari wa dhahabu: hatua moja ya mwisho */}
+      <div className="container-x pt-12 sm:pt-16">
+        <div className="flex flex-col items-start justify-between gap-5 rounded-[32px] bg-gold-400 p-6 text-navy-950 sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <p className="font-display text-[clamp(1.35rem,4.6vw,2rem)] font-bold leading-tight">{t('Una kazi ya kuprint leo?', 'Got something to print today?')}</p>
+            <p className="mt-1 text-navy-950/70">{t('Itume sasa, ichukue ikiwa tayari.', 'Send it now, collect it when ready.')}</p>
+          </div>
+          <a href={waLink(t('Habari Desc Point! Nina kazi ya kuprint.', 'Hello Desc Point! I have something to print.'))} target="_blank" rel="noreferrer" className="btn-ink shrink-0 !bg-navy-950 !text-white"><MessageCircle className="h-5 w-5" /> {t('Tuma WhatsApp', 'Send on WhatsApp')}</a>
+        </div>
+      </div>
+
+      <div className="container-x grid gap-10 py-12 lg:grid-cols-[1.2fr_2fr_1.1fr]">
         <div>
           <a href={href('/')} className="flex items-center gap-3">
-            <img src={asset('logo.png')} alt="" className="h-14 w-14 rounded-full ring-2 ring-gold-400/60" />
-            <span><b className="block font-display text-xl">{BUSINESS.name}</b><span className="text-sm text-gold-300">{BUSINESS.slogan}</span></span>
+            <img src={asset('logo.png')} alt="" className="h-12 w-12 rounded-full ring-2 ring-gold-400" />
+            <span><b className="block font-display text-lg">{BUSINESS.name}</b><span className="text-sm text-gold-300">{BUSINESS.slogan}</span></span>
           </a>
-          <p className="mt-5 max-w-xs text-sm text-white/55">Madafu na Zegereni, Kibaha, Pwani. {x(BUSINESS.hours.label)}, {x(BUSINESS.hours.time)}.</p>
-          <p className="mt-3 text-sm text-white/75"><span className="select-all">{BUSINESS.phoneLocal}</span><br /><span className="select-all">{BUSINESS.phone2Local}</span><br /><span className="select-all">{BUSINESS.email}</span></p>
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/55">Madafu {t('na', 'and')} Zegereni, Kibaha, Pwani.<br />{x(BUSINESS.hours.label)}, {x(BUSINESS.hours.time)}.</p>
+          <p className="mt-3 text-sm leading-relaxed text-white/80"><span className="select-all">{BUSINESS.phoneLocal}</span><br /><span className="select-all">{BUSINESS.phone2Local}</span><br /><span className="select-all">{BUSINESS.email}</span></p>
           <div className="mt-5 flex gap-2">
             {[[Instagram, BUSINESS.social.instagram, 'Instagram'], [Facebook, BUSINESS.social.facebook, 'Facebook']].filter(([, h]) => h).map(([I, h, l]) => (
-              <a key={l} href={h} target="_blank" rel="noreferrer" aria-label={l} className="grid h-10 w-10 place-items-center rounded-full bg-white/5 ring-1 ring-white/10 transition hover:bg-gold-400 hover:text-navy-950"><I className="h-4 w-4" /></a>
+              <a key={l} href={h} target="_blank" rel="noreferrer" aria-label={l} className="grid h-11 w-11 place-items-center rounded-full bg-white/[.07] transition hover:bg-gold-400 hover:text-navy-950"><I className="h-4 w-4" /></a>
             ))}
           </div>
         </div>
@@ -46,7 +57,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {COLS.map((c) => (
             <div key={c.title}>
-              <p className="text-sm font-bold text-gold-300">{c.title}</p>
+              <p className="font-display text-sm font-bold text-gold-300">{c.title}</p>
               <ul className="mt-4 space-y-2.5 text-sm text-white/60">
                 {c.links.map(([l, to]) => <li key={to + l}><a href={href(to)} className="transition hover:text-white">{l}</a></li>)}
               </ul>
@@ -54,18 +65,16 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Pakua App (kama "Download Yas App") */}
-        <div className="rounded-[30px] bg-white/[.05] p-6 ring-1 ring-white/10">
-          <p className="text-sm font-bold text-gold-300">{t('Pakua App ya Desc Point', 'Get the Desc Point app')}</p>
-          <p className="mt-2 text-sm text-white/60">{t('Agiza, pakia faili na fuatilia oda kutoka kwenye simu yako — hata mtandao ukiwa dhaifu.', 'Order, upload files and track orders from your phone — even on a weak connection.')}</p>
-          <div className="mt-5 grid gap-2">
-            <button onClick={onInstall} className="flex items-center gap-3 rounded-2xl bg-black px-4 py-2.5 text-left ring-1 ring-white/20 transition hover:ring-gold-400">
-              <Smartphone className="h-7 w-7 text-gold-300" />
-              <span className="leading-tight"><span className="block text-[10px] text-white/60">{t('Weka kwenye', 'Install on')}</span><b className="text-base">Android</b></span>
+        <div className="rounded-[28px] bg-white/[.05] p-6">
+          <p className="font-display text-sm font-bold text-gold-300">{t('Desc Point kwenye simu', 'Desc Point on your phone')}</p>
+          <p className="mt-2 text-sm text-white/60">{t('Iweke kama app: inafunguka haraka hata mtandao ukiwa dhaifu.', 'Install it like an app: opens fast even on a weak connection.')}</p>
+          <div className="mt-5 grid grid-cols-2 gap-2 lg:grid-cols-1">
+            <button onClick={onInstall} className="flex items-center gap-2.5 rounded-[18px] bg-white/[.08] px-4 py-3 text-left transition hover:bg-white/15">
+              <Smartphone className="h-6 w-6 text-gold-300" /><b className="text-sm">Android</b>
             </button>
-            <button onClick={() => setHowTo(true)} className="flex items-center gap-3 rounded-2xl bg-black px-4 py-2.5 text-left ring-1 ring-white/20 transition hover:ring-gold-400">
-              <svg viewBox="0 0 24 24" className="h-7 w-7 fill-white" aria-hidden><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9s-2-.9-3.4-.9C5.8 6.8 4 7.9 3.1 9.6c-1.9 3.3-.5 8.2 1.4 10.9.9 1.3 2 2.8 3.4 2.8 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.9 2.4-1.4 3.3-2.7c1-1.5 1.5-3 1.5-3.1-.1 0-2.9-1.1-3.3-4.9zM13.8 4.9c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z" /></svg>
-              <span className="leading-tight"><span className="block text-[10px] text-white/60">{t('Weka kwenye', 'Add to')}</span><b className="text-base">iPhone</b></span>
+            <button onClick={() => setHowTo(true)} className="flex items-center gap-2.5 rounded-[18px] bg-white/[.08] px-4 py-3 text-left transition hover:bg-white/15">
+              <svg viewBox="0 0 24 24" className="h-6 w-6 fill-white" aria-hidden><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9s-2-.9-3.4-.9C5.8 6.8 4 7.9 3.1 9.6c-1.9 3.3-.5 8.2 1.4 10.9.9 1.3 2 2.8 3.4 2.8 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.9 2.4-1.4 3.3-2.7c1-1.5 1.5-3 1.5-3.1-.1 0-2.9-1.1-3.3-4.9zM13.8 4.9c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z" /></svg>
+              <b className="text-sm">iPhone</b>
             </button>
           </div>
         </div>
@@ -73,9 +82,9 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-between gap-3 py-5 text-sm text-white/45 sm:flex-row">
-          <p>© {new Date().getFullYear()} {BUSINESS.name}. {t('Haki zote zimehifadhiwa.', 'All rights reserved.')}</p>
+          <p>© {new Date().getFullYear()} {BUSINESS.name}</p>
           <p>{t('Website na', 'Website by')} <span className="text-gold-300">EllieTech Solutions</span></p>
-          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-1 hover:text-white">{t('Juu', 'Top')} <ArrowUp className="h-4 w-4" /></button>
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-1 hover:text-white">{t('Rudi juu', 'Back to top')} <ArrowUp className="h-4 w-4" /></button>
         </div>
       </div>
 

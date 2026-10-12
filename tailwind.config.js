@@ -9,15 +9,16 @@ export default {
         royal: { 600: '#1440d6', 500: '#1f55ff', 400: '#4d7bff' },
         gold: { 300: '#ffe27a', 400: '#ffd23f', 500: '#f5b800', 600: '#d99a00', 700: '#a87400' },
         paper: '#f3f5fb',
+        sky: { 100: '#e6ecff', 200: '#cdd9ff' },
         // Rangi za mandhari (zinabadilika light/dark kupitia CSS variables)
         ink: 'rgb(var(--ink) / <alpha-value>)',
         surface: 'rgb(var(--surface) / <alpha-value>)',
         canvas: 'rgb(var(--canvas) / <alpha-value>)',
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque Variable"', '"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
-        script: ['"Bricolage Grotesque Variable"', '"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
-        sans: ['"Bricolage Grotesque Variable"', '"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        display: ['"Unbounded Variable"', 'Unbounded', 'system-ui', 'sans-serif'],
+        script: ['"Unbounded Variable"', 'Unbounded', 'system-ui', 'sans-serif'],
+        sans: ['"Figtree Variable"', 'Figtree', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },

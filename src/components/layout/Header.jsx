@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Search, ShoppingBag, Heart, Menu, X, ChevronDown, Phone, Moon, Sun, MessageCircle, MapPin, PackageSearch, HelpCircle, Info, ArrowRight, Flame, Download } from 'lucide-react'
+import { Search, ShoppingBag, Heart, X, ChevronDown, Moon, Sun, MessageCircle, MapPin, PackageSearch, Info, ArrowRight, Download, Home, LayoutGrid, Store, Menu, Phone } from 'lucide-react'
 import { BUSINESS, NAV, waLink } from '../../data/site'
 import { useApp } from '../../lib/store'
 import { href, useRoute } from '../../lib/router'
@@ -9,7 +9,7 @@ import { asset } from '../../lib/asset'
 import { SafeImg, tsh } from '../ui'
 import { useOpenStatus } from '../useOpenStatus'
 
-function SearchBox({ onDone, autoFocus = false, big = false }) {
+export function SearchBox({ onDone, autoFocus = false, big = false }) {
   const { t, x, lang } = useApp()
   const index = useMemo(buildIndex, [])
   const [q, setQ] = useState('')
@@ -87,218 +87,220 @@ function SearchBox({ onDone, autoFocus = false, big = false }) {
   )
 }
 
-export default function Header() {
-  const { t, x, lang, setLang, theme, toggleTheme, count, setCartOpen, wishlist, canInstall, install } = useApp()
-  const { page } = useRoute()
-  const status = useOpenStatus()
-  const [mega, setMega] = useState(null)
-  const [mobile, setMobile] = useState(false)
-  const [acc, setAcc] = useState(null)
-  const [scrolled, setScrolled] = useState(false)
-  const closeTimer = useRef(null)
 
-  useEffect(() => {
-    const f = () => setScrolled(window.scrollY > 10)
-    f(); window.addEventListener('scroll', f, { passive: true })
-    return () => window.removeEventListener('scroll', f)
-  }, [])
-  useEffect(() => { setMega(null); setMobile(false) }, [page])
-  useEffect(() => {
-    document.body.style.overflow = mobile ? 'hidden' : ''
-    const k = (e) => { if (e.key === 'Escape') { setMega(null); setMobile(false) } }
-    window.addEventListener('keydown', k)
-    return () => window.removeEventListener('keydown', k)
-  }, [mobile])
-
-  const openMega = (id) => { clearTimeout(closeTimer.current); setMega(id) }
-  const closeMega = () => { closeTimer.current = setTimeout(() => setMega(null), 140) }
-  const cur = NAV.find((n) => n.id === mega)
-
-  const LangSwitch = () => (
-    <div role="group" aria-label={t('Lugha', 'Language')} className="flex rounded-full bg-white/10 p-0.5 text-[11px] font-bold">
-      {['sw', 'en'].map((l) => (
-        <button key={l} onClick={() => setLang(l)} aria-pressed={lang === l}
-          className={`rounded-full px-2.5 py-1 uppercase transition ${lang === l ? 'bg-gold-400 text-navy-950' : 'text-white/70 hover:text-white'}`}>{l}</button>
-      ))}
-    </div>
-  )
-
-  const utility = [
-    [Info, t('Kuhusu sisi', 'About us'), '/kuhusu'],
-    [PackageSearch, t('Fuatilia oda', 'Track order'), '/fuatilia'],
-    [MapPin, t('Pata duka', 'Find a store'), '/kuhusu#maduka'],
-    [HelpCircle, t('Msaada', 'Help'), '/#msaada'],
-  ]
-
+function Logo({ light }) {
   return (
-    <header className="sticky top-0 z-50" style={{ top: 'env(safe-area-inset-top, 0px)' }}>
-      {/* Utepe wa juu (kama Yas) */}
-      <div className={`hidden bg-navy-950 text-white transition-all duration-300 lg:block ${scrolled ? 'h-0 overflow-hidden' : 'h-10'}`}>
-        <div className="container-x flex h-10 items-center justify-between text-xs">
-          <span className="flex items-center gap-2 font-medium text-white/85">
-            <span className={`h-2 w-2 rounded-full ${status.open ? 'bg-emerald-400' : 'bg-rose-400'}`} />
-            {status.open ? t('Tuko wazi sasa, hadi saa 2:00 usiku', 'Open now until 8 PM') : t('Tumefunga. Tunafungua saa 2:00 asubuhi', 'Closed. We open at 8 AM')}
-          </span>
-          <nav aria-label={t('Viungo vya haraka', 'Quick links')} className="hidden items-center gap-5 2xl:flex">
-            {utility.map(([I, l, to]) => (
-              <a key={to} href={href(to)} className="flex items-center gap-1.5 text-white/75 transition hover:text-gold-300"><I className="h-3.5 w-3.5" /> {l}</a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-white/75"><Phone className="h-3.5 w-3.5 text-gold-400" /> <span className="select-all">{BUSINESS.phoneLocal}</span> / <span className="select-all">{BUSINESS.phone2Local}</span></span>
-            <LangSwitch />
-            <button onClick={toggleTheme} aria-label={theme === 'dark' ? t('Mwanga', 'Light mode') : t('Giza', 'Dark mode')} className="grid h-7 w-7 place-items-center rounded-full bg-white/10 hover:bg-white/20">
-              {theme === 'dark' ? <Sun className="h-3.5 w-3.5 text-gold-300" /> : <Moon className="h-3.5 w-3.5" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Header kuu */}
-      <div className={`relative border-b border-ink/5 bg-surface transition-shadow ${scrolled || mega ? 'shadow-[0_10px_30px_-20px_rgba(6,20,77,.35)]' : ''}`} onMouseLeave={closeMega}>
-        <div className="container-x flex h-16 items-center gap-3 lg:h-[72px] lg:gap-6">
-          <a href={href('/')} className="flex shrink-0 items-center gap-2.5" aria-label="Desc Point Stationery – home">
-            <img src={asset('logo.png')} alt="" className="h-10 w-10 rounded-full ring-2 ring-gold-400/60 lg:h-11 lg:w-11" />
-            <span className="leading-none">
-              <span className="block font-display text-[19px] font-extrabold tracking-tight text-ink">Desc Point</span>
-              <span className="text-[11px] font-semibold text-gold-600">Stationery</span>
-            </span>
-          </a>
-
-          <nav aria-label={t('Menyu kuu', 'Main menu')} className="hidden h-full items-stretch xl:flex">
-            {NAV.map((n) => (
-              n.columns ? (
-                <button key={n.id} onMouseEnter={() => openMega(n.id)} onFocus={() => openMega(n.id)} onClick={() => setMega(mega === n.id ? null : n.id)} aria-expanded={mega === n.id}
-                  className={`relative flex items-center gap-1 whitespace-nowrap px-2.5 text-sm font-semibold transition 2xl:px-3 ${mega === n.id ? 'text-royal-500' : 'text-ink/80 hover:text-ink'}`}>
-                  {x(n.label)} <ChevronDown className={`h-4 w-4 transition ${mega === n.id ? 'rotate-180' : ''}`} />
-                  {mega === n.id && <motion.span layoutId="mega-bar" className="absolute inset-x-2.5 bottom-0 h-[3px] rounded-t bg-gold-400" />}
-                </button>
-              ) : (
-                <a key={n.id} href={href(n.to)} onMouseEnter={closeMega}
-                  className={`relative flex items-center gap-1.5 whitespace-nowrap px-2.5 text-sm font-semibold transition 2xl:px-3 ${page === n.to.slice(1) ? 'text-royal-500' : 'text-ink/80 hover:text-ink'}`}>
-                  {n.hot && <Flame className="h-4 w-4 text-rose-500" />}{x(n.label)}
-                </a>
-              )
-            ))}
-          </nav>
-
-          <div className="ml-auto hidden w-full max-w-xs lg:block xl:max-w-[220px] 2xl:max-w-[300px]"><SearchBox /></div>
-
-          <div className="ml-auto flex items-center gap-1 lg:ml-0">
-            <a href={href('/duka')} aria-label={t('Unavyovipenda', 'Wishlist')} className="relative hidden h-10 w-10 place-items-center rounded-full text-ink/75 hover:bg-ink/5 sm:grid">
-              <Heart className={`h-5 w-5 ${wishlist.length ? 'fill-rose-500 text-rose-500' : ''}`} />
-              {wishlist.length > 0 && <span className="absolute right-0.5 top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-bold text-white">{wishlist.length}</span>}
-            </a>
-            <button onClick={() => setCartOpen(true)} aria-label={t('Oda yangu', 'My order')} className="relative flex h-10 items-center gap-2 rounded-full px-2.5 text-ink/80 hover:bg-ink/5 sm:px-3">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="hidden text-sm font-semibold sm:inline">{t('Oda', 'Order')}</span>
-              {count > 0 && <motion.span key={count} initial={{ scale: 0.6 }} animate={{ scale: 1 }} className="grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1.5 text-[11px] font-bold text-navy-950">{count}</motion.span>}
-            </button>
-            <a href={waLink(t('Habari Desc Point, naomba msaada.', 'Hello Desc Point, I need help.'))} target="_blank" rel="noreferrer"
-              className="ml-1 hidden items-center gap-2 rounded-full bg-navy-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gold-400 hover:text-navy-950 md:flex dark:bg-gold-400 dark:text-navy-950">
-              <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
-            <button onClick={() => setMobile(true)} aria-label={t('Fungua menyu', 'Open menu')} className="grid h-10 w-10 place-items-center rounded-full text-ink hover:bg-ink/5 xl:hidden"><Menu className="h-5 w-5" /></button>
-          </div>
-        </div>
-
-
-        {/* Mega-menu */}
-        <AnimatePresence>
-          {cur && (
-            <motion.div key={cur.id} onMouseEnter={() => openMega(cur.id)} onMouseLeave={closeMega}
-              initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.18 }}
-              className="absolute inset-x-0 top-full hidden border-t border-ink/5 bg-surface shadow-2xl xl:block">
-              <div className="container-x grid grid-cols-[1fr_1fr_340px] gap-10 py-8">
-                {cur.columns.map((c) => (
-                  <div key={c.title.sw}>
-                    <p className="text-xs font-bold text-gold-600">{x(c.title)}</p>
-                    <ul className="mt-4 space-y-1">
-                      {c.links.map(([l, to]) => (
-                        <li key={l.sw}><a href={href(to)} onClick={() => setMega(null)} className="group flex items-center justify-between rounded-xl px-3 py-2.5 text-[15px] font-medium text-ink/80 transition hover:bg-ink/5 hover:text-ink">
-                          {x(l)} <ArrowRight className="h-4 w-4 -translate-x-2 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" />
-                        </a></li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-                <MegaPromo id={cur.id} close={() => setMega(null)} />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Menyu ya simu */}
-      <AnimatePresence>
-        {mobile && (
-          <>
-            <motion.div className="fixed inset-0 z-[70] bg-navy-950/50 xl:hidden" onClick={() => setMobile(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />
-            <motion.aside role="dialog" aria-modal="true" aria-label={t('Menyu', 'Menu')} className="fixed inset-y-0 right-0 z-[71] flex w-[88%] max-w-sm flex-col bg-surface shadow-2xl xl:hidden"
-              initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 30, stiffness: 280 }}>
-              <div className="flex items-center justify-between bg-navy-950 px-5 py-4 text-white" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}>
-                <LangSwitch />
-                <div className="flex items-center gap-2">
-                  <button onClick={toggleTheme} aria-label={t('Badilisha mandhari', 'Toggle theme')} className="grid h-10 w-10 place-items-center rounded-full bg-white/10">{theme === 'dark' ? <Sun className="h-4 w-4 text-gold-300" /> : <Moon className="h-4 w-4" />}</button>
-                  <button onClick={() => setMobile(false)} aria-label={t('Funga', 'Close')} className="grid h-10 w-10 place-items-center rounded-full bg-white/10"><X className="h-5 w-5" /></button>
-                </div>
-              </div>
-              <div className="px-4 pt-4"><SearchBox big onDone={() => setMobile(false)} /></div>
-              <nav className="flex-1 overflow-y-auto px-3 py-3">
-                <a href={href('/')} className="block rounded-xl px-3 py-3 font-semibold text-ink hover:bg-ink/5">{t('Mwanzo', 'Home')}</a>
-                {NAV.map((n) => n.columns ? (
-                  <div key={n.id} className="border-b border-ink/5">
-                    <button onClick={() => setAcc(acc === n.id ? null : n.id)} aria-expanded={acc === n.id} className="flex w-full items-center justify-between rounded-xl px-3 py-3 font-semibold text-ink">
-                      {x(n.label)} <ChevronDown className={`h-4 w-4 transition ${acc === n.id ? 'rotate-180' : ''}`} />
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {acc === n.id && (
-                        <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
-                          {n.columns.map((c) => (
-                            <div key={c.title.sw} className="pb-3 pl-3">
-                              <p className="px-3 pt-1 text-[11px] font-bold text-gold-600">{x(c.title)}</p>
-                              {c.links.map(([l, to]) => <a key={l.sw} href={href(to)} onClick={() => setMobile(false)} className="block rounded-lg px-3 py-2 text-sm text-ink/75 hover:bg-ink/5">{x(l)}</a>)}
-                            </div>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <a key={n.id} href={href(n.to)} className="flex items-center gap-2 border-b border-ink/5 px-3 py-3 font-semibold text-ink">{n.hot && <Flame className="h-4 w-4 text-rose-500" />}{x(n.label)}</a>
-                ))}
-                <div className="mt-3 grid gap-1">
-                  {utility.map(([I, l, to]) => <a key={to} href={href(to)} onClick={() => setMobile(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-ink/70 hover:bg-ink/5"><I className="h-4 w-4 text-gold-600" /> {l}</a>)}
-                </div>
-              </nav>
-              <div className="grid gap-2 border-t border-ink/5 p-4" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}>
-                {canInstall && <button onClick={install} className="flex items-center justify-center gap-2 rounded-full border border-gold-400 px-5 py-3 text-sm font-semibold text-ink"><Download className="h-4 w-4" /> {t('Weka App kwenye simu', 'Install the app')}</button>}
-                <a href={waLink(t('Habari Desc Point, naomba msaada.', 'Hello Desc Point, I need help.'))} target="_blank" rel="noreferrer" className="btn-gold w-full"><MessageCircle className="h-4 w-4" /> {t('Ongea nasi WhatsApp', 'Chat on WhatsApp')}</a>
-              </div>
-            </motion.aside>
-          </>
-        )}
-      </AnimatePresence>
-    </header>
+    <a href={href('/')} className="flex shrink-0 items-center gap-2.5" aria-label="Desc Point Stationery – home">
+      <img src={asset('logo.png')} alt="" className="h-10 w-10 rounded-full ring-2 ring-gold-400" />
+      <span className={`font-display text-[15px] font-bold leading-[1.05] ${light ? 'text-white' : 'text-ink'}`}>Desc Point<span className={`block text-[11px] font-medium tracking-normal ${light ? 'text-gold-300' : 'text-gold-600 dark:text-gold-300'}`}>Stationery</span></span>
+    </a>
   )
 }
 
-function MegaPromo({ id, close }) {
-  const { t } = useApp()
-  const promo = {
-    print: { img: asset('images/work-business-cards.jpg'), title: t('Pakia faili, chukua ikiwa tayari', 'Upload now, collect when ready'), to: '/printing', cta: t('Anza printing', 'Start printing') },
-    online: { img: asset('images/poster-heslb-requirements.jpg'), title: t('Msimu wa HESLB: tuma maombi bila makosa', 'HESLB season: apply without mistakes'), to: '/mtandaoni#heslb', cta: t('Ona viambata', 'See requirements') },
-    shop: { img: asset('images/casio-fx991es-plus.jpg'), title: t('Casio fx-991ES PLUS — TSh 35,000', 'Casio fx-991ES PLUS — TSh 35,000'), to: '/duka/Shule', cta: t('Nunua sasa', 'Shop now') },
-  }[id]
-  if (!promo) return null
+function LangSwitch({ light }) {
+  const { lang, setLang, t } = useApp()
   return (
-    <a href={href(promo.to)} onClick={close} className="group relative block overflow-hidden rounded-2xl bg-navy-900 text-white">
-      <SafeImg src={promo.img} alt="" className="h-48 w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 p-5">
-        <p className="font-display text-lg font-black leading-snug">{promo.title}</p>
-        <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-gold-300">{promo.cta} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></span>
-      </div>
-    </a>
+    <div role="group" aria-label={t('Lugha', 'Language')} className={`flex rounded-full p-0.5 text-[11px] font-bold ${light ? 'bg-white/15' : 'bg-ink/[.06]'}`}>
+      {['sw', 'en'].map((l) => (
+        <button key={l} onClick={() => setLang(l)} aria-pressed={lang === l}
+          className={`rounded-full px-2.5 py-1.5 uppercase transition ${lang === l ? 'bg-gold-400 text-navy-950' : light ? 'text-white/80' : 'text-ink/60'}`}>{l}</button>
+      ))}
+    </div>
+  )
+}
+
+/* Utafutaji wa skrini nzima (kama app) */
+function SearchOverlay({ open, onClose }) {
+  const { t } = useApp()
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div className="fixed inset-0 z-[90] bg-navy-950/60" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+          <motion.div role="dialog" aria-modal="true" aria-label={t('Tafuta', 'Search')} onClick={(e) => e.stopPropagation()}
+            initial={{ y: -24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -24, opacity: 0 }} transition={{ duration: 0.2 }}
+            className="mx-auto min-h-[60vh] w-full max-w-2xl rounded-b-[32px] bg-surface p-4 pb-8 shadow-2xl sm:mt-20 sm:min-h-0 sm:rounded-[32px] sm:p-6" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}>
+            <div className="flex items-center justify-between pb-3">
+              <p className="font-display text-lg font-bold">{t('Unatafuta nini?', 'What are you looking for?')}</p>
+              <button onClick={onClose} aria-label={t('Funga', 'Close')} className="grid h-10 w-10 place-items-center rounded-full bg-ink/[.06]"><X className="h-5 w-5" /></button>
+            </div>
+            <SearchBox big autoFocus onDone={onClose} />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+/* Menyu ya "Zaidi" — sheet ya chini kwenye simu */
+function MoreSheet({ open, onClose }) {
+  const { t, x, theme, toggleTheme, canInstall, install } = useApp()
+  const status = useOpenStatus()
+  useEffect(() => { document.body.style.overflow = open ? 'hidden' : ''; return () => { document.body.style.overflow = '' } }, [open])
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div className="fixed inset-0 z-[80] bg-navy-950/55" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} />
+          <motion.div role="dialog" aria-modal="true" aria-label={t('Menyu', 'Menu')}
+            initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 32, stiffness: 320 }}
+            drag="y" dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: 0.6 }} onDragEnd={(_, i) => { if (i.offset.y > 120) onClose() }}
+            className="fixed inset-x-0 bottom-0 z-[81] flex max-h-[88svh] flex-col rounded-t-[32px] bg-surface shadow-2xl">
+            <div className="mx-auto mt-3 h-1.5 w-12 rounded-full bg-ink/15" />
+            <div className="flex items-center justify-between px-5 pb-3 pt-4">
+              <span className="flex items-center gap-2 text-sm font-semibold text-ink/70"><span className={`h-2.5 w-2.5 rounded-full ${status.open ? 'bg-emerald-500' : 'bg-rose-500'}`} />{status.open ? t('Tuko wazi sasa', 'Open now') : t('Tumefunga sasa', 'Closed now')}</span>
+              <div className="flex items-center gap-2">
+                <LangSwitch />
+                <button onClick={toggleTheme} aria-label={t('Badilisha mandhari', 'Toggle theme')} className="grid h-9 w-9 place-items-center rounded-full bg-ink/[.06]">{theme === 'dark' ? <Sun className="h-4 w-4 text-gold-300" /> : <Moon className="h-4 w-4" />}</button>
+              </div>
+            </div>
+            <nav className="flex-1 overflow-y-auto px-5 pb-4">
+              {NAV.map((n) => (
+                <div key={n.id} className="border-t border-ink/[.07] py-4">
+                  {n.columns ? <>
+                    <p className="font-display text-[15px] font-bold">{x(n.label)}</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {n.columns.flatMap((c) => c.links).map(([l, to]) => <a key={l.sw} href={href(to)} onClick={onClose} className="rounded-full bg-ink/[.05] px-3.5 py-2 text-sm font-medium text-ink/80">{x(l)}</a>)}
+                    </div>
+                  </> : <a href={href(n.to)} onClick={onClose} className="flex items-center justify-between font-display text-[15px] font-bold">{x(n.label)} <ArrowRight className="h-4 w-4 text-ink/40" /></a>}
+                </div>
+              ))}
+              <div className="grid grid-cols-2 gap-2 border-t border-ink/[.07] pt-4">
+                {[[Info, t('Kuhusu sisi', 'About us'), '/kuhusu'], [PackageSearch, t('Fuatilia oda', 'Track order'), '/fuatilia'], [MapPin, t('Maduka yetu', 'Our shops'), '/kuhusu#maduka'], [Heart, t('Unavyovipenda', 'Wishlist'), '/duka']].map(([I, l, to]) => (
+                  <a key={l} href={href(to)} onClick={onClose} className="flex items-center gap-2.5 rounded-[18px] bg-canvas px-3.5 py-3 text-sm font-semibold"><I className="h-4 w-4 text-royal-500 dark:text-gold-300" /> {l}</a>
+                ))}
+              </div>
+            </nav>
+            <div className="grid gap-2 border-t border-ink/[.07] p-4" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}>
+              {canInstall && <button onClick={install} className="btn-ink w-full"><Download className="h-4 w-4" /> {t('Weka App kwenye simu', 'Install the app')}</button>}
+              <a href={waLink(t('Habari Desc Point, naomba msaada.', 'Hello Desc Point, I need help.'))} target="_blank" rel="noreferrer" className="btn-gold w-full"><MessageCircle className="h-4 w-4" /> {t('Ongea nasi WhatsApp', 'Chat on WhatsApp')}</a>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  )
+}
+
+/* Tab bar ya chini (simu) — kama app */
+function BottomBar({ onMore }) {
+  const { t, count, setCartOpen } = useApp()
+  const { page } = useRoute()
+  const tabs = [
+    { id: 'home', icon: Home, label: t('Mwanzo', 'Home'), to: '/' },
+    { id: 'huduma', icon: LayoutGrid, label: t('Huduma', 'Services'), to: '/huduma', match: ['huduma', 'printing', 'design', 'mtandaoni', 'kozi', 'kazi-zetu'] },
+    { id: 'duka', icon: Store, label: t('Duka', 'Shop'), to: '/duka', match: ['duka', 'ofa'] },
+    { id: 'oda', icon: ShoppingBag, label: t('Oda', 'Order'), action: () => setCartOpen(true), badge: count },
+    { id: 'more', icon: Menu, label: t('Zaidi', 'More'), action: onMore },
+  ]
+  return (
+    <nav aria-label={t('Menyu ya chini', 'Bottom menu')} className="fixed inset-x-0 bottom-0 z-[60] border-t border-ink/[.08] bg-surface xl:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+      <ul className="mx-auto grid h-[66px] max-w-md grid-cols-5">
+        {tabs.map(({ id, icon: I, label, to, action, badge, match }) => {
+          const on = to && (match ? match.includes(page) : page === id)
+          const inner = <>
+            <span className={`relative grid h-8 w-14 place-items-center rounded-full transition-colors ${on ? 'bg-gold-400 text-navy-950' : 'text-ink/55'}`}>
+              <I className="h-[21px] w-[21px]" strokeWidth={on ? 2.4 : 2} />
+              {badge > 0 && <span className="absolute -right-0.5 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-royal-500 px-1 text-[10px] font-bold text-white">{badge}</span>}
+            </span>
+            <span className={`text-[11px] ${on ? 'font-bold text-ink' : 'font-medium text-ink/55'}`}>{label}</span>
+          </>
+          const cls = 'flex h-full w-full flex-col items-center justify-center gap-1'
+          return <li key={id}>{to ? <a href={href(to)} aria-current={on ? 'page' : undefined} className={cls}>{inner}</a> : <button onClick={action} className={cls}>{inner}</button>}</li>
+        })}
+      </ul>
+    </nav>
+  )
+}
+
+export default function Header() {
+  const { t, x, theme, toggleTheme, count, setCartOpen, wishlist } = useApp()
+  const { page } = useRoute()
+  const [drop, setDrop] = useState(null)
+  const [more, setMore] = useState(false)
+  const [find, setFind] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const timer = useRef(null)
+  const overHero = page === 'home' && !scrolled
+
+  useEffect(() => {
+    const f = () => setScrolled(window.scrollY > 24)
+    f(); window.addEventListener('scroll', f, { passive: true })
+    return () => window.removeEventListener('scroll', f)
+  }, [])
+  useEffect(() => { setDrop(null); setMore(false); setFind(false) }, [page])
+  useEffect(() => {
+    const k = (e) => {
+      if (e.key === 'Escape') { setDrop(null); setFind(false); setMore(false) }
+      if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !/input|textarea|select/i.test(document.activeElement?.tagName))) { e.preventDefault(); setFind(true) }
+    }
+    window.addEventListener('keydown', k)
+    return () => window.removeEventListener('keydown', k)
+  }, [])
+
+  const open = (id) => { clearTimeout(timer.current); setDrop(id) }
+  const close = () => { timer.current = setTimeout(() => setDrop(null), 160) }
+  const iconBtn = `grid h-10 w-10 place-items-center rounded-full transition ${overHero ? 'bg-white/15 text-white hover:bg-white/25' : 'bg-ink/[.05] text-ink hover:bg-ink/10'}`
+
+  return (
+    <>
+      <header className={`${page === 'home' ? 'fixed' : 'sticky'} inset-x-0 top-0 z-50 transition-colors duration-300 ${overHero ? 'bg-gradient-to-b from-navy-950/70 to-transparent' : 'border-b border-ink/[.07] bg-surface'}`}
+        style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+        <div className="container-x flex h-16 items-center gap-3 lg:h-[76px]">
+          <Logo light={overHero} />
+
+          {/* Menyu ya kompyuta: kidonge katikati */}
+          <nav aria-label={t('Menyu kuu', 'Main menu')} onMouseLeave={close}
+            className={`relative mx-auto hidden items-center gap-0.5 rounded-full p-1 xl:flex ${overHero ? 'bg-white/10 ring-1 ring-white/20' : 'bg-ink/[.04] ring-1 ring-ink/[.06]'}`}>
+            {NAV.map((n) => {
+              const cls = `flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition 2xl:px-4 ${drop === n.id ? (overHero ? 'bg-white text-navy-950' : 'bg-surface text-ink shadow-sm') : overHero ? 'text-white/90 hover:text-white' : 'text-ink/75 hover:text-ink'}`
+              return n.columns ? (
+                <div key={n.id} className="relative" onMouseEnter={() => open(n.id)}>
+                  <button onClick={() => setDrop(drop === n.id ? null : n.id)} onFocus={() => open(n.id)} aria-expanded={drop === n.id} className={cls}>
+                    {x(n.label)} <ChevronDown className={`h-3.5 w-3.5 transition ${drop === n.id ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {drop === n.id && (
+                      <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} transition={{ duration: 0.15 }}
+                        onMouseEnter={() => open(n.id)} className="absolute left-1/2 top-full z-50 w-[520px] -translate-x-1/2 pt-3">
+                        <div className="grid grid-cols-2 gap-6 rounded-[28px] bg-surface p-6 text-ink shadow-[0_30px_80px_-30px_rgba(6,20,77,.5)] ring-1 ring-ink/[.07]">
+                          {n.columns.map((c) => (
+                            <div key={c.title.sw}>
+                              <p className="text-xs font-semibold text-ink/45">{x(c.title)}</p>
+                              <ul className="mt-2 space-y-0.5">
+                                {c.links.map(([l, to]) => <li key={l.sw}><a href={href(to)} onClick={() => setDrop(null)} className="block rounded-[14px] px-3 py-2.5 text-[15px] font-medium text-ink/85 transition hover:bg-canvas hover:text-ink">{x(l)}</a></li>)}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : <a key={n.id} href={href(n.to)} onMouseEnter={close} className={`${cls} ${page === n.to.slice(1) ? (overHero ? '!bg-white !text-navy-950' : '!bg-surface shadow-sm') : ''}`}>{x(n.label)}</a>
+            })}
+          </nav>
+
+          <div className="ml-auto flex items-center gap-1.5 xl:ml-0">
+            <button onClick={() => setFind(true)} aria-label={t('Tafuta', 'Search')} className={iconBtn}><Search className="h-[18px] w-[18px]" /></button>
+            <div className="hidden sm:block"><LangSwitch light={overHero} /></div>
+            <button onClick={toggleTheme} aria-label={theme === 'dark' ? t('Mwanga', 'Light mode') : t('Giza', 'Dark mode')} className={`${iconBtn} hidden sm:grid`}>{theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}</button>
+            <a href={href('/duka')} aria-label={t('Unavyovipenda', 'Wishlist')} className={`${iconBtn} relative hidden 2xl:grid`}>
+              <Heart className={`h-[18px] w-[18px] ${wishlist.length ? 'fill-rose-500 text-rose-500' : ''}`} />
+            </a>
+            <button onClick={() => setCartOpen(true)} aria-label={t('Oda yangu', 'My order')} className={`${iconBtn} relative hidden xl:grid`}>
+              <ShoppingBag className="h-[18px] w-[18px]" />
+              {count > 0 && <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1 text-[11px] font-bold text-navy-950">{count}</span>}
+            </button>
+            <a href={waLink(t('Habari Desc Point, naomba msaada.', 'Hello Desc Point, I need help.'))} target="_blank" rel="noreferrer" className="ml-1 hidden items-center gap-2 rounded-full bg-gold-400 px-5 py-2.5 text-sm font-bold text-navy-950 transition hover:bg-gold-300 2xl:flex">
+              <MessageCircle className="h-4 w-4" /> WhatsApp
+            </a>
+            <a href={`tel:${BUSINESS.phone.replace(/\s/g, '')}`} aria-label={t('Piga simu', 'Call us')} className={`${iconBtn} xl:hidden`}><Phone className="h-[18px] w-[18px]" /></a>
+          </div>
+        </div>
+      </header>
+      <SearchOverlay open={find} onClose={() => setFind(false)} />
+      <MoreSheet open={more} onClose={() => setMore(false)} />
+      <BottomBar onMore={() => setMore(true)} />
+    </>
   )
 }

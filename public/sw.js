@@ -1,5 +1,5 @@
 // Service worker ya Desc Point: inafanya website ifunguke haraka na hata bila mtandao.
-const VERSION = 'dps-v2'
+const VERSION = 'dps-v5'
 const BASE = new URL('./', self.location).pathname
 const SHELL = ['', 'index.html', 'logo.png', 'hero.jpg', 'icon-192.png', 'manifest.webmanifest'].map((p) => BASE + p)
 

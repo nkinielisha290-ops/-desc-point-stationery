@@ -34,7 +34,7 @@ export default function WhyUs() {
         <Reveal className="relative">
           <SafeImg src={IMAGES.about} alt={t('Vifaa vya ofisi', 'Office supplies')} className="aspect-[4/5] w-full rounded-[40px] object-cover shadow-2xl" />
           <div className="absolute -right-2 bottom-10 w-56 rounded-[30px] bg-gold-400 p-6 text-navy-950 shadow-2xl sm:-right-10">
-            <p className="font-display text-5xl font-black"><Counter to={5000} suffix="+" /></p>
+            <p className="font-display text-5xl font-bold"><Counter to={5000} suffix="+" /></p>
             <p className="text-sm font-semibold">{t('Wateja walioridhika', 'Happy customers')}</p>
           </div>
           <img src={asset('logo.png')} alt="" className="absolute -left-4 -top-6 h-28 w-28 rounded-full shadow-xl ring-4 ring-canvas" />
@@ -53,7 +53,7 @@ export default function WhyUs() {
           </Stagger>
           <div className="mt-10 grid grid-cols-3 gap-4 rounded-[30px] bg-navy-900 p-6 text-center text-white ring-1 ring-white/5">
             {[[40, '+', t('Huduma', 'Services')], [12, 'h', t('Kwa siku', 'Per day')], [100, '%', t('Kujituma', 'Commitment')]].map(([n, s, l]) => (
-              <div key={s}><p className="font-display text-3xl font-black text-gold-300"><Counter to={n} suffix={s} /></p><p className="text-xs text-white/60">{l}</p></div>
+              <div key={s}><p className="font-display text-3xl font-bold text-gold-300"><Counter to={n} suffix={s} /></p><p className="text-xs text-white/60">{l}</p></div>
             ))}
           </div>
         </div>

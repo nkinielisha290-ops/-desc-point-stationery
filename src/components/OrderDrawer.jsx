@@ -62,7 +62,7 @@ export default function OrderDrawer() {
             <div className="flex items-center justify-between bg-navy-950 px-6 py-5 text-white" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top, 0px))' }}>
               <div>
                 <p className="text-xs font-bold sm:text-sm text-gold-300">{t('Cart yako', 'Your cart')}</p>
-                <p className="font-display text-2xl font-black">{items.length} {t('vitu', 'items')}</p>
+                <p className="font-display text-2xl font-bold">{items.length} {t('vitu', 'items')}</p>
               </div>
               <button onClick={onClose} aria-label={t('Funga', 'Close')} className="grid h-10 w-10 place-items-center rounded-full bg-white/10"><X className="h-5 w-5" /></button>
             </div>
@@ -72,9 +72,9 @@ export default function OrderDrawer() {
                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring' }} className="grid h-20 w-20 place-items-center rounded-full bg-emerald-500 text-white">
                   <Check className="h-10 w-10" />
                 </motion.div>
-                <h3 className="mt-6 font-display text-2xl font-black">{t('Oda imeandaliwa!', 'Order prepared!')}</h3>
+                <h3 className="mt-6 font-display text-2xl font-bold">{t('Oda imeandaliwa!', 'Order prepared!')}</h3>
                 <p className="mt-2 text-ink/65">{t('Hifadhi namba hii kufuatilia oda yako:', 'Keep this number to track your order:')}</p>
-                <button onClick={copyId} className="mt-4 flex select-all items-center gap-2 rounded-2xl bg-surface px-5 py-3 font-display text-xl font-black tracking-wide ring-2 ring-gold-400">
+                <button onClick={copyId} className="mt-4 flex select-all items-center gap-2 rounded-2xl bg-surface px-5 py-3 font-display text-xl font-bold tracking-wide ring-2 ring-gold-400">
                   {sent.id} <Copy className="h-4 w-4 text-gold-600" />
                 </button>
                 <p className="mt-4 max-w-xs text-sm text-ink/60">{t('WhatsApp haikufunguka? Bonyeza hapa chini kutuma tena.', 'WhatsApp didn’t open? Tap below to send again.')}</p>
@@ -126,7 +126,7 @@ export default function OrderDrawer() {
                     </div>
                     <div className="mt-4 flex items-center justify-between">
                       <span className="text-ink/60">{t('Jumla', 'Total')}</span>
-                      <span className="font-display text-3xl font-black tabular-nums">{tsh(total)}</span>
+                      <span className="font-display text-3xl font-bold tabular-nums">{tsh(total)}</span>
                     </div>
                     <button onClick={send} className="btn-gold mt-4 w-full text-base">
                       <MessageCircle className="h-5 w-5" /> {t('Tuma oda kwa WhatsApp', 'Send order on WhatsApp')}

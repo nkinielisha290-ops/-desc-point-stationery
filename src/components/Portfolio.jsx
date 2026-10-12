@@ -82,7 +82,7 @@ export default function Portfolio() {
               <button onClick={(e) => { e.stopPropagation(); go(1) }} aria-label={t('Inayofuata', 'Next')} className="absolute right-3 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-gold-400 hover:text-navy-950 sm:right-6"><ChevronRight /></button>
             </div>
             <div className="container-x flex flex-col items-center gap-3 py-6 text-center" style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom, 0px))' }}>
-              <h3 className="font-display text-2xl font-black">{x(cur.title)}</h3>
+              <h3 className="font-display text-2xl font-bold">{x(cur.title)}</h3>
               <p className="text-white/65">{x(cur.detail)}</p>
               <a href={waLink(t(`Habari Desc Point! Nimeona kazi yenu "${x(cur.title)}". Nataka kitu kama hiki.`, `Hello Desc Point! I saw your work "${x(cur.title)}". I'd like something similar.`))}
                 target="_blank" rel="noreferrer" className="btn-gold mt-1"><MessageCircle className="h-4 w-4" /> {t('Nataka kama hii', 'I want one like this')}</a>

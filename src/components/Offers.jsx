@@ -8,7 +8,7 @@ import { SafeImg, SectionTitle, Stagger, rise, tsh } from './ui'
 function Unit({ v, l }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative grid h-16 w-14 place-items-center overflow-hidden rounded-xl bg-navy-950 font-display text-3xl font-black tabular-nums text-gold-300 shadow-inner ring-1 ring-gold-400/30 sm:h-20 sm:w-20 sm:text-4xl">
+      <div className="relative grid h-16 w-14 place-items-center overflow-hidden rounded-xl bg-navy-950 font-display text-3xl font-bold tabular-nums text-gold-300 shadow-inner ring-1 ring-gold-400/30 sm:h-20 sm:w-20 sm:text-4xl">
         <motion.span key={v} initial={{ y: -24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
           {String(v).padStart(2, '0')}
         </motion.span>
@@ -33,9 +33,9 @@ export default function Offers() {
           <div className="shrink-0" role="timer" aria-label={t('Muda uliobaki', 'Time left')}>
             <p className="mb-3 flex items-center justify-center gap-2 text-sm font-semibold text-gold-300 lg:justify-start"><Timer className="h-4 w-4" /> {t('Zinaisha baada ya', 'Ending in')}</p>
             <div className="flex items-start gap-2 sm:gap-3">
-              <Unit v={d} l={t('Siku', 'Days')} /><span className="pt-4 text-2xl font-black text-white/30 sm:pt-6">:</span>
-              <Unit v={h} l={t('Saa', 'Hrs')} /><span className="pt-4 text-2xl font-black text-white/30 sm:pt-6">:</span>
-              <Unit v={m} l={t('Dak', 'Min')} /><span className="pt-4 text-2xl font-black text-white/30 sm:pt-6">:</span>
+              <Unit v={d} l={t('Siku', 'Days')} /><span className="pt-4 text-2xl font-bold text-white/30 sm:pt-6">:</span>
+              <Unit v={h} l={t('Saa', 'Hrs')} /><span className="pt-4 text-2xl font-bold text-white/30 sm:pt-6">:</span>
+              <Unit v={m} l={t('Dak', 'Min')} /><span className="pt-4 text-2xl font-bold text-white/30 sm:pt-6">:</span>
               <Unit v={s} l={t('Sek', 'Sec')} />
             </div>
           </div>
@@ -51,13 +51,13 @@ export default function Offers() {
                   <SafeImg src={item?.img} alt={x(o.title)} className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent" />
                   <motion.span initial={{ rotate: -12, scale: 0 }} whileInView={{ rotate: -8, scale: 1 }} viewport={{ once: true }} transition={{ type: 'spring', delay: 0.3 }}
-                    className="absolute left-4 top-4 rounded-xl bg-rose-500 px-3 py-1.5 font-display text-lg font-black shadow-lg">{x(o.badge)}</motion.span>
+                    className="absolute left-4 top-4 rounded-xl bg-rose-500 px-3 py-1.5 font-display text-lg font-bold shadow-lg">{x(o.badge)}</motion.span>
                 </div>
                 <div className="p-6">
-                  <h3 className="font-display text-2xl font-black">{x(o.title)}</h3>
+                  <h3 className="font-display text-2xl font-bold">{x(o.title)}</h3>
                   <p className="mt-1 text-sm text-white/60">{x(o.note)}</p>
                   <div className="mt-4 flex flex-wrap items-baseline gap-x-3">
-                    <span className="gold-text font-display text-3xl font-black tabular-nums">{tsh(o.price)}</span>
+                    <span className="gold-text font-display text-3xl font-bold tabular-nums">{tsh(o.price)}</span>
                     <span className="text-white/40 line-through tabular-nums">{tsh(o.oldPrice)}</span>
                   </div>
                   <p className="mt-1 flex items-center gap-1 text-xs font-semibold text-emerald-300"><Tag className="h-3 w-3" /> {t('Unaokoa', 'You save')} {tsh(save)}</p>

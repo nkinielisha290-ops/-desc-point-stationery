@@ -148,7 +148,7 @@ export default function PrintUpload() {
                 className="grid h-16 w-16 place-items-center rounded-2xl bg-navy-900 text-gold-300 shadow-lg dark:bg-gold-400 dark:text-navy-950">
                 <UploadCloud className="h-8 w-8" />
               </motion.span>
-              <p className="mt-4 font-display text-xl font-black">{drag ? t('Achia hapa!', 'Drop it here!') : t('Bonyeza kuchagua faili', 'Tap to choose files')}</p>
+              <p className="mt-4 font-display text-xl font-bold">{drag ? t('Achia hapa!', 'Drop it here!') : t('Bonyeza kuchagua faili', 'Tap to choose files')}</p>
               <p className="mt-1 text-sm text-ink/55">{t('au buruta hapa · PDF, Word, picha · hadi', 'or drag here · PDF, Word, images · up to')} {MAX_MB}MB</p>
               <input ref={input} id="print-files" type="file" multiple hidden accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,image/*" onChange={(e) => { addFiles(e.target.files); e.target.value = '' }} />
             </motion.div>
@@ -207,7 +207,7 @@ export default function PrintUpload() {
                 <div className="flex items-center gap-2 rounded-2xl bg-ink/5 p-1">
                   <button type="button" onClick={() => setCopies((c) => Math.max(1, c - 1))} aria-label={t('Punguza', 'Decrease')} className="grid h-10 w-12 place-items-center rounded-xl bg-surface shadow-sm"><Minus className="h-4 w-4" /></button>
                   <input id="print-copies" type="number" min="1" inputMode="numeric" value={copies} onChange={(e) => setCopies(Math.max(1, Math.min(5000, +e.target.value || 1)))}
-                    aria-label={t('Idadi ya nakala', 'Number of copies')} className="min-w-0 flex-1 bg-transparent text-center font-display text-xl font-black tabular-nums outline-none" />
+                    aria-label={t('Idadi ya nakala', 'Number of copies')} className="min-w-0 flex-1 bg-transparent text-center font-display text-xl font-bold tabular-nums outline-none" />
                   <button type="button" onClick={() => setCopies((c) => c + 1)} aria-label={t('Ongeza', 'Increase')} className="grid h-10 w-12 place-items-center rounded-xl bg-surface shadow-sm"><Plus className="h-4 w-4" /></button>
                 </div>
               </div>
@@ -235,7 +235,7 @@ export default function PrintUpload() {
             <div className="relative rounded-t-3xl bg-white px-6 pb-8 pt-7 font-mono text-[13px] text-navy-900 shadow-2xl [mask-image:linear-gradient(black,black)] sm:px-8">
               <div className="text-center">
                 <img src={asset('logo.png')} alt="" className="mx-auto h-12 w-12 rounded-full" />
-                <p className="mt-2 font-display text-lg font-black not-italic">Desc Point Stationery</p>
+                <p className="mt-2 font-display text-lg font-bold not-italic">Desc Point Stationery</p>
                 <p className="text-[11px] text-navy-900/50">{t('Makadirio ya printing', 'Print estimate')}</p>
               </div>
               <div className="my-4 border-t-2 border-dashed border-navy-900/15" />
@@ -250,7 +250,7 @@ export default function PrintUpload() {
               <div className="my-4 border-t-2 border-dashed border-navy-900/15" />
               <div className="flex items-end justify-between">
                 <span className="font-bold ">{t('Jumla', 'Total')}</span>
-                <motion.span key={calc.total} initial={{ scale: 1.2, color: '#d99a00' }} animate={{ scale: 1, color: '#06144d' }} className="font-display text-3xl font-black not-italic tabular-nums">
+                <motion.span key={calc.total} initial={{ scale: 1.2, color: '#d99a00' }} animate={{ scale: 1, color: '#06144d' }} className="font-display text-3xl font-bold not-italic tabular-nums">
                   {tsh(calc.total)}
                 </motion.span>
               </div>
@@ -278,7 +278,7 @@ export default function PrintUpload() {
             <AnimatePresence>
               {sentInfo && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-5 rounded-2xl bg-emerald-500/10 p-4 text-sm ring-1 ring-emerald-500/30">
-                  <p className="font-semibold">{t('Namba ya oda yako:', 'Your order number:')} <span className="select-all font-display font-black">{sentInfo.id}</span></p>
+                  <p className="font-semibold">{t('Namba ya oda yako:', 'Your order number:')} <span className="select-all font-display font-bold">{sentInfo.id}</span></p>
                   {!sentInfo.shared && <p className="mt-1 text-ink/70">{t('WhatsApp imefunguka na ujumbe. Bonyeza 📎 kwenye chat uambatishe faili zako.', 'WhatsApp opened with your message. Tap 📎 in the chat to attach your files.')}</p>}
                   <a href={sentInfo.link} target="_blank" rel="noreferrer" className="mt-2 inline-block font-semibold text-emerald-700 hover:underline dark:text-emerald-300">{t('Fungua WhatsApp tena →', 'Open WhatsApp again →')}</a>
                 </motion.div>

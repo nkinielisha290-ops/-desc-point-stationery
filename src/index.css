@@ -2,52 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+/* v5 — "duka mfukoni": karatasi nyeupe, wino wa bluu, dhahabu kwa vitendo */
 @layer base {
-  :root { --ink: 10 26 92; --surface: 255 255 255; --canvas: 243 245 251; color-scheme: light; }
-  .dark { --ink: 232 236 255; --surface: 13 27 88; --canvas: 4 11 43; color-scheme: dark; }
-  html { scroll-behavior: smooth; }
-  body { @apply bg-canvas text-ink font-sans antialiased; overflow-x: hidden; }
-  h1, h2, h3 { letter-spacing: -0.025em; font-variation-settings: 'opsz' 96; }
-  body { font-variation-settings: 'opsz' 14; }
+  :root { --ink: 9 24 92; --surface: 255 255 255; --canvas: 242 244 251; color-scheme: light; }
+  .dark { --ink: 228 233 255; --surface: 12 24 82; --canvas: 4 10 40; color-scheme: dark; }
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-canvas text-ink font-sans antialiased; overflow-x: hidden; font-size: 16px; }
+  h1, h2, h3, .font-display { font-family: theme('fontFamily.display'); letter-spacing: -0.03em; }
   img { -webkit-user-drag: none; }
   ::selection { @apply bg-gold-400 text-navy-900; }
+  :focus-visible { outline: 3px solid #ffd23f; outline-offset: 2px; border-radius: 12px; }
 }
 
 @layer components {
   .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
-  .gold-text {
-    background: linear-gradient(100deg, #a87400 0%, #ffd23f 25%, #fff3b8 40%, #f5b800 55%, #a87400 80%, #ffd23f 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    @apply animate-shine;
-  }
+  .gold-text { @apply text-gold-500; }
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 font-semibold text-navy-950 transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0;
-    background: linear-gradient(135deg, #ffe27a, #f5b800 55%, #d99a00);
-    box-shadow: 0 10px 30px -10px rgba(245, 184, 0, .7), inset 0 1px 0 rgba(255,255,255,.6);
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-400 px-6 py-3.5 font-bold text-navy-950 transition active:scale-[.97] hover:bg-gold-300;
+  }
+  .btn-ink {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-navy-900 px-6 py-3.5 font-bold text-white transition active:scale-[.97] hover:bg-navy-800 dark:bg-white dark:text-navy-950;
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white backdrop-blur transition hover:border-gold-400 hover:text-gold-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/10;
   }
-  .card {
-    @apply rounded-[30px] bg-surface shadow-[0_1px_2px_rgba(6,20,77,.06),0_8px_24px_-12px_rgba(6,20,77,.18)] ring-1 ring-ink/[.06] dark:shadow-none;
-  }
+  /* Radius kwa ngazi: kubwa 36 (sehemu), kati 28 (kadi), ndogo 18 (vitu vya ndani) */
+  .card { @apply rounded-[28px] bg-surface ring-1 ring-ink/[.07]; }
   .eyebrow { @apply text-sm font-semibold text-royal-500 dark:text-gold-300; }
-  .paper-grain {
-    background-image: radial-gradient(rgb(var(--ink) / .07) 1px, transparent 1px);
-    background-size: 18px 18px;
+  .chip { @apply inline-flex shrink-0 items-center gap-2 rounded-full bg-surface px-4 py-2.5 text-sm font-semibold text-ink ring-1 ring-ink/10 transition active:scale-[.97] hover:ring-royal-500; }
+  .h-sec { @apply font-display text-[clamp(1.6rem,5.4vw,2.6rem)] font-bold leading-[1.08] text-ink; text-wrap: balance; }
+  .paper-grain { background-image: radial-gradient(rgb(var(--ink) / .07) 1px, transparent 1px); background-size: 18px 18px; }
+  .ruled { background-image: repeating-linear-gradient(to bottom, transparent 0 31px, rgba(31,85,255,.09) 31px 32px); }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Tiketi: matundu pembeni kwenye mstari wa kukata (--cut) */
+  .ticket {
+    --cut: 58%; --r: 13px;
+    -webkit-mask: radial-gradient(circle var(--r) at 0 var(--cut), #0000 98%, #000) left / 51% 100% no-repeat,
+                  radial-gradient(circle var(--r) at 100% var(--cut), #0000 98%, #000) right / 51% 100% no-repeat;
+            mask: radial-gradient(circle var(--r) at 0 var(--cut), #0000 98%, #000) left / 51% 100% no-repeat,
+                  radial-gradient(circle var(--r) at 100% var(--cut), #0000 98%, #000) right / 51% 100% no-repeat;
   }
-  .ruled {
-    background-image: repeating-linear-gradient(to bottom, transparent 0 31px, rgba(31,85,255,.09) 31px 32px);
-  }
+  .ticket-line { position: absolute; left: 18px; right: 18px; top: var(--cut, 58%); border-top: 2px dashed currentColor; opacity: .22; }
+  .inp { @apply w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-gold-400 focus:bg-white/10; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-}
-
-@layer components {
-  .inp { @apply w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-gold-400 focus:bg-white/10; }
 }
 
 /* Kuprint CV, kadi au nukuu tu (si ukurasa mzima) */

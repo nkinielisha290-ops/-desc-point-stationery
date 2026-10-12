@@ -32,7 +32,7 @@ export function RouterProvider({ children }) {
         requestAnimationFrame(() => setTimeout(() => {
           const el = r.anchor && document.getElementById(r.anchor)
           if (el) el.scrollIntoView({ behavior: samePage ? 'smooth' : 'auto', block: 'start' })
-          else if (!samePage) window.scrollTo({ top: 0 })
+          else if (!samePage) window.scrollTo({ top: 0, behavior: 'instant' })
         }, samePage ? 0 : 60))
         return r
       })

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { AnimatePresence, MotionConfig, animate, motion, useMotionValue } from 'framer-motion'
 import { Search, ShoppingBag, Heart, X, ChevronDown, Moon, Sun, MessageCircle, MapPin, PackageSearch, Info, ArrowRight, Download, Home, LayoutGrid, Store, Menu, Phone } from 'lucide-react'
 import { BUSINESS, NAV, waLink } from '../../data/site'
 import { useApp } from '../../lib/store'
@@ -181,11 +181,68 @@ function MoreSheet({ open, onClose }) {
   )
 }
 
-/* Tab bar ya chini (simu) — kidonge cha dhahabu kinateleza kati ya tabs, icon inaruka */
-const SPRING = { type: 'spring', stiffness: 520, damping: 34, mass: 0.9 }
+/* Tab bar ya chini (simu) — juu yake ni kama maji: ukihama tab, mawimbi yanasambaa
+   kutoka tab mpya na kutulia; kilima kinateleza kufuata tab inayowaka. */
+const SPRING = { type: 'spring', stiffness: 420, damping: 26, mass: 0.9 }
+const LIFT = 28 // nafasi ya mawimbi juu ya bar
+
+function useWaterEdge(navRef, ulRef, activeIdx) {
+  const pathRef = useRef(null), lineRef = useRef(null)
+  const cx = useMotionValue(-1), hill = useMotionValue(0)
+  const st = useRef({ w: 0, h: 0, t0: -10, raf: 0 })
+  const calm = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
+  const draw = useCallback(() => {
+    const { w, h, t0 } = st.current
+    if (!w || !pathRef.current) return false
+    const t = (performance.now() - t0) / 1000
+    const amp = calm ? 0 : 10 * Math.exp(-t / 0.7) // mawimbi yanapungua taratibu
+    const c = cx.get(), H = hill.get()
+    let top = ''
+    for (let x = 0; x <= w + 4; x += 4) {
+      const d = Math.abs(x - c)
+      const k = (x - c) / 40, bump = H * Math.exp(-k * k)
+      const wave = amp * Math.sin(d / 15 - t * 13) * Math.exp(-d / 170) * Math.min(1, d / 30)
+      top += `${x ? 'L' : 'M'}${Math.min(x, w)} ${(LIFT - bump - wave).toFixed(2)}`
+    }
+    pathRef.current.setAttribute('d', `${top}L${w} ${h}L0 ${h}Z`)
+    lineRef.current.setAttribute('d', top)
+    return amp > 0.05
+  }, [cx, hill, calm])
+
+  const loop = useCallback(() => {
+    cancelAnimationFrame(st.current.raf)
+    const tick = () => { const moving = draw(); if (moving || cx.isAnimating() || hill.isAnimating()) st.current.raf = requestAnimationFrame(tick) }
+    st.current.raf = requestAnimationFrame(tick)
+  }, [draw, cx, hill])
+
+  // vipimo vya bar (na kila inapobadilika ukubwa)
+  useEffect(() => {
+    const nav = navRef.current
+    const ro = new ResizeObserver(() => { st.current.w = nav.offsetWidth; st.current.h = nav.offsetHeight + LIFT; place(false); draw() })
+    ro.observe(nav)
+    return () => { ro.disconnect(); cancelAnimationFrame(st.current.raf) }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const place = (animated) => {
+    const ul = ulRef.current
+    if (!ul) return
+    const target = activeIdx < 0 ? cx.get() : ul.offsetLeft + ((activeIdx + 0.5) * ul.offsetWidth) / 5
+    if (!animated || cx.get() < 0 || calm) { cx.set(target); hill.set(activeIdx < 0 ? 0 : 10); return }
+    animate(cx, target, SPRING)
+    animate(hill, activeIdx < 0 ? 0 : 10, { duration: 0.4 })
+    st.current.t0 = performance.now()
+    loop()
+  }
+  useEffect(() => { place(true); draw() }, [activeIdx]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  return { pathRef, lineRef }
+}
+
 function BottomBar({ onMore, moreOpen }) {
   const { t, count, cartOpen, setCartOpen } = useApp()
   const { page } = useRoute()
+  const navRef = useRef(null), ulRef = useRef(null)
   const tabs = [
     { id: 'home', icon: Home, label: t('Mwanzo', 'Home'), to: '/', match: ['home'] },
     { id: 'huduma', icon: LayoutGrid, label: t('Huduma', 'Services'), to: '/huduma', match: ['huduma', 'printing', 'design', 'mtandaoni', 'kozi', 'kazi-zetu'] },
@@ -195,18 +252,31 @@ function BottomBar({ onMore, moreOpen }) {
   ]
   // tab inayowaka: sheet iliyofunguka kwanza, kisha ukurasa
   const active = moreOpen ? 'more' : cartOpen ? 'oda' : (tabs.find((x) => x.match?.includes(page))?.id ?? null)
+  const activeIdx = tabs.findIndex((x) => x.id === active)
+  const { pathRef, lineRef } = useWaterEdge(navRef, ulRef, activeIdx)
+
   return (
     <MotionConfig reducedMotion="user">
-      <nav aria-label={t('Menyu ya chini', 'Bottom menu')} className="fixed inset-x-0 bottom-0 z-[60] border-t border-ink/[.08] bg-surface xl:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-        <ul className="mx-auto grid h-[66px] max-w-md grid-cols-5">
+      <nav ref={navRef} aria-label={t('Menyu ya chini', 'Bottom menu')} className="fixed inset-x-0 bottom-0 z-[60] xl:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+        <svg aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 w-full overflow-visible drop-shadow-[0_-6px_14px_rgba(6,20,77,.08)]" style={{ top: -LIFT, height: `calc(100% + ${LIFT}px)` }}>
+          <path ref={pathRef} style={{ fill: 'rgb(var(--surface))' }} />
+          <path ref={lineRef} fill="none" strokeWidth="1" style={{ stroke: 'rgb(var(--ink) / .08)' }} />
+        </svg>
+        <ul ref={ulRef} className="relative mx-auto grid h-[66px] max-w-md grid-cols-5">
           {tabs.map(({ id, icon: I, label, to, action, badge }) => {
             const on = active === id
             const inner = <>
-              <span className="relative grid h-8 w-14 place-items-center">
-                {on && <motion.span layoutId="tab-pill" transition={SPRING} className="absolute inset-0 rounded-full bg-gold-400 shadow-[0_6px_16px_-6px_rgba(245,184,0,.9)]" />}
+              <motion.span className="relative grid h-8 w-14 place-items-center" animate={{ y: on ? -5 : 0 }} transition={SPRING}>
+                {on && <>
+                  <motion.span layoutId="tab-pill" transition={SPRING} className="absolute inset-0 rounded-full bg-gold-400 shadow-[0_6px_16px_-6px_rgba(245,184,0,.9)]" />
+                  {/* pete za mawimbi kutoka kwenye icon */}
+                  {[0, 0.14].map((d) => (
+                    <motion.span key={d} className="absolute inset-0 rounded-full border-2 border-gold-400" initial={{ scale: 0.7, opacity: 0.7 }} animate={{ scale: 2.1, opacity: 0 }} transition={{ duration: 0.9, delay: d, ease: 'easeOut' }} />
+                  ))}
+                </>}
                 <motion.span key={on ? 'on' : 'off'} className={`relative ${on ? 'text-navy-950' : 'text-ink/55'}`}
                   initial={false} animate={on ? { y: [0, -7, 0], rotate: [0, -12, 8, 0], scale: [1, 1.18, 1] } : { y: 0, rotate: 0, scale: 1 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}>
                   <I className="h-[21px] w-[21px]" strokeWidth={on ? 2.4 : 2} />
                 </motion.span>
                 <AnimatePresence>
@@ -215,8 +285,8 @@ function BottomBar({ onMore, moreOpen }) {
                       className="absolute -right-0.5 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-royal-500 px-1 text-[10px] font-bold text-white">{badge}</motion.span>
                   )}
                 </AnimatePresence>
-              </span>
-              <motion.span animate={{ y: on ? 0 : 1 }} className={`text-[11px] transition-colors ${on ? 'font-bold text-ink' : 'font-medium text-ink/55'}`}>{label}</motion.span>
+              </motion.span>
+              <span className={`text-[11px] transition-colors ${on ? 'font-bold text-ink' : 'font-medium text-ink/55'}`}>{label}</span>
             </>
             const props = { whileTap: { scale: 0.86 }, transition: { type: 'spring', stiffness: 600, damping: 20 }, className: 'flex h-full w-full flex-col items-center justify-center gap-1' }
             return <li key={id}>{to

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import { Search, ShoppingBag, Heart, X, ChevronDown, Moon, Sun, MessageCircle, MapPin, PackageSearch, Info, ArrowRight, Download, Home, LayoutGrid, Store, Menu, Phone } from 'lucide-react'
 import { BUSINESS, NAV, waLink } from '../../data/site'
 import { useApp } from '../../lib/store'
@@ -181,34 +181,51 @@ function MoreSheet({ open, onClose }) {
   )
 }
 
-/* Tab bar ya chini (simu) — kama app */
-function BottomBar({ onMore }) {
-  const { t, count, setCartOpen } = useApp()
+/* Tab bar ya chini (simu) — kidonge cha dhahabu kinateleza kati ya tabs, icon inaruka */
+const SPRING = { type: 'spring', stiffness: 520, damping: 34, mass: 0.9 }
+function BottomBar({ onMore, moreOpen }) {
+  const { t, count, cartOpen, setCartOpen } = useApp()
   const { page } = useRoute()
   const tabs = [
-    { id: 'home', icon: Home, label: t('Mwanzo', 'Home'), to: '/' },
+    { id: 'home', icon: Home, label: t('Mwanzo', 'Home'), to: '/', match: ['home'] },
     { id: 'huduma', icon: LayoutGrid, label: t('Huduma', 'Services'), to: '/huduma', match: ['huduma', 'printing', 'design', 'mtandaoni', 'kozi', 'kazi-zetu'] },
     { id: 'duka', icon: Store, label: t('Duka', 'Shop'), to: '/duka', match: ['duka', 'ofa'] },
     { id: 'oda', icon: ShoppingBag, label: t('Oda', 'Order'), action: () => setCartOpen(true), badge: count },
     { id: 'more', icon: Menu, label: t('Zaidi', 'More'), action: onMore },
   ]
+  // tab inayowaka: sheet iliyofunguka kwanza, kisha ukurasa
+  const active = moreOpen ? 'more' : cartOpen ? 'oda' : (tabs.find((x) => x.match?.includes(page))?.id ?? null)
   return (
-    <nav aria-label={t('Menyu ya chini', 'Bottom menu')} className="fixed inset-x-0 bottom-0 z-[60] border-t border-ink/[.08] bg-surface xl:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-      <ul className="mx-auto grid h-[66px] max-w-md grid-cols-5">
-        {tabs.map(({ id, icon: I, label, to, action, badge, match }) => {
-          const on = to && (match ? match.includes(page) : page === id)
-          const inner = <>
-            <span className={`relative grid h-8 w-14 place-items-center rounded-full transition-colors ${on ? 'bg-gold-400 text-navy-950' : 'text-ink/55'}`}>
-              <I className="h-[21px] w-[21px]" strokeWidth={on ? 2.4 : 2} />
-              {badge > 0 && <span className="absolute -right-0.5 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-royal-500 px-1 text-[10px] font-bold text-white">{badge}</span>}
-            </span>
-            <span className={`text-[11px] ${on ? 'font-bold text-ink' : 'font-medium text-ink/55'}`}>{label}</span>
-          </>
-          const cls = 'flex h-full w-full flex-col items-center justify-center gap-1'
-          return <li key={id}>{to ? <a href={href(to)} aria-current={on ? 'page' : undefined} className={cls}>{inner}</a> : <button onClick={action} className={cls}>{inner}</button>}</li>
-        })}
-      </ul>
-    </nav>
+    <MotionConfig reducedMotion="user">
+      <nav aria-label={t('Menyu ya chini', 'Bottom menu')} className="fixed inset-x-0 bottom-0 z-[60] border-t border-ink/[.08] bg-surface xl:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+        <ul className="mx-auto grid h-[66px] max-w-md grid-cols-5">
+          {tabs.map(({ id, icon: I, label, to, action, badge }) => {
+            const on = active === id
+            const inner = <>
+              <span className="relative grid h-8 w-14 place-items-center">
+                {on && <motion.span layoutId="tab-pill" transition={SPRING} className="absolute inset-0 rounded-full bg-gold-400 shadow-[0_6px_16px_-6px_rgba(245,184,0,.9)]" />}
+                <motion.span key={on ? 'on' : 'off'} className={`relative ${on ? 'text-navy-950' : 'text-ink/55'}`}
+                  initial={false} animate={on ? { y: [0, -7, 0], rotate: [0, -12, 8, 0], scale: [1, 1.18, 1] } : { y: 0, rotate: 0, scale: 1 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
+                  <I className="h-[21px] w-[21px]" strokeWidth={on ? 2.4 : 2} />
+                </motion.span>
+                <AnimatePresence>
+                  {badge > 0 && (
+                    <motion.span key={badge} initial={{ scale: 0 }} animate={{ scale: [0, 1.35, 1] }} exit={{ scale: 0 }} transition={{ duration: 0.35 }}
+                      className="absolute -right-0.5 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-royal-500 px-1 text-[10px] font-bold text-white">{badge}</motion.span>
+                  )}
+                </AnimatePresence>
+              </span>
+              <motion.span animate={{ y: on ? 0 : 1 }} className={`text-[11px] transition-colors ${on ? 'font-bold text-ink' : 'font-medium text-ink/55'}`}>{label}</motion.span>
+            </>
+            const props = { whileTap: { scale: 0.86 }, transition: { type: 'spring', stiffness: 600, damping: 20 }, className: 'flex h-full w-full flex-col items-center justify-center gap-1' }
+            return <li key={id}>{to
+              ? <motion.a href={href(to)} aria-current={on ? 'page' : undefined} {...props}>{inner}</motion.a>
+              : <motion.button onClick={action} aria-expanded={on} {...props}>{inner}</motion.button>}</li>
+          })}
+        </ul>
+      </nav>
+    </MotionConfig>
   )
 }
 
@@ -300,7 +317,7 @@ export default function Header() {
       </header>
       <SearchOverlay open={find} onClose={() => setFind(false)} />
       <MoreSheet open={more} onClose={() => setMore(false)} />
-      <BottomBar onMore={() => setMore(true)} />
+      <BottomBar onMore={() => setMore(true)} moreOpen={more} />
     </>
   )
 }

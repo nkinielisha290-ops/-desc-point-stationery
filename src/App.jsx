@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Floating from './components/Floating'
 import OrderDrawer from './components/OrderDrawer'
 import Home from './pages/Home'
+import { BookingPage, CvPage, InvitePage, QuotePage } from './pages/Tools'
 import { AboutPage, CoursePage, DesignPage, OffersPage, OnlinePage, PortfolioPage, PrintingPage, ServicesPage, ShopPage, TrackPage } from './pages/Pages'
 
 function Progress() {
@@ -20,6 +21,7 @@ function Page() {
     home: <Home />, printing: <PrintingPage />, design: <DesignPage />, 'kazi-zetu': <PortfolioPage />,
     mtandaoni: <OnlinePage />, duka: <ShopPage cat={param} />, kozi: <CoursePage />, ofa: <OffersPage />,
     fuatilia: <TrackPage />, huduma: <ServicesPage />, kuhusu: <AboutPage />,
+    miadi: <BookingPage />, cv: <CvPage />, mwaliko: <InvitePage />, nukuu: <QuotePage />,
   }
   return (
     <AnimatePresence mode="wait" initial={false}>

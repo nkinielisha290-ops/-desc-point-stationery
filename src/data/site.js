@@ -379,6 +379,12 @@ export const NAV = [
     { title: b('Shule & biashara', 'Schools & business'), links: [
       [b('Vifurushi vya shule', 'School packs'), '/duka#shule'], [b('Ofa za wiki', 'Weekly offers'), '/ofa'], [b('Bidhaa & huduma kwa picha', 'Browse with photos'), '/duka#gundua'] ] },
   ] },
+  { id: 'tools', label: b('Zana', 'Tools'), columns: [
+    { title: b('Kwa wateja', 'For customers'), links: [
+      [b('Weka miadi (ruka foleni)', 'Book a visit (skip the queue)'), '/miadi'], [b('Tengeneza CV bure', 'Free CV maker'), '/cv'] ] },
+    { title: b('Kwa sherehe & shule', 'Events & schools'), links: [
+      [b('Kadi ya mwaliko (onyesho)', 'Invitation card preview'), '/mwaliko'], [b('Nukuu ya mitihani ya shule', 'School exam quote'), '/nukuu'] ] },
+  ] },
   { id: 'course', label: b('Kozi ya Kompyuta', 'Computer Course'), to: '/kozi' },
   { id: 'offers', label: b('Ofa', 'Offers'), to: '/ofa', hot: true },
 ]

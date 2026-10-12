@@ -18,7 +18,7 @@ export default function Footer() {
   const COLS = [
     { title: 'Desc Point', links: [[t('Kuhusu sisi', 'About us'), '/kuhusu'], [t('Kazi zetu', 'Our work'), '/kazi-zetu'], [t('Pata duka', 'Find a store'), '/kuhusu#maduka'], [t('Ushuhuda', 'Reviews'), '/#ushuhuda']] },
     { title: t('Huduma', 'Services'), links: [[t('Printing & photocopy', 'Printing & photocopy'), '/printing'], [t('Design studio', 'Design studio'), '/design'], [t('Huduma za mtandaoni', 'Online services'), '/mtandaoni'], [t('Kozi ya kompyuta', 'Computer course'), '/kozi'], [t('Huduma zote', 'All services'), '/huduma']] },
-    { title: t('Taarifa muhimu', 'Useful info'), links: [[t('Duka', 'Shop'), '/duka'], [t('Ofa za wiki', 'Weekly offers'), '/ofa'], [t('Fuatilia oda', 'Track order'), '/fuatilia'], [t('Maswali (FAQ)', 'FAQs'), '/#faq'], [t('Orodha ya bei', 'Price list'), '/printing#bei']] },
+    { title: t('Taarifa muhimu', 'Useful info'), links: [[t('Duka', 'Shop'), '/duka'], [t('Ofa za wiki', 'Weekly offers'), '/ofa'], [t('Fuatilia oda', 'Track order'), '/fuatilia'], [t('Weka miadi', 'Book a visit'), '/miadi'], [t('Tengeneza CV', 'CV maker'), '/cv'], [t('Maswali (FAQ)', 'FAQs'), '/#faq'], [t('Orodha ya bei', 'Price list'), '/printing#bei']] },
   ]
 
   const onInstall = async () => {

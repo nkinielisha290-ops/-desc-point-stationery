@@ -7,6 +7,7 @@ import { href } from '../lib/router'
 import { asset } from '../lib/asset'
 import { SafeImg, tsh } from '../components/ui'
 import { useOpenStatus } from '../components/useOpenStatus'
+import { TOOLS } from './Tools'
 
 /* 1. Hero: picha kubwa ya duka. Simu: picha juu, maandishi chini. Kompyuta: maandishi kushoto, picha nusu ya kulia hadi ukingoni. */
 function Hero() {
@@ -85,6 +86,33 @@ function Services() {
             <p className="mt-1 text-white/75">{t('Word, Excel, PowerPoint na internet', 'Word, Excel, PowerPoint and internet')}</p>
           </div>
         </a>
+      </div>
+    </section>
+  )
+}
+
+/* Zana mpya: miadi, CV, mwaliko, nukuu */
+function Tools() {
+  const { t, lang } = useApp()
+  return (
+    <section className="pb-16 sm:pb-24">
+      <div className="container-x">
+        <div className="rounded-[36px] bg-navy-950 p-6 text-white sm:p-10">
+          <span className="inline-flex rounded-full bg-gold-400 px-3 py-1 text-xs font-bold text-navy-950">{t('Mpya', 'New')}</span>
+          <h2 className="mt-3 text-[clamp(1.9rem,6vw,2.75rem)] font-extrabold leading-tight">{t('Zana za bure, kwenye simu yako', 'Free tools, right on your phone')}</h2>
+          <p className="mt-2 max-w-lg text-white/65">{t('Andaa kazi yako kabla ya kufika dukani.', 'Get your job ready before you visit.')}</p>
+          <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {TOOLS.map(({ to, icon: I, sw, en, d }) => (
+              <a key={to} href={href(to)} className="group flex min-h-[150px] flex-col justify-between rounded-[26px] bg-white/[.07] p-4 ring-1 ring-white/10 transition hover:bg-white/[.12] sm:p-5">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-400 text-navy-950"><I className="h-5 w-5" /></span>
+                <span>
+                  <b className="block text-[17px] leading-tight">{t(sw, en)}</b>
+                  <span className="mt-1 block text-sm text-white/60">{t(d.sw, d.en)}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -190,6 +218,7 @@ export default function Home() {
     <>
       <Hero />
       <Services />
+      <Tools />
       <Featured />
       <Work />
       <Visit />

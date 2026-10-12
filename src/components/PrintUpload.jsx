@@ -236,7 +236,7 @@ export default function PrintUpload() {
               <div className="text-center">
                 <img src={asset('logo.png')} alt="" className="mx-auto h-12 w-12 rounded-full" />
                 <p className="mt-2 font-display text-lg font-black not-italic">Desc Point Stationery</p>
-                <p className="text-[11px] uppercase tracking-[.25em] text-navy-900/50">{t('Makadirio ya printing', 'Print estimate')}</p>
+                <p className="text-[11px] text-navy-900/50">{t('Makadirio ya printing', 'Print estimate')}</p>
               </div>
               <div className="my-4 border-t-2 border-dashed border-navy-900/15" />
               <Line l={t('Faili', 'Files')} r={files.length} />
@@ -249,7 +249,7 @@ export default function PrintUpload() {
               {calc.finishCost > 0 && <Line l={x(fin.label)} r={tsh(calc.finishCost)} />}
               <div className="my-4 border-t-2 border-dashed border-navy-900/15" />
               <div className="flex items-end justify-between">
-                <span className="font-bold uppercase tracking-wider">{t('Jumla', 'Total')}</span>
+                <span className="font-bold ">{t('Jumla', 'Total')}</span>
                 <motion.span key={calc.total} initial={{ scale: 1.2, color: '#d99a00' }} animate={{ scale: 1, color: '#06144d' }} className="font-display text-3xl font-black not-italic tabular-nums">
                   {tsh(calc.total)}
                 </motion.span>

@@ -41,7 +41,7 @@ export default function OrderTracker() {
           <Search className="ml-3 h-5 w-5 shrink-0 text-ink/40" />
           <label htmlFor="track-code" className="sr-only">{t('Namba ya oda', 'Order number')}</label>
           <input id="track-code" value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="DPS-261011-AB3" autoComplete="off"
-            className="min-w-0 flex-1 bg-transparent py-2 font-mono text-base uppercase tracking-wider outline-none placeholder:normal-case placeholder:tracking-normal placeholder:text-ink/35" />
+            className="min-w-0 flex-1 bg-transparent py-2 font-mono text-base outline-none placeholder:normal-case placeholder:tracking-normal placeholder:text-ink/35" />
           <button className="btn-gold !px-5 !py-2.5 text-sm">{state.phase === 'loading' ? <Loader2 className="h-4 w-4 animate-spin" /> : t('Fuatilia', 'Track')}</button>
         </form>
         <p className="mt-3 text-center text-xs text-ink/50">

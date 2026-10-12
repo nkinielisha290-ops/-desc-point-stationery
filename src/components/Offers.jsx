@@ -14,7 +14,7 @@ function Unit({ v, l }) {
         </motion.span>
         <span className="absolute inset-x-0 top-1/2 h-px bg-white/10" />
       </div>
-      <span className="mt-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/60">{l}</span>
+      <span className="mt-1.5 text-[11px] font-semibold text-white/60">{l}</span>
     </div>
   )
 }

@@ -61,7 +61,7 @@ export default function OrderDrawer() {
             initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 30, stiffness: 260 }}>
             <div className="flex items-center justify-between bg-navy-950 px-6 py-5 text-white" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top, 0px))' }}>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{t('Cart yako', 'Your cart')}</p>
+                <p className="text-xs font-bold sm:text-sm text-gold-300">{t('Cart yako', 'Your cart')}</p>
                 <p className="font-display text-2xl font-black">{items.length} {t('vitu', 'items')}</p>
               </div>
               <button onClick={onClose} aria-label={t('Funga', 'Close')} className="grid h-10 w-10 place-items-center rounded-full bg-white/10"><X className="h-5 w-5" /></button>

@@ -151,7 +151,7 @@ export default function Showcase() {
           <div className="flex flex-col p-6 sm:p-8 lg:p-10">
             <AnimatePresence mode="wait">
               <motion.div key={tab + item.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.3 }} className="flex-1">
-                <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{kind}</p>
+                <p className="text-xs font-bold sm:text-sm text-gold-300">{kind}</p>
                 <h3 className="font-display text-3xl font-black leading-tight sm:text-4xl" style={{ textWrap: 'balance' }}>{x(item.name)}</h3>
                 <p className="mt-4 leading-relaxed text-white/70">{x(item.desc)}</p>
                 <div className="mt-6 hidden items-baseline gap-2 lg:flex">

@@ -44,7 +44,7 @@ export default function Services() {
                   <span className="grid h-16 w-16 place-items-center rounded-2xl bg-gold-400 text-navy-950 shadow-lg shadow-gold-500/30"><Icon className="h-8 w-8" /></span>
                   <div>
                     <h3 className="font-display text-3xl font-black sm:text-4xl">{x(g.title)}</h3>
-                    <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{x(g.blurb)}</p>
+                    <p className="text-xs font-bold sm:text-sm text-gold-300">{x(g.blurb)}</p>
                   </div>
                 </div>
                 <ul className="mt-10 grid gap-3 sm:grid-cols-2">

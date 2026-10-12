@@ -202,10 +202,10 @@ export default function DesignStudio() {
                       style={{ background: pal.c[2], color: pal.c[0] }}>
                       <div className="absolute inset-3 rounded-2xl border-2" style={{ borderColor: pal.c[1] }} />
                       <Sparkles className="h-8 w-8" style={{ color: pal.c[1] }} />
-                      <p className="mt-3 text-xs font-bold uppercase tracking-[.18em] sm:text-sm" style={{ color: pal.c[1] }}>{x(kind.label)}</p>
+                      <p className="mt-3 text-xs font-bold sm:text-sm" style={{ color: pal.c[1] }}>{x(kind.label)}</p>
                       <p className="mt-2 line-clamp-4 font-display text-2xl font-black leading-tight">{text || t('Maandishi yako yatakaa hapa', 'Your text goes here')}</p>
                       {date && <p className="mt-3 text-sm font-semibold opacity-70">{new Date(date).toLocaleDateString(t('sw-TZ', 'en-GB'), { day: 'numeric', month: 'long', year: 'numeric' })}</p>}
-                      <span className="absolute bottom-4 text-[10px] font-semibold uppercase tracking-[.3em] opacity-50">{t('Mfano tu', 'Mock-up only')}</span>
+                      <span className="absolute bottom-4 text-[10px] font-semibold opacity-50">{t('Mfano tu', 'Mock-up only')}</span>
                     </motion.div>
 
                     <div>

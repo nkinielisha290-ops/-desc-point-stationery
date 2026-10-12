@@ -22,7 +22,7 @@ export default function Prices() {
           <div className="absolute -inset-3 rotate-2 rounded-[36px] bg-gold-400" />
           <div className="ruled relative rounded-[36px] bg-paper p-6 text-navy-900 shadow-2xl sm:p-10">
             <div className="absolute bottom-0 left-12 top-0 w-px bg-rose-400/50" />
-            <p className="pl-10 text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-royal-600">{t('Orodha ya Bei ✍︎', 'Price List ✍︎')}</p>
+            <p className="pl-10 text-xs font-bold sm:text-sm text-royal-600">{t('Orodha ya Bei ✍︎', 'Price List ✍︎')}</p>
             <ul className="mt-4 pl-10">
               {PRICES.map((p, i) => (
                 <motion.li key={p.item.sw} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}

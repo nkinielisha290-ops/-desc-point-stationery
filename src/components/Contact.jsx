@@ -51,7 +51,7 @@ export default function Contact() {
 
           <Reveal delay={0.15} className="lg:col-span-3">
             <form onSubmit={send} className="relative h-full overflow-hidden rounded-[36px] bg-navy-900 p-8 text-white shadow-2xl ring-1 ring-white/5 sm:p-12">
-              <p className="text-xs font-bold uppercase tracking-[.18em] sm:text-sm text-gold-300">{t('Tuandikie', 'Write to us')}</p>
+              <p className="text-xs font-bold sm:text-sm text-gold-300">{t('Tuandikie', 'Write to us')}</p>
               <h3 className="font-display text-3xl font-black sm:text-4xl">{t('Omba bei au weka oda', 'Get a price or place an order')}</h3>
               <div className="mt-8 grid gap-5 sm:grid-cols-2">
                 <Field id="c-name" label={t('Jina lako', 'Your name')}><input id="c-name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="inp" placeholder={t('Mf. Amina Hassan', 'e.g. Amina Hassan')} /></Field>

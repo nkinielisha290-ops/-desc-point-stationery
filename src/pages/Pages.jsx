@@ -24,15 +24,14 @@ import Contact from '../components/Contact'
 export function PageHero({ crumb, title, sub, children }) {
   const { t } = useApp()
   return (
-    <section className="relative overflow-hidden bg-navy-950 text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(245,184,0,.18),transparent_45%),radial-gradient(circle_at_10%_90%,rgba(31,85,255,.35),transparent_50%)]" />
-      <div className="container-x relative py-12 sm:py-16">
-        <nav aria-label={t('Ulipo', 'Breadcrumb')} className="flex items-center gap-1 text-sm text-white/55">
-          <a href={href('/')} className="hover:text-white">{t('Mwanzo', 'Home')}</a> <ChevronRight className="h-4 w-4" /> <span className="text-gold-300">{crumb}</span>
+    <section className="border-b border-ink/[.06] bg-surface">
+      <div className="container-x py-10 sm:py-14">
+        <nav aria-label={t('Ulipo', 'Breadcrumb')} className="flex items-center gap-1 text-sm text-ink/50">
+          <a href={href('/')} className="hover:text-ink">{t('Mwanzo', 'Home')}</a> <ChevronRight className="h-4 w-4" /> <span className="font-semibold text-royal-500">{crumb}</span>
         </nav>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          className="mt-4 max-w-3xl font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl" style={{ textWrap: 'balance' }}>{title}</motion.h1>
-        {sub && <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-3 max-w-2xl text-white/70 sm:text-lg">{sub}</motion.p>}
+        <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+          className="mt-4 max-w-4xl text-[clamp(2.4rem,6vw,4.25rem)] font-extrabold leading-[.98] text-ink" style={{ textWrap: 'balance' }}>{title}</motion.h1>
+        {sub && <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-ink/60">{sub}</p>}
         {children}
       </div>
     </section>
@@ -117,7 +116,7 @@ export function OnlinePage() {
     <PageHero crumb={t('Huduma za mtandaoni', 'Online services')} title={t('Huduma za mtandaoni, bila foleni', 'Online services, without the queue')}
       sub={t('Tunajaza, tunascan, tunapakia na kutuma maombi yako. Unaondoka na nakala ya kila ulichotuma.', 'We fill in, scan, upload and submit your application. You leave with a copy of everything.')}>
       <div className="mt-7 flex flex-wrap gap-2">
-        {ONLINE_SERVICES.map((s) => <a key={s.id} href={href(`/mtandaoni#${s.id}`)} className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold ring-1 ring-white/15 transition hover:bg-gold-400 hover:text-navy-950">{x(s.name).split('—')[0].trim()}</a>)}
+        {ONLINE_SERVICES.map((s) => <a key={s.id} href={href(`/mtandaoni#${s.id}`)} className="rounded-full bg-canvas px-4 py-2 text-sm font-semibold text-ink ring-1 ring-ink/10 transition-colors hover:bg-navy-900 hover:text-white">{x(s.name).split('—')[0].trim()}</a>)}
       </div>
     </PageHero>
     <section className="container-x space-y-6 py-14 sm:py-20">
@@ -130,7 +129,7 @@ export function OnlinePage() {
               <SafeImg src={item?.img} alt={x(s.name)} className={`relative h-full w-full ${item?.fit === 'contain' ? 'object-contain p-4' : 'object-cover'}`} />
             </div>
             <div className="p-6 sm:p-9">
-              <span className="text-xs font-bold uppercase tracking-[.2em] text-gold-600">{String(i + 1).padStart(2, '0')} · {t('Huduma ya mtandaoni', 'Online service')}</span>
+              <span className="text-xs font-bold text-gold-600">{String(i + 1).padStart(2, '0')} · {t('Huduma ya mtandaoni', 'Online service')}</span>
               <h2 className="mt-2 font-display text-2xl font-black text-ink sm:text-3xl">{x(s.name)}</h2>
               <p className="mt-3 text-ink/65">{x(item?.desc)}</p>
               <div className="mt-6 rounded-2xl bg-ink/[.035] p-5">

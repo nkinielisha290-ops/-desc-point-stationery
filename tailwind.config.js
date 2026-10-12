@@ -8,16 +8,16 @@ export default {
         navy: { 950: '#030c33', 900: '#06144d', 800: '#0a1f73', 700: '#0d2a9c' },
         royal: { 600: '#1440d6', 500: '#1f55ff', 400: '#4d7bff' },
         gold: { 300: '#ffe27a', 400: '#ffd23f', 500: '#f5b800', 600: '#d99a00', 700: '#a87400' },
-        paper: '#fbf8f1',
+        paper: '#f3f5fb',
         // Rangi za mandhari (zinabadilika light/dark kupitia CSS variables)
         ink: 'rgb(var(--ink) / <alpha-value>)',
         surface: 'rgb(var(--surface) / <alpha-value>)',
         canvas: 'rgb(var(--canvas) / <alpha-value>)',
       },
       fontFamily: {
-        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        script: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque Variable"', '"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        script: ['"Bricolage Grotesque Variable"', '"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        sans: ['"Bricolage Grotesque Variable"', '"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },

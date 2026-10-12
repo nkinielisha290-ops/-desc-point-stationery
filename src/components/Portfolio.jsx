@@ -49,7 +49,7 @@ export default function Portfolio() {
                 <SafeImg src={p.img} alt={x(p.title)} className="h-auto w-full transition duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/20 to-transparent opacity-80 transition group-hover:opacity-100" />
                 <div className="absolute inset-x-0 bottom-0 translate-y-2 p-5 transition duration-300 group-hover:translate-y-0">
-                  <span className="text-[11px] font-bold uppercase tracking-[.2em] text-gold-300">{x(PORTFOLIO_CATS.find((c) => c.id === p.cat)?.label)}</span>
+                  <span className="text-[11px] font-bold text-gold-300">{x(PORTFOLIO_CATS.find((c) => c.id === p.cat)?.label)}</span>
                   <h3 className="mt-1 font-display text-xl font-bold leading-snug">{x(p.title)}</h3>
                   <p className="mt-1 max-h-0 overflow-hidden text-sm text-white/70 opacity-0 transition-all duration-300 group-hover:max-h-12 group-hover:opacity-100">{x(p.detail)}</p>
                 </div>

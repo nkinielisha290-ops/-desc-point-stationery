@@ -7,6 +7,7 @@ import { href, useRoute } from '../../lib/router'
 import { buildIndex, search, POPULAR } from '../../lib/search'
 import { asset } from '../../lib/asset'
 import { SafeImg, tsh } from '../ui'
+import { useOpenStatus } from '../useOpenStatus'
 
 function SearchBox({ onDone, autoFocus = false, big = false }) {
   const { t, x, lang } = useApp()
@@ -49,7 +50,7 @@ function SearchBox({ onDone, autoFocus = false, big = false }) {
             className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-2xl bg-surface shadow-2xl ring-1 ring-ink/10">
             {q.trim().length < 2 ? (
               <div className="p-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-ink/45">{t('Zinazotafutwa sana', 'Popular searches')}</p>
+                <p className="text-xs font-semibold text-ink/45">{t('Zinazotafutwa sana', 'Popular searches')}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {POPULAR.map((p) => (
                     <button key={p.sw} type="button" onClick={() => setQ(x(p))} className="rounded-full bg-ink/5 px-3 py-1.5 text-sm font-medium text-ink/75 transition hover:bg-gold-400 hover:text-navy-950">{x(p)}</button>
@@ -89,6 +90,7 @@ function SearchBox({ onDone, autoFocus = false, big = false }) {
 export default function Header() {
   const { t, x, lang, setLang, theme, toggleTheme, count, setCartOpen, wishlist, canInstall, install } = useApp()
   const { page } = useRoute()
+  const status = useOpenStatus()
   const [mega, setMega] = useState(null)
   const [mobile, setMobile] = useState(false)
   const [acc, setAcc] = useState(null)
@@ -133,13 +135,17 @@ export default function Header() {
       {/* Utepe wa juu (kama Yas) */}
       <div className={`hidden bg-navy-950 text-white transition-all duration-300 lg:block ${scrolled ? 'h-0 overflow-hidden' : 'h-10'}`}>
         <div className="container-x flex h-10 items-center justify-between text-xs">
-          <nav aria-label={t('Viungo vya haraka', 'Quick links')} className="flex items-center gap-5">
+          <span className="flex items-center gap-2 font-medium text-white/85">
+            <span className={`h-2 w-2 rounded-full ${status.open ? 'bg-emerald-400' : 'bg-rose-400'}`} />
+            {status.open ? t('Tuko wazi sasa, hadi saa 2:00 usiku', 'Open now until 8 PM') : t('Tumefunga. Tunafungua saa 2:00 asubuhi', 'Closed. We open at 8 AM')}
+          </span>
+          <nav aria-label={t('Viungo vya haraka', 'Quick links')} className="hidden items-center gap-5 2xl:flex">
             {utility.map(([I, l, to]) => (
               <a key={to} href={href(to)} className="flex items-center gap-1.5 text-white/75 transition hover:text-gold-300"><I className="h-3.5 w-3.5" /> {l}</a>
             ))}
           </nav>
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-white/75"><Phone className="h-3.5 w-3.5 text-gold-400" /> <span className="select-all">{BUSINESS.phoneLocal}</span> · <span className="select-all">{BUSINESS.phone2Local}</span></span>
+            <span className="flex items-center gap-1.5 text-white/75"><Phone className="h-3.5 w-3.5 text-gold-400" /> <span className="select-all">{BUSINESS.phoneLocal}</span> / <span className="select-all">{BUSINESS.phone2Local}</span></span>
             <LangSwitch />
             <button onClick={toggleTheme} aria-label={theme === 'dark' ? t('Mwanga', 'Light mode') : t('Giza', 'Dark mode')} className="grid h-7 w-7 place-items-center rounded-full bg-white/10 hover:bg-white/20">
               {theme === 'dark' ? <Sun className="h-3.5 w-3.5 text-gold-300" /> : <Moon className="h-3.5 w-3.5" />}
@@ -154,8 +160,8 @@ export default function Header() {
           <a href={href('/')} className="flex shrink-0 items-center gap-2.5" aria-label="Desc Point Stationery – home">
             <img src={asset('logo.png')} alt="" className="h-10 w-10 rounded-full ring-2 ring-gold-400/60 lg:h-11 lg:w-11" />
             <span className="leading-none">
-              <span className="block font-display text-lg font-black text-ink">Desc Point</span>
-              <span className="text-[11px] font-semibold uppercase tracking-[.2em] text-gold-600">Stationery</span>
+              <span className="block font-display text-[19px] font-extrabold tracking-tight text-ink">Desc Point</span>
+              <span className="text-[11px] font-semibold text-gold-600">Stationery</span>
             </span>
           </a>
 
@@ -183,9 +189,10 @@ export default function Header() {
               <Heart className={`h-5 w-5 ${wishlist.length ? 'fill-rose-500 text-rose-500' : ''}`} />
               {wishlist.length > 0 && <span className="absolute right-0.5 top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-bold text-white">{wishlist.length}</span>}
             </a>
-            <button onClick={() => setCartOpen(true)} aria-label={t('Cart yangu', 'My cart')} className="relative grid h-10 w-10 place-items-center rounded-full text-ink/75 hover:bg-ink/5">
+            <button onClick={() => setCartOpen(true)} aria-label={t('Oda yangu', 'My order')} className="relative flex h-10 items-center gap-2 rounded-full px-2.5 text-ink/80 hover:bg-ink/5 sm:px-3">
               <ShoppingBag className="h-5 w-5" />
-              {count > 0 && <motion.span key={count} initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute right-0.5 top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-gold-400 px-1 text-[10px] font-bold text-navy-950">{count}</motion.span>}
+              <span className="hidden text-sm font-semibold sm:inline">{t('Oda', 'Order')}</span>
+              {count > 0 && <motion.span key={count} initial={{ scale: 0.6 }} animate={{ scale: 1 }} className="grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1.5 text-[11px] font-bold text-navy-950">{count}</motion.span>}
             </button>
             <a href={waLink(t('Habari Desc Point, naomba msaada.', 'Hello Desc Point, I need help.'))} target="_blank" rel="noreferrer"
               className="ml-1 hidden items-center gap-2 rounded-full bg-navy-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gold-400 hover:text-navy-950 md:flex dark:bg-gold-400 dark:text-navy-950">
@@ -207,7 +214,7 @@ export default function Header() {
               <div className="container-x grid grid-cols-[1fr_1fr_340px] gap-10 py-8">
                 {cur.columns.map((c) => (
                   <div key={c.title.sw}>
-                    <p className="text-xs font-bold uppercase tracking-[.2em] text-gold-600">{x(c.title)}</p>
+                    <p className="text-xs font-bold text-gold-600">{x(c.title)}</p>
                     <ul className="mt-4 space-y-1">
                       {c.links.map(([l, to]) => (
                         <li key={l.sw}><a href={href(to)} onClick={() => setMega(null)} className="group flex items-center justify-between rounded-xl px-3 py-2.5 text-[15px] font-medium text-ink/80 transition hover:bg-ink/5 hover:text-ink">
@@ -250,7 +257,7 @@ export default function Header() {
                         <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
                           {n.columns.map((c) => (
                             <div key={c.title.sw} className="pb-3 pl-3">
-                              <p className="px-3 pt-1 text-[11px] font-bold uppercase tracking-[.2em] text-gold-600">{x(c.title)}</p>
+                              <p className="px-3 pt-1 text-[11px] font-bold text-gold-600">{x(c.title)}</p>
                               {c.links.map(([l, to]) => <a key={l.sw} href={href(to)} onClick={() => setMobile(false)} className="block rounded-lg px-3 py-2 text-sm text-ink/75 hover:bg-ink/5">{x(l)}</a>)}
                             </div>
                           ))}

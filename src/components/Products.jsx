@@ -24,7 +24,7 @@ export function Card({ p, i = 0 }) {
       <div className={`relative overflow-hidden ${real ? 'aspect-square bg-gradient-to-b from-ink/[.02] to-ink/[.06]' : 'aspect-[4/3] bg-navy-900 sm:aspect-square'}`}>
         <SafeImg src={p.img} alt={x(p.name)} className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${real ? 'object-contain p-2 sm:p-4' : 'object-cover'}`} />
         <div className="absolute inset-x-3 top-3 flex items-start justify-between">
-          {p.tag ? <span className="rounded-full bg-gold-400 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-navy-950">{x(p.tag)}</span> : <span />}
+          {p.tag ? <span className="rounded-full bg-gold-400 px-2.5 py-1 text-[11px] font-bold text-navy-950">{x(p.tag)}</span> : <span />}
           <button onClick={() => { toggleWish(p.id); notify(loved ? t('Imeondolewa', 'Removed') : t('Imehifadhiwa kwenye unavyovipenda', 'Saved to wishlist')) }}
             aria-pressed={loved} aria-label={loved ? t('Ondoa kwenye unavyovipenda', 'Remove from wishlist') : t('Hifadhi', 'Save to wishlist')}
             className="grid h-9 w-9 place-items-center rounded-full bg-white text-navy-900 shadow-sm ring-1 ring-black/5 transition active:scale-90">
@@ -34,15 +34,15 @@ export function Card({ p, i = 0 }) {
       </div>
 
       <div className="flex flex-1 flex-col p-4 sm:p-5">
-        <span className="text-[11px] font-bold uppercase tracking-[.14em] text-gold-600">{x(catLabel(p.cat))}</span>
+        <span className="text-[11px] font-bold text-gold-600">{x(catLabel(p.cat))}</span>
         <h3 className="mt-1 line-clamp-2 min-h-[2.75rem] text-[15px] font-bold leading-snug text-ink sm:text-base">{x(p.name)}</h3>
         <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink/55">{x(p.desc)}</p>
 
         <div className="mt-auto pt-4">
-          <div className="flex items-baseline justify-between gap-2 border-t border-ink/[.07] pt-3">
+          <div className="border-t border-ink/[.07] pt-3">
             {ask ? <span className="text-lg font-extrabold text-ink">{t('Uliza bei', 'Ask for price')}</span>
-              : <span className="text-xl font-extrabold tabular-nums text-ink">{tsh(p.price)}</span>}
-            {!ask && <span className="text-xs text-ink/45">/ {x(p.unit)}</span>}
+              : <span className="whitespace-nowrap text-lg font-extrabold tabular-nums text-ink sm:text-xl">{tsh(p.price)}</span>}
+            {!ask && <span className="block text-xs text-ink/45">{t('kwa', 'per')} {x(p.unit)}</span>}
           </div>
           {ask ? (
             <a href={waLink(t(`Habari Desc Point! Naomba bei ya ${x(p.name)}.`, `Hello Desc Point! What is the price of the ${x(p.name)}?`))} target="_blank" rel="noreferrer"
@@ -52,7 +52,7 @@ export function Card({ p, i = 0 }) {
           ) : (
             <button onClick={click}
               className={`mt-3 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-bold transition ${added ? 'bg-emerald-500 text-white' : 'bg-navy-900 text-white hover:bg-gold-400 hover:text-navy-950 dark:bg-gold-400 dark:text-navy-950'}`}>
-              {added ? <><Check className="h-4 w-4" /> {t('Imeongezwa', 'Added')}</> : <><Plus className="h-4 w-4" /> {inCart ? t(`Ongeza tena (${inCart})`, `Add again (${inCart})`) : t('Ongeza kwenye cart', 'Add to cart')}</>}
+              {added ? <><Check className="h-4 w-4" /> {t('Imeongezwa', 'Added')}</> : <><Plus className="h-4 w-4 shrink-0" /> <span className="sm:hidden">{inCart ? `${t('Ongeza', 'Add')} (${inCart})` : t('Ongeza', 'Add')}</span><span className="hidden sm:inline">{inCart ? t(`Ongeza tena (${inCart})`, `Add again (${inCart})`) : t('Ongeza kwenye oda', 'Add to order')}</span></>}
             </button>
           )}
         </div>

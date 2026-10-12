@@ -34,8 +34,8 @@ export default function Footer() {
             <img src={asset('logo.png')} alt="" className="h-14 w-14 rounded-full ring-2 ring-gold-400/60" />
             <span><b className="block font-display text-xl">{BUSINESS.name}</b><span className="text-sm text-gold-300">{BUSINESS.slogan}</span></span>
           </a>
-          <p className="mt-5 max-w-xs text-sm text-white/55">Madafu & Zegereni, Kibaha – Pwani · {x(BUSINESS.hours.label)}, {x(BUSINESS.hours.time)}</p>
-          <p className="mt-3 text-sm text-white/75"><span className="select-all">{BUSINESS.phoneLocal}</span> · <span className="select-all">{BUSINESS.phone2Local}</span><br /><span className="select-all">{BUSINESS.email}</span></p>
+          <p className="mt-5 max-w-xs text-sm text-white/55">Madafu na Zegereni, Kibaha, Pwani. {x(BUSINESS.hours.label)}, {x(BUSINESS.hours.time)}.</p>
+          <p className="mt-3 text-sm text-white/75"><span className="select-all">{BUSINESS.phoneLocal}</span><br /><span className="select-all">{BUSINESS.phone2Local}</span><br /><span className="select-all">{BUSINESS.email}</span></p>
           <div className="mt-5 flex gap-2">
             {[[Instagram, BUSINESS.social.instagram, 'Instagram'], [Facebook, BUSINESS.social.facebook, 'Facebook']].filter(([, h]) => h).map(([I, h, l]) => (
               <a key={l} href={h} target="_blank" rel="noreferrer" aria-label={l} className="grid h-10 w-10 place-items-center rounded-full bg-white/5 ring-1 ring-white/10 transition hover:bg-gold-400 hover:text-navy-950"><I className="h-4 w-4" /></a>
@@ -46,7 +46,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {COLS.map((c) => (
             <div key={c.title}>
-              <p className="text-sm font-bold uppercase tracking-[.15em] text-gold-300">{c.title}</p>
+              <p className="text-sm font-bold text-gold-300">{c.title}</p>
               <ul className="mt-4 space-y-2.5 text-sm text-white/60">
                 {c.links.map(([l, to]) => <li key={to + l}><a href={href(to)} className="transition hover:text-white">{l}</a></li>)}
               </ul>
@@ -56,16 +56,16 @@ export default function Footer() {
 
         {/* Pakua App (kama "Download Yas App") */}
         <div className="rounded-[30px] bg-white/[.05] p-6 ring-1 ring-white/10">
-          <p className="text-sm font-bold uppercase tracking-[.15em] text-gold-300">{t('Pakua App ya Desc Point', 'Get the Desc Point app')}</p>
+          <p className="text-sm font-bold text-gold-300">{t('Pakua App ya Desc Point', 'Get the Desc Point app')}</p>
           <p className="mt-2 text-sm text-white/60">{t('Agiza, pakia faili na fuatilia oda kutoka kwenye simu yako — hata mtandao ukiwa dhaifu.', 'Order, upload files and track orders from your phone — even on a weak connection.')}</p>
           <div className="mt-5 grid gap-2">
             <button onClick={onInstall} className="flex items-center gap-3 rounded-2xl bg-black px-4 py-2.5 text-left ring-1 ring-white/20 transition hover:ring-gold-400">
               <Smartphone className="h-7 w-7 text-gold-300" />
-              <span className="leading-tight"><span className="block text-[10px] uppercase tracking-wider text-white/60">{t('Weka kwenye', 'Install on')}</span><b className="text-base">Android</b></span>
+              <span className="leading-tight"><span className="block text-[10px] text-white/60">{t('Weka kwenye', 'Install on')}</span><b className="text-base">Android</b></span>
             </button>
             <button onClick={() => setHowTo(true)} className="flex items-center gap-3 rounded-2xl bg-black px-4 py-2.5 text-left ring-1 ring-white/20 transition hover:ring-gold-400">
               <svg viewBox="0 0 24 24" className="h-7 w-7 fill-white" aria-hidden><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9s-2-.9-3.4-.9C5.8 6.8 4 7.9 3.1 9.6c-1.9 3.3-.5 8.2 1.4 10.9.9 1.3 2 2.8 3.4 2.8 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.9 2.4-1.4 3.3-2.7c1-1.5 1.5-3 1.5-3.1-.1 0-2.9-1.1-3.3-4.9zM13.8 4.9c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z" /></svg>
-              <span className="leading-tight"><span className="block text-[10px] uppercase tracking-wider text-white/60">{t('Weka kwenye', 'Add to')}</span><b className="text-base">iPhone</b></span>
+              <span className="leading-tight"><span className="block text-[10px] text-white/60">{t('Weka kwenye', 'Add to')}</span><b className="text-base">iPhone</b></span>
             </button>
           </div>
         </div>

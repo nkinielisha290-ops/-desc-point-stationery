@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MessageCircle, ShoppingBag, CheckCircle2, Smartphone, X } from 'lucide-react'
 import { BUSINESS, waLink } from '../data/site'
@@ -8,6 +8,13 @@ import { asset } from '../lib/asset'
 export default function Floating() {
   const { t, count, setCartOpen, toast, canInstall, install } = useApp()
   const [skip, setSkip] = useState(false)
+  // kitufe kinachoelea kinaonekana baada ya kushuka (hero tayari ina WhatsApp)
+  const [shown, setShown] = useState(false)
+  useEffect(() => {
+    const f = () => setShown(window.scrollY > 480)
+    f(); window.addEventListener('scroll', f, { passive: true })
+    return () => window.removeEventListener('scroll', f)
+  }, [])
   return (
     <>
       <div className="fixed bottom-5 right-4 z-40 flex flex-col items-end gap-3 sm:right-5" style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>
@@ -20,7 +27,7 @@ export default function Floating() {
           )}
         </AnimatePresence>
         <motion.a href={waLink(t(`Habari ${BUSINESS.name}!`, `Hello ${BUSINESS.name}!`))} target="_blank" rel="noreferrer" aria-label="WhatsApp"
-          initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2, type: 'spring' }}
+          initial={false} animate={{ scale: shown ? 1 : 0, opacity: shown ? 1 : 0 }} transition={{ type: 'spring', damping: 18 }} style={{ pointerEvents: shown ? 'auto' : 'none' }}
           className="relative grid h-16 w-16 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl shadow-emerald-600/40">
           <MessageCircle className="relative h-8 w-8" />
         </motion.a>

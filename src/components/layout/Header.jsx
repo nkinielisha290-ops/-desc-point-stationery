@@ -202,8 +202,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Search ya simu */}
-        <div className="container-x pb-3 lg:hidden"><SearchBox big /></div>
 
         {/* Mega-menu */}
         <AnimatePresence>
@@ -245,6 +243,7 @@ export default function Header() {
                   <button onClick={() => setMobile(false)} aria-label={t('Funga', 'Close')} className="grid h-10 w-10 place-items-center rounded-full bg-white/10"><X className="h-5 w-5" /></button>
                 </div>
               </div>
+              <div className="px-4 pt-4"><SearchBox big onDone={() => setMobile(false)} /></div>
               <nav className="flex-1 overflow-y-auto px-3 py-3">
                 <a href={href('/')} className="block rounded-xl px-3 py-3 font-semibold text-ink hover:bg-ink/5">{t('Mwanzo', 'Home')}</a>
                 {NAV.map((n) => n.columns ? (
